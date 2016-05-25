@@ -4,7 +4,7 @@
 
 #import <UIKit/UIKit.h>
 
-#include "Scene/SceneMetadata.h"
+#include "duality/SceneMetadata.h"
 
 #include <vector>
 

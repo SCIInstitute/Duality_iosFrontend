@@ -6,7 +6,7 @@
 
 #import "DynamicUIBuilder.h"
 
-#include "Scene/InputVariable.h"
+#include "duality/InputVariable.h"
 
 @interface FloatStepper : UIStepper
 {
@@ -192,7 +192,7 @@ UIStackView* buildStackViewFromVariableMap(const Scene::VariableMap& variableMap
     stackView.spacing = 50;
     
     for (const auto& object : variableMap) {
-        if (!object.second.floatInfos.empty()) {
+        if (!object.second.floatInfos.empty() || !object.second.enumInfos.empty()) {
             UIStackView* objectStackView = buildObjectStackView(object.first, object.second);
             objectStackView.translatesAutoresizingMaskIntoConstraints = false;
             [stackView addArrangedSubview:objectStackView];

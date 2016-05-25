@@ -4,6 +4,6 @@
 
 #import <UIKit/UIKit.h>
 
-#include "Scene/Scene.h"
+#include "duality/Scene.h"
 
 UIStackView* buildStackViewFromVariableMap(const Scene::VariableMap& variableMap);

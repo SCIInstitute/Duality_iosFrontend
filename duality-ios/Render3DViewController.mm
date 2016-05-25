@@ -9,9 +9,10 @@
 #import "DynamicUIBuilder.h"
 
 #include "IVDA/iOS.h"
-#include "Scene/RenderDispatcher.h"
-#include "Scene/ScreenInfo.h"
-#include "Scene/Scene.h"
+#include "IVDA/GLInclude.h"
+#include "duality/RenderDispatcher.h"
+#include "duality/ScreenInfo.h"
+#include "duality/Scene.h"
 
 @implementation Render3DViewController
 

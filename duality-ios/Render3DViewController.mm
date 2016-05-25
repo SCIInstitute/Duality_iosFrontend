@@ -23,11 +23,14 @@
     m_scene = scene;
     auto variableMap = m_scene->variableMap();
     if (!variableMap.empty()) {
-        UIStackView* stackView = buildStackViewFromVariableMap(variableMap);
-        stackView.translatesAutoresizingMaskIntoConstraints = false;
-        [self.view addSubview:stackView];
-        [stackView.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
-        [stackView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
+        m_dynamicUI = buildStackViewFromVariableMap(variableMap);
+        m_dynamicUI.translatesAutoresizingMaskIntoConstraints = false;
+        if (m_dynamicUI) {
+            [m_dynamicUI removeFromSuperview];
+        }
+        [self.view addSubview:m_dynamicUI];
+        [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
+        [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
     }
 }
 

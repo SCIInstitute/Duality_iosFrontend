@@ -21,6 +21,7 @@ class RenderDispatcher;
     IVDA::Vec2f m_touchPos1;
     IVDA::Vec2f m_touchPos2;
     IVDA::ArcBall m_arcBall;
+    UIStackView* m_dynamicUI;
 }
 
 -(void) setScene:(Scene*)scene;

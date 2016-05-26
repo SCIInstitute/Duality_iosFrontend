@@ -9,7 +9,8 @@
 
 #include "IVDA/iOS.h"
 #include "IVDA/GLInclude.h"
-#include "duality/RenderDispatcher.h"
+#include "duality/RenderDispatcher3D.h"
+#include "duality/GeometryRenderer2D.h"
 #include "duality/ScreenInfo.h"
 #include "duality/Scene.h"
 
@@ -31,6 +32,10 @@
         [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
         [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
     }
+    ScreenInfo screenInfo = [self screenInfo];
+    BoundingBoxCalculator bbCalc;
+    m_scene->dispatch(bbCalc);
+    m_rendererDispatcher = std::make_unique<RenderDispatcher3D>(screenInfo, bbCalc.getMinMax());
 }
 
 - (ScreenInfo)screenInfo
@@ -75,7 +80,6 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    m_rendererDispatcher = std::make_unique<RenderDispatcher>([self screenInfo]);
     m_arcBall.SetWindowSize(uint32_t(self.view.bounds.size.width), uint32_t(self.view.bounds.size.height));
 }
 
@@ -89,8 +93,6 @@
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
     if (m_scene) {
-        GLMatrix modelView = m_scene->modelViewMatrix();
-        m_rendererDispatcher->setModelView(modelView);
         m_rendererDispatcher->startDraw();
         m_scene->dispatch(*m_rendererDispatcher);
         m_rendererDispatcher->finishDraw();
@@ -143,7 +145,7 @@
     if (numTouches == 1) {
         CGPoint touchPoint = [[touches anyObject] locationInView:self.view];
         IVDA::Mat4f rotation = m_arcBall.Drag(IVDA::Vec2ui(touchPoint.x, touchPoint.y)).ComputeRotation();
-        m_scene->addRotation(rotation);
+        m_rendererDispatcher->addRotation(rotation);
         m_arcBall.Click(IVDA::Vec2ui(touchPoint.x, touchPoint.y));
     }
     else if (numTouches == 2) {
@@ -167,7 +169,7 @@
     IVDA::Vec2f c1((m_touchPos1.x + m_touchPos2.x) / 2, (m_touchPos1.y + m_touchPos2.y) / 2);
     IVDA::Vec2f c2((touchPos1.x + touchPos2.x) / 2, (touchPos1.y + touchPos2.y) / 2);
     IVDA::Vec2f translation(c2.x - c1.x, -(c2.y - c1.y));
-    m_scene->addTranslation(translation);
+    m_rendererDispatcher->addTranslation(translation);
 }
 
 @end

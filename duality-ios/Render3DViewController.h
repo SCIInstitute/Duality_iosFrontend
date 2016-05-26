@@ -11,13 +11,13 @@
 #include <memory>
 
 class Scene;
-class RenderDispatcher;
+class RenderDispatcher3D;
 
 @interface Render3DViewController : GLKViewController
 {
 @protected
     Scene* m_scene;
-    std::unique_ptr<RenderDispatcher> m_rendererDispatcher;
+    std::unique_ptr<RenderDispatcher3D> m_rendererDispatcher;
     IVDA::Vec2f m_touchPos1;
     IVDA::Vec2f m_touchPos2;
     IVDA::ArcBall m_arcBall;

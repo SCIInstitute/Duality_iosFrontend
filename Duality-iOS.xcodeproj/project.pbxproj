@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8E2AFA561CDAC18400AC6CEC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2AFA551CDAC18400AC6CEC /* Foundation.framework */; };
 		8E2AFA581CDAC18C00AC6CEC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2AFA571CDAC18C00AC6CEC /* UIKit.framework */; };
+		8E96F8771CF763FD003511F6 /* Render2DViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8E96F8761CF763FD003511F6 /* Render2DViewController.mm */; };
 		8EC1922F1CE12FB6003EBC45 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC1922E1CE12FB6003EBC45 /* GLKit.framework */; };
 		8EC5A3961CE143650042E2C8 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC5A3951CE143650042E2C8 /* OpenGLES.framework */; };
 		8EE891F21CF647F600740718 /* bb.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8EE891D51CF647F600740718 /* bb.fsh */; };
@@ -142,6 +143,8 @@
 		8E2AF9CE1CDA762900AC6CEC /* Duality-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Duality-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2AFA551CDAC18400AC6CEC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8E2AFA571CDAC18C00AC6CEC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8E96F8751CF763E6003511F6 /* Render2DViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Render2DViewController.h; path = "duality-ios/Render2DViewController.h"; sourceTree = "<group>"; };
+		8E96F8761CF763FD003511F6 /* Render2DViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Render2DViewController.mm; path = "duality-ios/Render2DViewController.mm"; sourceTree = "<group>"; };
 		8EC1922E1CE12FB6003EBC45 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		8EC5A3951CE143650042E2C8 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		8EE891D51CF647F600740718 /* bb.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bb.fsh; sourceTree = "<group>"; };
@@ -490,6 +493,8 @@
 				8EE892121CF6481900740718 /* DynamicUIBuilder.h */,
 				8EE892131CF6481900740718 /* DynamicUIBuilder.mm */,
 				8EE892151CF6481900740718 /* main.mm */,
+				8E96F8751CF763E6003511F6 /* Render2DViewController.h */,
+				8E96F8761CF763FD003511F6 /* Render2DViewController.mm */,
 				8EE892161CF6481900740718 /* Render3DViewController.h */,
 				8EE892171CF6481900740718 /* Render3DViewController.mm */,
 				8EE892181CF6481900740718 /* SelectSceneViewController.h */,
@@ -1241,6 +1246,7 @@
 				8EE895701CF6483B00740718 /* LoopbackConnectionSpawner.cpp in Sources */,
 				8EE8955E1CF6483B00740718 /* ConsoleLog.cpp in Sources */,
 				8EE895591CF6483B00740718 /* Thread.cpp in Sources */,
+				8E96F8771CF763FD003511F6 /* Render2DViewController.mm in Sources */,
 				8EE896451CF6484600740718 /* SceneMetadata.cpp in Sources */,
 				8EE895721CF6483B00740718 /* Dispatcher.cpp in Sources */,
 				8EE895671CF6483B00740718 /* FramingUtils.cpp in Sources */,

@@ -5,6 +5,7 @@
 #import "SelectSceneViewController.h"
 #import "SettingsViewController.h"
 #import "Render3DViewController.h"
+#import "Render2DViewController.h"
 
 #import <UIKit/UIKit.h>
 
@@ -14,6 +15,7 @@ class SceneLoader;
 @private
     std::unique_ptr<SceneLoader> m_sceneLoader;
     Render3DViewController* m_render3DViewController;
+    Render2DViewController* m_render2DViewController;
     SelectSceneViewController* m_selectSceneViewController;
     SettingsViewController* m_settingsViewController;
 }

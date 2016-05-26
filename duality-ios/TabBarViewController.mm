@@ -15,6 +15,7 @@
     self = [super init];
     
     m_render3DViewController = [[Render3DViewController alloc] init];
+    m_render2DViewController = [[Render2DViewController alloc] init];
     m_selectSceneViewController = [[SelectSceneViewController alloc] init];
     m_settingsViewController = [[SettingsViewController alloc] init];
 
@@ -34,6 +35,11 @@
     UINavigationController* navController;
 
     navController = [self createNavigationController:m_render3DViewController withTitle:@"3D View"];
+    navController.navigationBar.hidden = YES;
+    navController.tabBarItem.tag = 0;
+    [viewControllersArray addObject:navController];
+
+    navController = [self createNavigationController:m_render2DViewController withTitle:@"2D View"];
     navController.navigationBar.hidden = YES;
     navController.tabBarItem.tag = 0;
     [viewControllersArray addObject:navController];
@@ -65,6 +71,7 @@
             Scene* scene = m_sceneLoader->activeScene();
             scene->updateDatasets();
             [m_render3DViewController setScene:m_sceneLoader->activeScene()];
+            [m_render2DViewController setScene:m_sceneLoader->activeScene()];
         }
     }
     catch (const std::exception& err) {
@@ -80,6 +87,7 @@
         mocca::net::Endpoint endpoint("tcp.prefixed", serverIP, std::to_string(serverPort));
         m_sceneLoader = std::make_unique<SceneLoader>(endpoint);
         [m_render3DViewController reset];
+        [m_render2DViewController reset];
     }
     catch (const std::exception& err) {
         [self showAlertWithTitle:@"Error" andMessage:[NSString stringWithUTF8String:err.what()]];

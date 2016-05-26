@@ -4,7 +4,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "Render3DViewController.h"
+#import "Render2DViewController.h"
 #import "DynamicUIBuilder.h"
 
 #include "IVDA/iOS.h"
@@ -13,7 +13,7 @@
 #include "duality/ScreenInfo.h"
 #include "duality/Scene.h"
 
-@implementation Render3DViewController
+@implementation Render2DViewController
 
 @synthesize context = _context;
 
@@ -54,7 +54,7 @@
     if (!self.context) {
         NSLog(@"Failed to create OpenGLES context");
     }
-
+    
     [EAGLContext setCurrentContext:self.context];
     
     GLKView *view = (GLKView *)self.view;

@@ -13,6 +13,8 @@
 		8E96F87A1CF7688E003511F6 /* GeometryRenderer2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E96F8791CF7688E003511F6 /* GeometryRenderer2D.cpp */; };
 		8E96F87D1CF7796C003511F6 /* GeometryUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E96F87C1CF7796C003511F6 /* GeometryUtil.cpp */; };
 		8E96F8841CF7A2A7003511F6 /* MVP3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E96F8831CF7A2A7003511F6 /* MVP3D.cpp */; };
+		8E96F8881CF7AEFC003511F6 /* MVP2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E96F8871CF7AEFC003511F6 /* MVP2D.cpp */; };
+		8E96F88B1CF7B725003511F6 /* CoordinateSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E96F88A1CF7B725003511F6 /* CoordinateSystem.cpp */; };
 		8EC1922F1CE12FB6003EBC45 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC1922E1CE12FB6003EBC45 /* GLKit.framework */; };
 		8EC5A3961CE143650042E2C8 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC5A3951CE143650042E2C8 /* OpenGLES.framework */; };
 		8EE891F21CF647F600740718 /* bb.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8EE891D51CF647F600740718 /* bb.fsh */; };
@@ -151,6 +153,10 @@
 		8E96F87C1CF7796C003511F6 /* GeometryUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryUtil.cpp; sourceTree = "<group>"; };
 		8E96F87F1CF7A025003511F6 /* MVP3D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MVP3D.h; sourceTree = "<group>"; };
 		8E96F8831CF7A2A7003511F6 /* MVP3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MVP3D.cpp; sourceTree = "<group>"; };
+		8E96F8861CF7AEDF003511F6 /* MVP2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MVP2D.h; sourceTree = "<group>"; };
+		8E96F8871CF7AEFC003511F6 /* MVP2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MVP2D.cpp; sourceTree = "<group>"; };
+		8E96F8891CF7B2E0003511F6 /* CoordinateSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoordinateSystem.h; sourceTree = "<group>"; };
+		8E96F88A1CF7B725003511F6 /* CoordinateSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoordinateSystem.cpp; sourceTree = "<group>"; };
 		8EC1922E1CE12FB6003EBC45 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		8EC5A3951CE143650042E2C8 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		8EE891D51CF647F600740718 /* bb.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bb.fsh; sourceTree = "<group>"; };
@@ -461,6 +467,7 @@
 			isa = PBXGroup;
 			children = (
 				8E96F8781CF76870003511F6 /* GeometryRenderer2D.h */,
+				8E96F8861CF7AEDF003511F6 /* MVP2D.h */,
 			);
 			name = 2D;
 			sourceTree = "<group>";
@@ -479,6 +486,7 @@
 			isa = PBXGroup;
 			children = (
 				8E96F8791CF7688E003511F6 /* GeometryRenderer2D.cpp */,
+				8E96F8871CF7AEFC003511F6 /* MVP2D.cpp */,
 			);
 			name = 2D;
 			sourceTree = "<group>";
@@ -1005,6 +1013,7 @@
 				8E96F8811CF7A24E003511F6 /* 2D */,
 				8E96F8801CF7A226003511F6 /* 3D */,
 				8EE895A51CF6484600740718 /* AbstractIO.h */,
+				8E96F8891CF7B2E0003511F6 /* CoordinateSystem.h */,
 				8EE895A71CF6484600740718 /* BoundingBoxCalculator.h */,
 				8EE895A81CF6484600740718 /* Communication.h */,
 				8EE895A91CF6484600740718 /* DataProvider.h */,
@@ -1064,6 +1073,7 @@
 				8E96F8851CF7A9EA003511F6 /* 2D */,
 				8E96F8821CF7A282003511F6 /* 3D */,
 				8EE895EB1CF6484600740718 /* AbstractIO.cpp */,
+				8E96F88A1CF7B725003511F6 /* CoordinateSystem.cpp */,
 				8EE895ED1CF6484600740718 /* BoundingBoxCalculator.cpp */,
 				8EE895EE1CF6484600740718 /* Communication.cpp */,
 				8EE895EF1CF6484600740718 /* Dataset.cpp */,
@@ -1232,6 +1242,7 @@
 				8EE8956A1CF6483B00740718 /* FramingConnection.cpp in Sources */,
 				8EE892251CF6481900740718 /* TabBarViewController.mm in Sources */,
 				8EE896431CF6484600740718 /* Scene.cpp in Sources */,
+				8E96F8881CF7AEFC003511F6 /* MVP2D.cpp in Sources */,
 				8EE896511CF6484600740718 /* XQueryComponents.mm in Sources */,
 				8EE8957B1CF6483B00740718 /* QueueConnectionSpawner.cpp in Sources */,
 				8EE8921E1CF6481900740718 /* AppDelegate.mm in Sources */,
@@ -1285,6 +1296,7 @@
 				8EE8956D1CF6483B00740718 /* LoopbackConnection.cpp in Sources */,
 				8EE8963C1CF6484600740718 /* InputVariable.cpp in Sources */,
 				8EE892241CF6481900740718 /* SettingsViewController.mm in Sources */,
+				8E96F88B1CF7B725003511F6 /* CoordinateSystem.cpp in Sources */,
 				8EE8955A1CF6483B00740718 /* File.cpp in Sources */,
 				8EE896441CF6484600740718 /* SceneLoader.cpp in Sources */,
 				8EE8964E1CF6484600740718 /* MultiplexOut.cpp in Sources */,

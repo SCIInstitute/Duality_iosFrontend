@@ -10,6 +10,7 @@
 		8E2AFA561CDAC18400AC6CEC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2AFA551CDAC18400AC6CEC /* Foundation.framework */; };
 		8E2AFA581CDAC18C00AC6CEC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2AFA571CDAC18C00AC6CEC /* UIKit.framework */; };
 		8E96F8771CF763FD003511F6 /* Render2DViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8E96F8761CF763FD003511F6 /* Render2DViewController.mm */; };
+		8E96F87A1CF7688E003511F6 /* GeometrySliceRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E96F8791CF7688E003511F6 /* GeometrySliceRenderer.cpp */; };
 		8EC1922F1CE12FB6003EBC45 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC1922E1CE12FB6003EBC45 /* GLKit.framework */; };
 		8EC5A3961CE143650042E2C8 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC5A3951CE143650042E2C8 /* OpenGLES.framework */; };
 		8EE891F21CF647F600740718 /* bb.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8EE891D51CF647F600740718 /* bb.fsh */; };
@@ -106,7 +107,6 @@
 		8EE895811CF6483B00740718 /* NetworkTesting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE8943C1CF6483B00740718 /* NetworkTesting.cpp */; };
 		8EE896141CF6484600740718 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8EE895A21CF6484600740718 /* CMakeLists.txt */; };
 		8EE896321CF6484600740718 /* AbstractIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895EB1CF6484600740718 /* AbstractIO.cpp */; };
-		8EE896331CF6484600740718 /* AbstractRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895EC1CF6484600740718 /* AbstractRenderer.cpp */; };
 		8EE896341CF6484600740718 /* BoundingBoxCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895ED1CF6484600740718 /* BoundingBoxCalculator.cpp */; };
 		8EE896351CF6484600740718 /* Communication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895EE1CF6484600740718 /* Communication.cpp */; };
 		8EE896361CF6484600740718 /* Dataset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895EF1CF6484600740718 /* Dataset.cpp */; };
@@ -116,7 +116,6 @@
 		8EE8963A1CF6484600740718 /* GeometryRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895F31CF6484600740718 /* GeometryRenderer.cpp */; };
 		8EE8963B1CF6484600740718 /* GLMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895F41CF6484600740718 /* GLMatrix.cpp */; };
 		8EE8963C1CF6484600740718 /* InputVariable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895F51CF6484600740718 /* InputVariable.cpp */; };
-		8EE8963D1CF6484600740718 /* AbstractRendererImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895F71CF6484600740718 /* AbstractRendererImpl.cpp */; };
 		8EE8963E1CF6484600740718 /* GeometryRendererImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895F91CF6484600740718 /* GeometryRendererImpl.cpp */; };
 		8EE8963F1CF6484600740718 /* GLFrameBufferObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895FB1CF6484600740718 /* GLFrameBufferObject.cpp */; };
 		8EE896401CF6484600740718 /* GLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895FF1CF6484600740718 /* GLShader.cpp */; };
@@ -145,6 +144,8 @@
 		8E2AFA571CDAC18C00AC6CEC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8E96F8751CF763E6003511F6 /* Render2DViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Render2DViewController.h; path = "duality-ios/Render2DViewController.h"; sourceTree = "<group>"; };
 		8E96F8761CF763FD003511F6 /* Render2DViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Render2DViewController.mm; path = "duality-ios/Render2DViewController.mm"; sourceTree = "<group>"; };
+		8E96F8781CF76870003511F6 /* GeometrySliceRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeometrySliceRenderer.h; sourceTree = "<group>"; };
+		8E96F8791CF7688E003511F6 /* GeometrySliceRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometrySliceRenderer.cpp; sourceTree = "<group>"; };
 		8EC1922E1CE12FB6003EBC45 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		8EC5A3951CE143650042E2C8 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		8EE891D51CF647F600740718 /* bb.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bb.fsh; sourceTree = "<group>"; };
@@ -316,7 +317,6 @@
 		8EE8943C1CF6483B00740718 /* NetworkTesting.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkTesting.cpp; sourceTree = "<group>"; };
 		8EE895A21CF6484600740718 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		8EE895A51CF6484600740718 /* AbstractIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractIO.h; sourceTree = "<group>"; };
-		8EE895A61CF6484600740718 /* AbstractRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractRenderer.h; sourceTree = "<group>"; };
 		8EE895A71CF6484600740718 /* BoundingBoxCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoundingBoxCalculator.h; sourceTree = "<group>"; };
 		8EE895A81CF6484600740718 /* Communication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Communication.h; sourceTree = "<group>"; };
 		8EE895A91CF6484600740718 /* DataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataProvider.h; sourceTree = "<group>"; };
@@ -352,7 +352,6 @@
 		8EE895C81CF6484600740718 /* Vectors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vectors.h; sourceTree = "<group>"; };
 		8EE895C91CF6484600740718 /* XQueryComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQueryComponents.h; sourceTree = "<group>"; };
 		8EE895EB1CF6484600740718 /* AbstractIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AbstractIO.cpp; sourceTree = "<group>"; };
-		8EE895EC1CF6484600740718 /* AbstractRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AbstractRenderer.cpp; sourceTree = "<group>"; };
 		8EE895ED1CF6484600740718 /* BoundingBoxCalculator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoundingBoxCalculator.cpp; sourceTree = "<group>"; };
 		8EE895EE1CF6484600740718 /* Communication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Communication.cpp; sourceTree = "<group>"; };
 		8EE895EF1CF6484600740718 /* Dataset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dataset.cpp; sourceTree = "<group>"; };
@@ -362,13 +361,10 @@
 		8EE895F31CF6484600740718 /* GeometryRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryRenderer.cpp; sourceTree = "<group>"; };
 		8EE895F41CF6484600740718 /* GLMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLMatrix.cpp; sourceTree = "<group>"; };
 		8EE895F51CF6484600740718 /* InputVariable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputVariable.cpp; sourceTree = "<group>"; };
-		8EE895F71CF6484600740718 /* AbstractRendererImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AbstractRendererImpl.cpp; sourceTree = "<group>"; };
-		8EE895F81CF6484600740718 /* AbstractRendererImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractRendererImpl.h; sourceTree = "<group>"; };
 		8EE895F91CF6484600740718 /* GeometryRendererImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryRendererImpl.cpp; sourceTree = "<group>"; };
 		8EE895FA1CF6484600740718 /* GeometryRendererImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryRendererImpl.h; sourceTree = "<group>"; };
 		8EE895FB1CF6484600740718 /* GLFrameBufferObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLFrameBufferObject.cpp; sourceTree = "<group>"; };
 		8EE895FC1CF6484600740718 /* GLFrameBufferObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLFrameBufferObject.h; sourceTree = "<group>"; };
-		8EE895FD1CF6484600740718 /* GLInclude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLInclude.h; sourceTree = "<group>"; };
 		8EE895FE1CF6484600740718 /* GLObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLObject.h; sourceTree = "<group>"; };
 		8EE895FF1CF6484600740718 /* GLShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLShader.cpp; sourceTree = "<group>"; };
 		8EE896001CF6484600740718 /* GLShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLShader.h; sourceTree = "<group>"; };
@@ -968,7 +964,6 @@
 			isa = PBXGroup;
 			children = (
 				8EE895A51CF6484600740718 /* AbstractIO.h */,
-				8EE895A61CF6484600740718 /* AbstractRenderer.h */,
 				8EE895A71CF6484600740718 /* BoundingBoxCalculator.h */,
 				8EE895A81CF6484600740718 /* Communication.h */,
 				8EE895A91CF6484600740718 /* DataProvider.h */,
@@ -979,6 +974,7 @@
 				8EE895AE1CF6484600740718 /* G3D.h */,
 				8EE895AF1CF6484600740718 /* GeometryDataset.h */,
 				8EE895B01CF6484600740718 /* GeometryRenderer.h */,
+				8E96F8781CF76870003511F6 /* GeometrySliceRenderer.h */,
 				8EE895B11CF6484600740718 /* GLMatrix.h */,
 				8EE895B21CF6484600740718 /* InputVariable.h */,
 				8EE895B31CF6484600740718 /* PythonProvider.h */,
@@ -1027,7 +1023,6 @@
 			isa = PBXGroup;
 			children = (
 				8EE895EB1CF6484600740718 /* AbstractIO.cpp */,
-				8EE895EC1CF6484600740718 /* AbstractRenderer.cpp */,
 				8EE895ED1CF6484600740718 /* BoundingBoxCalculator.cpp */,
 				8EE895EE1CF6484600740718 /* Communication.cpp */,
 				8EE895EF1CF6484600740718 /* Dataset.cpp */,
@@ -1035,6 +1030,7 @@
 				8EE895F11CF6484600740718 /* G3D.cpp */,
 				8EE895F21CF6484600740718 /* GeometryDataset.cpp */,
 				8EE895F31CF6484600740718 /* GeometryRenderer.cpp */,
+				8E96F8791CF7688E003511F6 /* GeometrySliceRenderer.cpp */,
 				8EE895F41CF6484600740718 /* GLMatrix.cpp */,
 				8EE895F51CF6484600740718 /* InputVariable.cpp */,
 				8EE895F61CF6484600740718 /* private */,
@@ -1052,13 +1048,10 @@
 		8EE895F61CF6484600740718 /* private */ = {
 			isa = PBXGroup;
 			children = (
-				8EE895F71CF6484600740718 /* AbstractRendererImpl.cpp */,
-				8EE895F81CF6484600740718 /* AbstractRendererImpl.h */,
 				8EE895F91CF6484600740718 /* GeometryRendererImpl.cpp */,
 				8EE895FA1CF6484600740718 /* GeometryRendererImpl.h */,
 				8EE895FB1CF6484600740718 /* GLFrameBufferObject.cpp */,
 				8EE895FC1CF6484600740718 /* GLFrameBufferObject.h */,
-				8EE895FD1CF6484600740718 /* GLInclude.h */,
 				8EE895FE1CF6484600740718 /* GLObject.h */,
 				8EE895FF1CF6484600740718 /* GLShader.cpp */,
 				8EE896001CF6484600740718 /* GLShader.h */,
@@ -1227,15 +1220,14 @@
 				8EE8956F1CF6483B00740718 /* LoopbackConnectionFactory.cpp in Sources */,
 				8EE8921F1CF6481900740718 /* DynamicUIBuilder.mm in Sources */,
 				8EE892221CF6481900740718 /* Render3DViewController.mm in Sources */,
+				8E96F87A1CF7688E003511F6 /* GeometrySliceRenderer.cpp in Sources */,
 				8EE896371CF6484600740718 /* DownloadProvider.cpp in Sources */,
 				8EE895631CF6483B00740718 /* TextLog.cpp in Sources */,
 				8EE8954F1CF6483B00740718 /* jsoncpp.cpp in Sources */,
-				8EE896331CF6484600740718 /* AbstractRenderer.cpp in Sources */,
 				8EE895801CF6483B00740718 /* TCPNetworkAddress.cpp in Sources */,
 				8EE8957A1CF6483B00740718 /* QueueConnectionFactory.cpp in Sources */,
 				8EE8964A1CF6484600740718 /* ConsoleOut.cpp in Sources */,
 				8EE895651CF6483B00740718 /* ConnectionFactorySelector.cpp in Sources */,
-				8EE8963D1CF6484600740718 /* AbstractRendererImpl.cpp in Sources */,
 				8EE895681CF6483B00740718 /* SizePrefixedProtocol.cpp in Sources */,
 				8EE8957D1CF6483B00740718 /* TCPConnection.cpp in Sources */,
 				8EE8955B1CF6483B00740718 /* Filesystem.cpp in Sources */,

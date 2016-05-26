@@ -90,7 +90,7 @@
 {
     if (m_scene) {
         GLMatrix modelView = m_scene->modelViewMatrix();
-        m_rendererDispatcher->setModelView(&modelView);
+        m_rendererDispatcher->setModelView(modelView);
         m_rendererDispatcher->startDraw();
         m_scene->dispatch(*m_rendererDispatcher);
         m_rendererDispatcher->finishDraw();

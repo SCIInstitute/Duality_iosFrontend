@@ -111,7 +111,7 @@
 		8EE895811CF6483B00740718 /* NetworkTesting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE8943C1CF6483B00740718 /* NetworkTesting.cpp */; };
 		8EE896141CF6484600740718 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8EE895A21CF6484600740718 /* CMakeLists.txt */; };
 		8EE896321CF6484600740718 /* AbstractIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895EB1CF6484600740718 /* AbstractIO.cpp */; };
-		8EE896341CF6484600740718 /* BoundingBoxCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895ED1CF6484600740718 /* BoundingBoxCalculator.cpp */; };
+		8EE896341CF6484600740718 /* BoundingBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895ED1CF6484600740718 /* BoundingBox.cpp */; };
 		8EE896351CF6484600740718 /* Communication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895EE1CF6484600740718 /* Communication.cpp */; };
 		8EE896361CF6484600740718 /* Dataset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895EF1CF6484600740718 /* Dataset.cpp */; };
 		8EE896371CF6484600740718 /* DownloadProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895F01CF6484600740718 /* DownloadProvider.cpp */; };
@@ -330,7 +330,7 @@
 		8EE8943C1CF6483B00740718 /* NetworkTesting.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkTesting.cpp; sourceTree = "<group>"; };
 		8EE895A21CF6484600740718 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		8EE895A51CF6484600740718 /* AbstractIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractIO.h; sourceTree = "<group>"; };
-		8EE895A71CF6484600740718 /* BoundingBoxCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoundingBoxCalculator.h; sourceTree = "<group>"; };
+		8EE895A71CF6484600740718 /* BoundingBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoundingBox.h; sourceTree = "<group>"; };
 		8EE895A81CF6484600740718 /* Communication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Communication.h; sourceTree = "<group>"; };
 		8EE895A91CF6484600740718 /* DataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataProvider.h; sourceTree = "<group>"; };
 		8EE895AA1CF6484600740718 /* Dataset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dataset.h; sourceTree = "<group>"; };
@@ -365,7 +365,7 @@
 		8EE895C81CF6484600740718 /* Vectors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vectors.h; sourceTree = "<group>"; };
 		8EE895C91CF6484600740718 /* XQueryComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQueryComponents.h; sourceTree = "<group>"; };
 		8EE895EB1CF6484600740718 /* AbstractIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AbstractIO.cpp; sourceTree = "<group>"; };
-		8EE895ED1CF6484600740718 /* BoundingBoxCalculator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoundingBoxCalculator.cpp; sourceTree = "<group>"; };
+		8EE895ED1CF6484600740718 /* BoundingBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoundingBox.cpp; sourceTree = "<group>"; };
 		8EE895EE1CF6484600740718 /* Communication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Communication.cpp; sourceTree = "<group>"; };
 		8EE895EF1CF6484600740718 /* Dataset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dataset.cpp; sourceTree = "<group>"; };
 		8EE895F01CF6484600740718 /* DownloadProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DownloadProvider.cpp; sourceTree = "<group>"; };
@@ -1023,7 +1023,7 @@
 				8E96F8801CF7A226003511F6 /* 3D */,
 				8EE895A51CF6484600740718 /* AbstractIO.h */,
 				8E96F8891CF7B2E0003511F6 /* CoordinateSystem.h */,
-				8EE895A71CF6484600740718 /* BoundingBoxCalculator.h */,
+				8EE895A71CF6484600740718 /* BoundingBox.h */,
 				8EE895A81CF6484600740718 /* Communication.h */,
 				8EE895A91CF6484600740718 /* DataProvider.h */,
 				8EE895AA1CF6484600740718 /* Dataset.h */,
@@ -1083,7 +1083,7 @@
 				8E96F8821CF7A282003511F6 /* 3D */,
 				8EE895EB1CF6484600740718 /* AbstractIO.cpp */,
 				8E96F88A1CF7B725003511F6 /* CoordinateSystem.cpp */,
-				8EE895ED1CF6484600740718 /* BoundingBoxCalculator.cpp */,
+				8EE895ED1CF6484600740718 /* BoundingBox.cpp */,
 				8EE895EE1CF6484600740718 /* Communication.cpp */,
 				8EE895EF1CF6484600740718 /* Dataset.cpp */,
 				8EE895F01CF6484600740718 /* DownloadProvider.cpp */,
@@ -1241,7 +1241,7 @@
 			files = (
 				8EE8957F1CF6483B00740718 /* TCPConnectionFactory.cpp in Sources */,
 				8EE8957C1CF6483B00740718 /* Sockets.cpp in Sources */,
-				8EE896341CF6484600740718 /* BoundingBoxCalculator.cpp in Sources */,
+				8EE896341CF6484600740718 /* BoundingBox.cpp in Sources */,
 				8EE895601CF6483B00740718 /* Log.cpp in Sources */,
 				8EE896351CF6484600740718 /* Communication.cpp in Sources */,
 				8EE892211CF6481900740718 /* main.mm in Sources */,

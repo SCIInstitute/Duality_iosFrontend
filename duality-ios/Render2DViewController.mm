@@ -10,6 +10,7 @@
 #include "IVDA/iOS.h"
 #include "IVDA/GLInclude.h"
 #include "duality/RenderDispatcher2D.h"
+#include "duality/BoundingBox.h"
 #include "duality/ScreenInfo.h"
 #include "duality/Scene.h"
 
@@ -32,9 +33,12 @@
         [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
     }
     ScreenInfo screenInfo = [self screenInfo];
+    
     BoundingBoxCalculator bbCalc;
     m_scene->dispatch(bbCalc);
-    m_rendererDispatcher = std::make_unique<RenderDispatcher2D>(screenInfo, bbCalc.getMinMax());
+    m_rendererDispatcher = std::make_unique<RenderDispatcher2D>(screenInfo, bbCalc.boundingBox());
+    m_sliceSelector.minimumValue = bbCalc.boundingBox().min[2]; // FIXME
+    m_sliceSelector.maximumValue = bbCalc.boundingBox().max[2]; // FIXME
 }
 
 - (ScreenInfo)screenInfo

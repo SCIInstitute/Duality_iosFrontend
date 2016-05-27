@@ -9,6 +9,7 @@
 
 #include "IVDA/iOS.h"
 #include "IVDA/GLInclude.h"
+#include "duality/BoundingBox.h"
 #include "duality/RenderDispatcher3D.h"
 #include "duality/ScreenInfo.h"
 #include "duality/Scene.h"
@@ -34,7 +35,7 @@
     ScreenInfo screenInfo = [self screenInfo];
     BoundingBoxCalculator bbCalc;
     m_scene->dispatch(bbCalc);
-    m_rendererDispatcher = std::make_unique<RenderDispatcher3D>(screenInfo, bbCalc.getMinMax());
+    m_rendererDispatcher = std::make_unique<RenderDispatcher3D>(screenInfo, bbCalc.boundingBox());
 }
 
 - (ScreenInfo)screenInfo

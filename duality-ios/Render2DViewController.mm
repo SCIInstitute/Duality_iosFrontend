@@ -9,8 +9,7 @@
 
 #include "IVDA/iOS.h"
 #include "IVDA/GLInclude.h"
-#include "duality/RenderDispatcher3D.h"
-#include "duality/GeometryRenderer2D.h"
+#include "duality/RenderDispatcher2D.h"
 #include "duality/ScreenInfo.h"
 #include "duality/Scene.h"
 
@@ -35,7 +34,7 @@
     ScreenInfo screenInfo = [self screenInfo];
     BoundingBoxCalculator bbCalc;
     m_scene->dispatch(bbCalc);
-    m_rendererDispatcher = std::make_unique<RenderDispatcher3D>(screenInfo, bbCalc.getMinMax());
+    m_rendererDispatcher = std::make_unique<RenderDispatcher2D>(screenInfo, bbCalc.getMinMax());
 }
 
 - (ScreenInfo)screenInfo
@@ -145,7 +144,7 @@
     if (numTouches == 1) {
         CGPoint touchPoint = [[touches anyObject] locationInView:self.view];
         IVDA::Mat4f rotation = m_arcBall.Drag(IVDA::Vec2ui(touchPoint.x, touchPoint.y)).ComputeRotation();
-        m_rendererDispatcher->addRotation(rotation);
+        //m_rendererDispatcher->addRotation(rotation);
         m_arcBall.Click(IVDA::Vec2ui(touchPoint.x, touchPoint.y));
     }
     else if (numTouches == 2) {
@@ -169,7 +168,7 @@
     IVDA::Vec2f c1((m_touchPos1.x + m_touchPos2.x) / 2, (m_touchPos1.y + m_touchPos2.y) / 2);
     IVDA::Vec2f c2((touchPos1.x + touchPos2.x) / 2, (touchPos1.y + touchPos2.y) / 2);
     IVDA::Vec2f translation(c2.x - c1.x, -(c2.y - c1.y));
-    m_rendererDispatcher->addTranslation(translation);
+    //m_rendererDispatcher->addTranslation(translation);
 }
 
 @end

@@ -139,6 +139,7 @@
 		8EE8964F1CF6484600740718 /* SysTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896111CF6484600740718 /* SysTools.cpp */; };
 		8EE896501CF6484600740718 /* Threads.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896121CF6484600740718 /* Threads.cpp */; };
 		8EE896511CF6484600740718 /* XQueryComponents.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896131CF6484600740718 /* XQueryComponents.mm */; };
+		8EEA652C1CF8A65C00B6465A /* RenderDispatcher2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA652B1CF8A65C00B6465A /* RenderDispatcher2D.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -395,6 +396,8 @@
 		8EE896111CF6484600740718 /* SysTools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SysTools.cpp; sourceTree = "<group>"; };
 		8EE896121CF6484600740718 /* Threads.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Threads.cpp; sourceTree = "<group>"; };
 		8EE896131CF6484600740718 /* XQueryComponents.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XQueryComponents.mm; sourceTree = "<group>"; };
+		8EEA652A1CF8A5B600B6465A /* RenderDispatcher2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderDispatcher2D.h; sourceTree = "<group>"; };
+		8EEA652B1CF8A65C00B6465A /* RenderDispatcher2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderDispatcher2D.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -466,8 +469,9 @@
 		8E96F8811CF7A24E003511F6 /* 2D */ = {
 			isa = PBXGroup;
 			children = (
-				8E96F8781CF76870003511F6 /* GeometryRenderer2D.h */,
 				8E96F8861CF7AEDF003511F6 /* MVP2D.h */,
+				8E96F8781CF76870003511F6 /* GeometryRenderer2D.h */,
+				8EEA652A1CF8A5B600B6465A /* RenderDispatcher2D.h */,
 			);
 			name = 2D;
 			sourceTree = "<group>";
@@ -485,8 +489,9 @@
 		8E96F8851CF7A9EA003511F6 /* 2D */ = {
 			isa = PBXGroup;
 			children = (
-				8E96F8791CF7688E003511F6 /* GeometryRenderer2D.cpp */,
 				8E96F8871CF7AEFC003511F6 /* MVP2D.cpp */,
+				8E96F8791CF7688E003511F6 /* GeometryRenderer2D.cpp */,
+				8EEA652B1CF8A65C00B6465A /* RenderDispatcher2D.cpp */,
 			);
 			name = 2D;
 			sourceTree = "<group>";
@@ -1244,6 +1249,7 @@
 				8EE896431CF6484600740718 /* Scene.cpp in Sources */,
 				8E96F8881CF7AEFC003511F6 /* MVP2D.cpp in Sources */,
 				8EE896511CF6484600740718 /* XQueryComponents.mm in Sources */,
+				8EEA652C1CF8A65C00B6465A /* RenderDispatcher2D.cpp in Sources */,
 				8EE8957B1CF6483B00740718 /* QueueConnectionSpawner.cpp in Sources */,
 				8EE8921E1CF6481900740718 /* AppDelegate.mm in Sources */,
 				8EE895641CF6483B00740718 /* ConnectionAggregator.cpp in Sources */,

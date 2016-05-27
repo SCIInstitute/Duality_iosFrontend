@@ -10,7 +10,6 @@
 #include "IVDA/iOS.h"
 #include "IVDA/GLInclude.h"
 #include "duality/RenderDispatcher3D.h"
-#include "duality/GeometryRenderer3D.h"
 #include "duality/ScreenInfo.h"
 #include "duality/Scene.h"
 

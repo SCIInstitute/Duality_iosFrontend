@@ -120,8 +120,6 @@
 		8EE8963A1CF6484600740718 /* GeometryRenderer3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895F31CF6484600740718 /* GeometryRenderer3D.cpp */; };
 		8EE8963B1CF6484600740718 /* GLMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895F41CF6484600740718 /* GLMatrix.cpp */; };
 		8EE8963C1CF6484600740718 /* InputVariable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895F51CF6484600740718 /* InputVariable.cpp */; };
-		8EE8963F1CF6484600740718 /* GLFrameBufferObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895FB1CF6484600740718 /* GLFrameBufferObject.cpp */; };
-		8EE896401CF6484600740718 /* GLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE895FF1CF6484600740718 /* GLShader.cpp */; };
 		8EE896411CF6484600740718 /* PythonProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896021CF6484600740718 /* PythonProvider.cpp */; };
 		8EE896421CF6484600740718 /* RenderDispatcher3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896031CF6484600740718 /* RenderDispatcher3D.cpp */; };
 		8EE896431CF6484600740718 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896041CF6484600740718 /* Scene.cpp */; };
@@ -129,18 +127,20 @@
 		8EE896451CF6484600740718 /* SceneMetadata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896061CF6484600740718 /* SceneMetadata.cpp */; };
 		8EE896461CF6484600740718 /* SceneNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896071CF6484600740718 /* SceneNode.cpp */; };
 		8EE896471CF6484600740718 /* SceneParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896081CF6484600740718 /* SceneParser.cpp */; };
-		8EE896481CF6484600740718 /* AbstrDebugOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE8960A1CF6484600740718 /* AbstrDebugOut.cpp */; };
-		8EE896491CF6484600740718 /* ArcBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE8960B1CF6484600740718 /* ArcBall.cpp */; };
-		8EE8964A1CF6484600740718 /* ConsoleOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE8960C1CF6484600740718 /* ConsoleOut.cpp */; };
-		8EE8964B1CF6484600740718 /* DebugOutHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE8960D1CF6484600740718 /* DebugOutHandler.cpp */; };
-		8EE8964C1CF6484600740718 /* iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8EE8960E1CF6484600740718 /* iOS.mm */; };
-		8EE8964D1CF6484600740718 /* Macros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE8960F1CF6484600740718 /* Macros.cpp */; };
-		8EE8964E1CF6484600740718 /* MultiplexOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896101CF6484600740718 /* MultiplexOut.cpp */; };
-		8EE8964F1CF6484600740718 /* SysTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896111CF6484600740718 /* SysTools.cpp */; };
-		8EE896501CF6484600740718 /* Threads.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896121CF6484600740718 /* Threads.cpp */; };
-		8EE896511CF6484600740718 /* XQueryComponents.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896131CF6484600740718 /* XQueryComponents.mm */; };
 		8EEA652C1CF8A65C00B6465A /* RenderDispatcher2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA652B1CF8A65C00B6465A /* RenderDispatcher2D.cpp */; };
 		8EEA652E1CF8AA3700B6465A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EEA652D1CF8AA3700B6465A /* CoreGraphics.framework */; };
+		8EEA65641CF9111B00B6465A /* AbstrDebugOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA65541CF9111B00B6465A /* AbstrDebugOut.cpp */; };
+		8EEA65651CF9111B00B6465A /* ArcBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA65551CF9111B00B6465A /* ArcBall.cpp */; };
+		8EEA65661CF9111B00B6465A /* ConsoleOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA65561CF9111B00B6465A /* ConsoleOut.cpp */; };
+		8EEA65671CF9111B00B6465A /* DebugOutHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA65571CF9111B00B6465A /* DebugOutHandler.cpp */; };
+		8EEA65681CF9111B00B6465A /* GLFrameBufferObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA65581CF9111B00B6465A /* GLFrameBufferObject.cpp */; };
+		8EEA65691CF9111B00B6465A /* GLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA655B1CF9111B00B6465A /* GLShader.cpp */; };
+		8EEA656A1CF9111B00B6465A /* iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA655E1CF9111B00B6465A /* iOS.mm */; };
+		8EEA656B1CF9111B00B6465A /* Macros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA655F1CF9111B00B6465A /* Macros.cpp */; };
+		8EEA656C1CF9111B00B6465A /* MultiplexOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA65601CF9111B00B6465A /* MultiplexOut.cpp */; };
+		8EEA656D1CF9111B00B6465A /* SysTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA65611CF9111B00B6465A /* SysTools.cpp */; };
+		8EEA656E1CF9111B00B6465A /* Threads.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA65621CF9111B00B6465A /* Threads.cpp */; };
+		8EEA656F1CF9111B00B6465A /* XQueryComponents.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA65631CF9111B00B6465A /* XQueryComponents.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -374,12 +374,6 @@
 		8EE895F31CF6484600740718 /* GeometryRenderer3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryRenderer3D.cpp; sourceTree = "<group>"; };
 		8EE895F41CF6484600740718 /* GLMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLMatrix.cpp; sourceTree = "<group>"; };
 		8EE895F51CF6484600740718 /* InputVariable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputVariable.cpp; sourceTree = "<group>"; };
-		8EE895FB1CF6484600740718 /* GLFrameBufferObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLFrameBufferObject.cpp; sourceTree = "<group>"; };
-		8EE895FC1CF6484600740718 /* GLFrameBufferObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLFrameBufferObject.h; sourceTree = "<group>"; };
-		8EE895FE1CF6484600740718 /* GLObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLObject.h; sourceTree = "<group>"; };
-		8EE895FF1CF6484600740718 /* GLShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLShader.cpp; sourceTree = "<group>"; };
-		8EE896001CF6484600740718 /* GLShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLShader.h; sourceTree = "<group>"; };
-		8EE896011CF6484600740718 /* GPUObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPUObject.h; sourceTree = "<group>"; };
 		8EE896021CF6484600740718 /* PythonProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PythonProvider.cpp; sourceTree = "<group>"; };
 		8EE896031CF6484600740718 /* RenderDispatcher3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderDispatcher3D.cpp; sourceTree = "<group>"; };
 		8EE896041CF6484600740718 /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
@@ -387,19 +381,25 @@
 		8EE896061CF6484600740718 /* SceneMetadata.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneMetadata.cpp; sourceTree = "<group>"; };
 		8EE896071CF6484600740718 /* SceneNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneNode.cpp; sourceTree = "<group>"; };
 		8EE896081CF6484600740718 /* SceneParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneParser.cpp; sourceTree = "<group>"; };
-		8EE8960A1CF6484600740718 /* AbstrDebugOut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AbstrDebugOut.cpp; sourceTree = "<group>"; };
-		8EE8960B1CF6484600740718 /* ArcBall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ArcBall.cpp; sourceTree = "<group>"; };
-		8EE8960C1CF6484600740718 /* ConsoleOut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConsoleOut.cpp; sourceTree = "<group>"; };
-		8EE8960D1CF6484600740718 /* DebugOutHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DebugOutHandler.cpp; sourceTree = "<group>"; };
-		8EE8960E1CF6484600740718 /* iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iOS.mm; sourceTree = "<group>"; };
-		8EE8960F1CF6484600740718 /* Macros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Macros.cpp; sourceTree = "<group>"; };
-		8EE896101CF6484600740718 /* MultiplexOut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiplexOut.cpp; sourceTree = "<group>"; };
-		8EE896111CF6484600740718 /* SysTools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SysTools.cpp; sourceTree = "<group>"; };
-		8EE896121CF6484600740718 /* Threads.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Threads.cpp; sourceTree = "<group>"; };
-		8EE896131CF6484600740718 /* XQueryComponents.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XQueryComponents.mm; sourceTree = "<group>"; };
 		8EEA652A1CF8A5B600B6465A /* RenderDispatcher2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderDispatcher2D.h; sourceTree = "<group>"; };
 		8EEA652B1CF8A65C00B6465A /* RenderDispatcher2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderDispatcher2D.cpp; sourceTree = "<group>"; };
 		8EEA652D1CF8AA3700B6465A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8EEA65541CF9111B00B6465A /* AbstrDebugOut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AbstrDebugOut.cpp; sourceTree = "<group>"; };
+		8EEA65551CF9111B00B6465A /* ArcBall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ArcBall.cpp; sourceTree = "<group>"; };
+		8EEA65561CF9111B00B6465A /* ConsoleOut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConsoleOut.cpp; sourceTree = "<group>"; };
+		8EEA65571CF9111B00B6465A /* DebugOutHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DebugOutHandler.cpp; sourceTree = "<group>"; };
+		8EEA65581CF9111B00B6465A /* GLFrameBufferObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLFrameBufferObject.cpp; sourceTree = "<group>"; };
+		8EEA65591CF9111B00B6465A /* GLFrameBufferObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLFrameBufferObject.h; sourceTree = "<group>"; };
+		8EEA655A1CF9111B00B6465A /* GLObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLObject.h; sourceTree = "<group>"; };
+		8EEA655B1CF9111B00B6465A /* GLShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLShader.cpp; sourceTree = "<group>"; };
+		8EEA655C1CF9111B00B6465A /* GLShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLShader.h; sourceTree = "<group>"; };
+		8EEA655D1CF9111B00B6465A /* GPUObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPUObject.h; sourceTree = "<group>"; };
+		8EEA655E1CF9111B00B6465A /* iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iOS.mm; sourceTree = "<group>"; };
+		8EEA655F1CF9111B00B6465A /* Macros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Macros.cpp; sourceTree = "<group>"; };
+		8EEA65601CF9111B00B6465A /* MultiplexOut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiplexOut.cpp; sourceTree = "<group>"; };
+		8EEA65611CF9111B00B6465A /* SysTools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SysTools.cpp; sourceTree = "<group>"; };
+		8EEA65621CF9111B00B6465A /* Threads.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Threads.cpp; sourceTree = "<group>"; };
+		8EEA65631CF9111B00B6465A /* XQueryComponents.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XQueryComponents.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1092,7 +1092,6 @@
 				8E96F87C1CF7796C003511F6 /* GeometryUtil.cpp */,
 				8EE895F41CF6484600740718 /* GLMatrix.cpp */,
 				8EE895F51CF6484600740718 /* InputVariable.cpp */,
-				8EE895F61CF6484600740718 /* private */,
 				8EE896021CF6484600740718 /* PythonProvider.cpp */,
 				8EE896041CF6484600740718 /* Scene.cpp */,
 				8EE896051CF6484600740718 /* SceneLoader.cpp */,
@@ -1103,32 +1102,25 @@
 			path = duality;
 			sourceTree = "<group>";
 		};
-		8EE895F61CF6484600740718 /* private */ = {
-			isa = PBXGroup;
-			children = (
-				8EE895FB1CF6484600740718 /* GLFrameBufferObject.cpp */,
-				8EE895FC1CF6484600740718 /* GLFrameBufferObject.h */,
-				8EE895FE1CF6484600740718 /* GLObject.h */,
-				8EE895FF1CF6484600740718 /* GLShader.cpp */,
-				8EE896001CF6484600740718 /* GLShader.h */,
-				8EE896011CF6484600740718 /* GPUObject.h */,
-			);
-			path = private;
-			sourceTree = "<group>";
-		};
 		8EE896091CF6484600740718 /* IVDA */ = {
 			isa = PBXGroup;
 			children = (
-				8EE8960A1CF6484600740718 /* AbstrDebugOut.cpp */,
-				8EE8960B1CF6484600740718 /* ArcBall.cpp */,
-				8EE8960C1CF6484600740718 /* ConsoleOut.cpp */,
-				8EE8960D1CF6484600740718 /* DebugOutHandler.cpp */,
-				8EE8960E1CF6484600740718 /* iOS.mm */,
-				8EE8960F1CF6484600740718 /* Macros.cpp */,
-				8EE896101CF6484600740718 /* MultiplexOut.cpp */,
-				8EE896111CF6484600740718 /* SysTools.cpp */,
-				8EE896121CF6484600740718 /* Threads.cpp */,
-				8EE896131CF6484600740718 /* XQueryComponents.mm */,
+				8EEA65541CF9111B00B6465A /* AbstrDebugOut.cpp */,
+				8EEA65551CF9111B00B6465A /* ArcBall.cpp */,
+				8EEA65561CF9111B00B6465A /* ConsoleOut.cpp */,
+				8EEA65571CF9111B00B6465A /* DebugOutHandler.cpp */,
+				8EEA65581CF9111B00B6465A /* GLFrameBufferObject.cpp */,
+				8EEA65591CF9111B00B6465A /* GLFrameBufferObject.h */,
+				8EEA655A1CF9111B00B6465A /* GLObject.h */,
+				8EEA655B1CF9111B00B6465A /* GLShader.cpp */,
+				8EEA655C1CF9111B00B6465A /* GLShader.h */,
+				8EEA655D1CF9111B00B6465A /* GPUObject.h */,
+				8EEA655E1CF9111B00B6465A /* iOS.mm */,
+				8EEA655F1CF9111B00B6465A /* Macros.cpp */,
+				8EEA65601CF9111B00B6465A /* MultiplexOut.cpp */,
+				8EEA65611CF9111B00B6465A /* SysTools.cpp */,
+				8EEA65621CF9111B00B6465A /* Threads.cpp */,
+				8EEA65631CF9111B00B6465A /* XQueryComponents.mm */,
 			);
 			path = IVDA;
 			sourceTree = "<group>";
@@ -1239,40 +1231,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EEA656F1CF9111B00B6465A /* XQueryComponents.mm in Sources */,
 				8EE8957F1CF6483B00740718 /* TCPConnectionFactory.cpp in Sources */,
 				8EE8957C1CF6483B00740718 /* Sockets.cpp in Sources */,
 				8EE896341CF6484600740718 /* BoundingBox.cpp in Sources */,
+				8EEA656B1CF9111B00B6465A /* Macros.cpp in Sources */,
 				8EE895601CF6483B00740718 /* Log.cpp in Sources */,
+				8EEA656C1CF9111B00B6465A /* MultiplexOut.cpp in Sources */,
 				8EE896351CF6484600740718 /* Communication.cpp in Sources */,
 				8EE892211CF6481900740718 /* main.mm in Sources */,
-				8EE896501CF6484600740718 /* Threads.cpp in Sources */,
 				8EE8956B1CF6483B00740718 /* FramingConnectionAcceptor.cpp in Sources */,
 				8EE8943E1CF6483B00740718 /* AES.cpp in Sources */,
 				8EE8956A1CF6483B00740718 /* FramingConnection.cpp in Sources */,
 				8EE892251CF6481900740718 /* TabBarViewController.mm in Sources */,
 				8EE896431CF6484600740718 /* Scene.cpp in Sources */,
 				8E96F8881CF7AEFC003511F6 /* MVP2D.cpp in Sources */,
-				8EE896511CF6484600740718 /* XQueryComponents.mm in Sources */,
 				8EEA652C1CF8A65C00B6465A /* RenderDispatcher2D.cpp in Sources */,
 				8EE8957B1CF6483B00740718 /* QueueConnectionSpawner.cpp in Sources */,
 				8EE8921E1CF6481900740718 /* AppDelegate.mm in Sources */,
+				8EEA65681CF9111B00B6465A /* GLFrameBufferObject.cpp in Sources */,
 				8EE895641CF6483B00740718 /* ConnectionAggregator.cpp in Sources */,
 				8EE896421CF6484600740718 /* RenderDispatcher3D.cpp in Sources */,
 				8EE895731CF6483B00740718 /* JsonKeys.cpp in Sources */,
 				8EE8955D1CF6483B00740718 /* CallbackLog.cpp in Sources */,
 				8EE8963B1CF6484600740718 /* GLMatrix.cpp in Sources */,
-				8EE8963F1CF6484600740718 /* GLFrameBufferObject.cpp in Sources */,
-				8EE896481CF6484600740718 /* AbstrDebugOut.cpp in Sources */,
 				8EE895611CF6483B00740718 /* LogManager.cpp in Sources */,
+				8EEA65691CF9111B00B6465A /* GLShader.cpp in Sources */,
 				8EE8956E1CF6483B00740718 /* LoopbackConnectionAcceptor.cpp in Sources */,
 				8EE895711CF6483B00740718 /* Message.cpp in Sources */,
 				8EE895761CF6483B00740718 /* RpcClient.cpp in Sources */,
 				8EE896361CF6484600740718 /* Dataset.cpp in Sources */,
 				8EE895771CF6483B00740718 /* ValueType.cpp in Sources */,
-				8EE896491CF6484600740718 /* ArcBall.cpp in Sources */,
 				8EE896461CF6484600740718 /* SceneNode.cpp in Sources */,
 				8EE895791CF6483B00740718 /* QueueConnectionAcceptor.cpp in Sources */,
 				8EE892231CF6481900740718 /* SelectSceneViewController.mm in Sources */,
+				8EEA656A1CF9111B00B6465A /* iOS.mm in Sources */,
 				8EE894401CF6483B00740718 /* base64.cpp in Sources */,
 				8EE896381CF6484600740718 /* G3D.cpp in Sources */,
 				8EE8956F1CF6483B00740718 /* LoopbackConnectionFactory.cpp in Sources */,
@@ -1280,18 +1273,19 @@
 				8EE892221CF6481900740718 /* Render3DViewController.mm in Sources */,
 				8E96F87A1CF7688E003511F6 /* GeometryRenderer2D.cpp in Sources */,
 				8EE896371CF6484600740718 /* DownloadProvider.cpp in Sources */,
+				8EEA65661CF9111B00B6465A /* ConsoleOut.cpp in Sources */,
 				8EE895631CF6483B00740718 /* TextLog.cpp in Sources */,
 				8EE8954F1CF6483B00740718 /* jsoncpp.cpp in Sources */,
 				8E96F8841CF7A2A7003511F6 /* MVP3D.cpp in Sources */,
 				8EE895801CF6483B00740718 /* TCPNetworkAddress.cpp in Sources */,
 				8EE8957A1CF6483B00740718 /* QueueConnectionFactory.cpp in Sources */,
 				8E96F87D1CF7796C003511F6 /* GeometryUtil.cpp in Sources */,
-				8EE8964A1CF6484600740718 /* ConsoleOut.cpp in Sources */,
 				8EE895651CF6483B00740718 /* ConnectionFactorySelector.cpp in Sources */,
 				8EE895681CF6483B00740718 /* SizePrefixedProtocol.cpp in Sources */,
 				8EE8957D1CF6483B00740718 /* TCPConnection.cpp in Sources */,
 				8EE8955B1CF6483B00740718 /* Filesystem.cpp in Sources */,
 				8EE895691CF6483B00740718 /* WebSocketProtocol.cpp in Sources */,
+				8EEA656E1CF9111B00B6465A /* Threads.cpp in Sources */,
 				8EE895811CF6483B00740718 /* NetworkTesting.cpp in Sources */,
 				8EE8957E1CF6483B00740718 /* TCPConnectionAcceptor.cpp in Sources */,
 				8EE895701CF6483B00740718 /* LoopbackConnectionSpawner.cpp in Sources */,
@@ -1300,30 +1294,28 @@
 				8E96F8771CF763FD003511F6 /* Render2DViewController.mm in Sources */,
 				8EE896451CF6484600740718 /* SceneMetadata.cpp in Sources */,
 				8EE895721CF6483B00740718 /* Dispatcher.cpp in Sources */,
+				8EEA65651CF9111B00B6465A /* ArcBall.cpp in Sources */,
 				8EE895671CF6483B00740718 /* FramingUtils.cpp in Sources */,
 				8EE895661CF6483B00740718 /* Endpoint.cpp in Sources */,
-				8EE8964D1CF6484600740718 /* Macros.cpp in Sources */,
 				8EE8956D1CF6483B00740718 /* LoopbackConnection.cpp in Sources */,
 				8EE8963C1CF6484600740718 /* InputVariable.cpp in Sources */,
 				8EE892241CF6481900740718 /* SettingsViewController.mm in Sources */,
 				8E96F88B1CF7B725003511F6 /* CoordinateSystem.cpp in Sources */,
+				8EEA65671CF9111B00B6465A /* DebugOutHandler.cpp in Sources */,
+				8EEA65641CF9111B00B6465A /* AbstrDebugOut.cpp in Sources */,
 				8EE8955A1CF6483B00740718 /* File.cpp in Sources */,
 				8EE896441CF6484600740718 /* SceneLoader.cpp in Sources */,
-				8EE8964E1CF6484600740718 /* MultiplexOut.cpp in Sources */,
 				8EE895581CF6483B00740718 /* StringTools.cpp in Sources */,
 				8EE896411CF6484600740718 /* PythonProvider.cpp in Sources */,
-				8EE8964C1CF6484600740718 /* iOS.mm in Sources */,
 				8EE895521CF6483B00740718 /* sha1.cpp in Sources */,
+				8EEA656D1CF9111B00B6465A /* SysTools.cpp in Sources */,
 				8EE896471CF6484600740718 /* SceneParser.cpp in Sources */,
 				8EE896391CF6484600740718 /* GeometryDataset.cpp in Sources */,
 				8EE895741CF6483B00740718 /* Method.cpp in Sources */,
 				8EE895751CF6483B00740718 /* MethodDescription.cpp in Sources */,
 				8EE8955C1CF6483B00740718 /* Path.cpp in Sources */,
 				8EE895571CF6483B00740718 /* Encryption.cpp in Sources */,
-				8EE8964B1CF6484600740718 /* DebugOutHandler.cpp in Sources */,
 				8EE895781CF6483B00740718 /* QueueConnection.cpp in Sources */,
-				8EE8964F1CF6484600740718 /* SysTools.cpp in Sources */,
-				8EE896401CF6484600740718 /* GLShader.cpp in Sources */,
 				8EE8955F1CF6483B00740718 /* HTMLLog.cpp in Sources */,
 				8EE895621CF6483B00740718 /* StreamLog.cpp in Sources */,
 				8EE8956C1CF6483B00740718 /* FramingConnectionFactory.cpp in Sources */,

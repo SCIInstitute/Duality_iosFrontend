@@ -140,6 +140,7 @@
 		8EE896501CF6484600740718 /* Threads.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896121CF6484600740718 /* Threads.cpp */; };
 		8EE896511CF6484600740718 /* XQueryComponents.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896131CF6484600740718 /* XQueryComponents.mm */; };
 		8EEA652C1CF8A65C00B6465A /* RenderDispatcher2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA652B1CF8A65C00B6465A /* RenderDispatcher2D.cpp */; };
+		8EEA652E1CF8AA3700B6465A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EEA652D1CF8AA3700B6465A /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -398,6 +399,7 @@
 		8EE896131CF6484600740718 /* XQueryComponents.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XQueryComponents.mm; sourceTree = "<group>"; };
 		8EEA652A1CF8A5B600B6465A /* RenderDispatcher2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderDispatcher2D.h; sourceTree = "<group>"; };
 		8EEA652B1CF8A65C00B6465A /* RenderDispatcher2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderDispatcher2D.cpp; sourceTree = "<group>"; };
+		8EEA652D1CF8AA3700B6465A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,6 +407,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EEA652E1CF8AA3700B6465A /* CoreGraphics.framework in Frameworks */,
 				8EC5A3961CE143650042E2C8 /* OpenGLES.framework in Frameworks */,
 				8EC1922F1CE12FB6003EBC45 /* GLKit.framework in Frameworks */,
 				8E2AFA581CDAC18C00AC6CEC /* UIKit.framework in Frameworks */,
@@ -439,6 +442,7 @@
 		8E6DCECF1CDBBA320091D5AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8EEA652D1CF8AA3700B6465A /* CoreGraphics.framework */,
 				8EC5A3951CE143650042E2C8 /* OpenGLES.framework */,
 				8EC1922E1CE12FB6003EBC45 /* GLKit.framework */,
 				8E2AFA571CDAC18C00AC6CEC /* UIKit.framework */,
@@ -479,9 +483,9 @@
 		8E96F8821CF7A282003511F6 /* 3D */ = {
 			isa = PBXGroup;
 			children = (
+				8E96F8831CF7A2A7003511F6 /* MVP3D.cpp */,
 				8EE895F31CF6484600740718 /* GeometryRenderer3D.cpp */,
 				8EE896031CF6484600740718 /* RenderDispatcher3D.cpp */,
-				8E96F8831CF7A2A7003511F6 /* MVP3D.cpp */,
 			);
 			name = 3D;
 			sourceTree = "<group>";

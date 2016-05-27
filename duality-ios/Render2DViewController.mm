@@ -74,18 +74,37 @@
 {
     [super viewDidLoad];
     [self initGL];
+    
+    m_sliceSelector = [[UISlider alloc] init];
+    m_sliceSelector.alpha = 0.8;
+    [m_sliceSelector addTarget:self action:@selector(setSlice) forControlEvents:UIControlEventValueChanged];
+    m_sliceSelector.minimumValue = -50;
+    m_sliceSelector.maximumValue = 50;
+    m_sliceSelector.backgroundColor = [UIColor clearColor];
+    //[m_sliceSelector setThumbImage:[UIImage imageNamed:@"sliderHandle.png"] forState:UIControlStateNormal];
+    
+    CGAffineTransform trans = CGAffineTransformMakeRotation(M_PI * 0.5);
+    m_sliceSelector.transform = trans;
+    m_sliceSelector.frame = CGRectMake(self.view.frame.size.width - 60, 50, 50, self.view.frame.size.height - 100);
+    
+    [self.view addSubview:m_sliceSelector];
 }
 
 - (void)viewWillLayoutSubviews
 {
-    [super viewWillLayoutSubviews];
     m_arcBall.SetWindowSize(uint32_t(self.view.bounds.size.width), uint32_t(self.view.bounds.size.height));
+    [super viewWillLayoutSubviews];
 }
 
 -(void) reset
 {
     m_scene = nullptr;
     glClear(GL_COLOR_BUFFER_BIT);
+}
+
+-(void) setSlice
+{
+    m_rendererDispatcher->setSlice(m_sliceSelector.value);
 }
 
 // Drawing

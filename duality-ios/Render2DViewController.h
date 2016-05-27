@@ -22,6 +22,7 @@ class RenderDispatcher2D;
     IVDA::Vec2f m_touchPos2;
     IVDA::ArcBall m_arcBall;
     UIStackView* m_dynamicUI;
+    UISlider* m_sliceSelector;
 }
 
 -(void) setScene:(Scene*)scene;

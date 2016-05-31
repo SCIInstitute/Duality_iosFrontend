@@ -161,18 +161,26 @@
         IVDA::Vec2f touchPos2(touchPoint2.x/self.view.frame.size.width,
                               touchPoint2.y/self.view.frame.size.height);
         
-        [self translateSceneWith:touchPos1 andWith:touchPos2];
+        IVDA::Vec2f d1(m_touchPos1.x - m_touchPos2.x, m_touchPos1.y - m_touchPos2.y);
+        IVDA::Vec2f d2(touchPos1.x - touchPos2.x, touchPos1.y - touchPos2.y);
+        
+        // pinch
+        float l1 = d1.length();
+        float l2 = d2.length();
+        
+        [self translateSceneWith:touchPos1 andWith:touchPos2 andWithZoom:l2-l1];
         
         m_touchPos1 = touchPos1;
         m_touchPos2 = touchPos2;
     }
 }
 
-- (void) translateSceneWith:(const IVDA::Vec2f&)touchPos1 andWith:(const IVDA::Vec2f&)touchPos2 {
+- (void) translateSceneWith:(const IVDA::Vec2f&)touchPos1 andWith:(const IVDA::Vec2f&)touchPos2 andWithZoom:(float)zoom {
     IVDA::Vec2f c1((m_touchPos1.x + m_touchPos2.x) / 2, (m_touchPos1.y + m_touchPos2.y) / 2);
     IVDA::Vec2f c2((touchPos1.x + touchPos2.x) / 2, (touchPos1.y + touchPos2.y) / 2);
     IVDA::Vec2f translation(c2.x - c1.x, -(c2.y - c1.y));
     m_sceneController.lock()->addTranslation(translation);
+    m_sceneController.lock()->addZoom(zoom);
 }
 
 @end

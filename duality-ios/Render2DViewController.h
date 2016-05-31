@@ -24,6 +24,7 @@ class RenderDispatcher2D;
     IVDA::ArcBall m_arcBall;
     UIStackView* m_dynamicUI;
     UISlider* m_sliceSelector;
+    UIButton* m_toggleAxisButton;
 }
 
 -(id) initWithSceneLoader:(SceneLoader*)loader;

@@ -58,16 +58,20 @@
     m_sliceSelector = [[UISlider alloc] init];
     m_sliceSelector.alpha = 0.8;
     [m_sliceSelector addTarget:self action:@selector(setSlice) forControlEvents:UIControlEventValueChanged];
-    m_sliceSelector.minimumValue = -50;
-    m_sliceSelector.maximumValue = 50;
     m_sliceSelector.backgroundColor = [UIColor clearColor];
-    //[m_sliceSelector setThumbImage:[UIImage imageNamed:@"sliderHandle.png"] forState:UIControlStateNormal];
-    
     CGAffineTransform trans = CGAffineTransformMakeRotation(M_PI * 0.5);
     m_sliceSelector.transform = trans;
     m_sliceSelector.frame = CGRectMake(self.view.frame.size.width - 60, 50, 50, self.view.frame.size.height - 100);
     
+    m_toggleAxisButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [m_toggleAxisButton addTarget:self action:@selector(toggleAxis) forControlEvents:UIControlEventTouchDown];
+    [m_toggleAxisButton setTitleColor:m_toggleAxisButton.tintColor forState:UIControlStateNormal];
+    [m_toggleAxisButton setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.8]];
+    [m_toggleAxisButton.titleLabel setFont:[UIFont boldSystemFontOfSize:11]];
+    m_toggleAxisButton.frame = CGRectMake(self.view.frame.size.width - 180, 50, 120, 40);
+    
     [self.view addSubview:m_sliceSelector];
+    [self.view addSubview:m_toggleAxisButton];
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -95,8 +99,12 @@
             [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
             [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
         }
-        //m_sliceSelector.minimumValue = bbCalc.boundingBox().min[2]; // FIXME
-        //m_sliceSelector.maximumValue = bbCalc.boundingBox().max[2]; // FIXME
+        auto minMaxForAxis = m_sceneController.lock()->minMaxForCurrentAxis();
+        m_sliceSelector.minimumValue = minMaxForAxis.first;
+        m_sliceSelector.maximumValue = minMaxForAxis.second;
+        
+        NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController.lock()->labelForCurrentAxis().c_str()];
+        [m_toggleAxisButton setTitle:axisLabel forState:UIControlStateNormal];
     }
 }
 
@@ -113,7 +121,17 @@
 
 -(void) setSlice
 {
-    //std::shared_ptr<SceneController2D>(m_sceneController)->setSlice(m_sliceSelector.value); FIXME
+    std::shared_ptr<SceneController2D>(m_sceneController)->setSlice(m_sliceSelector.value);
+}
+
+-(void) toggleAxis
+{
+    std::shared_ptr<SceneController2D>(m_sceneController)->toggleAxis();
+    auto minMaxForAxis = m_sceneController.lock()->minMaxForCurrentAxis();
+    m_sliceSelector.minimumValue = minMaxForAxis.first;
+    m_sliceSelector.maximumValue = minMaxForAxis.second;
+    NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController.lock()->labelForCurrentAxis().c_str()];
+    [m_toggleAxisButton setTitle:axisLabel forState:UIControlStateNormal];
 }
 
 // Drawing

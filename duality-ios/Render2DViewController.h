@@ -21,7 +21,6 @@ class RenderDispatcher2D;
     std::weak_ptr<SceneController2D> m_sceneController;
     IVDA::Vec2f m_touchPos1;
     IVDA::Vec2f m_touchPos2;
-    IVDA::ArcBall m_arcBall;
     UIStackView* m_dynamicUI;
     UISlider* m_sliceSelector;
     UITextView* m_sliceLabel;

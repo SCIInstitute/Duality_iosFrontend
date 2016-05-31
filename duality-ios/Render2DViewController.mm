@@ -120,12 +120,6 @@
     }
 }
 
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    m_arcBall.SetWindowSize(uint32_t(self.view.bounds.size.width), uint32_t(self.view.bounds.size.height));
-}
-
 -(void) reset
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -181,7 +175,8 @@
     NSUInteger numTouches = [[event allTouches] count];
     if (numTouches == 1) {
         CGPoint touchPoint = [[touches anyObject] locationInView:self.view];
-        m_arcBall.Click(IVDA::Vec2ui(touchPoint.x, touchPoint.y));
+        m_touchPos1 = IVDA::Vec2f(touchPoint.x/self.view.frame.size.width,
+                                  touchPoint.y/self.view.frame.size.height);
     }
     else if (numTouches == 2) {
         NSArray* allTouches = [[event allTouches] allObjects];
@@ -214,9 +209,12 @@
     
     if (numTouches == 1) {
         CGPoint touchPoint = [[touches anyObject] locationInView:self.view];
-        IVDA::Mat4f rotation = m_arcBall.Drag(IVDA::Vec2ui(touchPoint.x, touchPoint.y)).ComputeRotation();
-        //m_rendererDispatcher->addRotation(rotation);
-        m_arcBall.Click(IVDA::Vec2ui(touchPoint.x, touchPoint.y));
+        IVDA::Vec2f touchPos(touchPoint.x/self.view.frame.size.width,
+                             touchPoint.y/self.view.frame.size.height);
+        
+        [self transformOneTouch:touchPos];
+        
+        m_touchPos1 = touchPos;
     }
     else if (numTouches == 2) {
         NSArray* allTouches = [[event allTouches] allObjects];
@@ -228,18 +226,35 @@
         IVDA::Vec2f touchPos2(touchPoint2.x/self.view.frame.size.width,
                               touchPoint2.y/self.view.frame.size.height);
         
-        [self translateSceneWith:touchPos1 andWith:touchPos2];
+        [self transformTwoTouch:touchPos1 andWith:touchPos2];
         
         m_touchPos1 = touchPos1;
         m_touchPos2 = touchPos2;
     }
 }
 
-- (void) translateSceneWith:(const IVDA::Vec2f&)touchPos1 andWith:(const IVDA::Vec2f&)touchPos2 {
-    IVDA::Vec2f c1((m_touchPos1.x + m_touchPos2.x) / 2, (m_touchPos1.y + m_touchPos2.y) / 2);
-    IVDA::Vec2f c2((touchPos1.x + touchPos2.x) / 2, (touchPos1.y + touchPos2.y) / 2);
-    IVDA::Vec2f translation(c2.x - c1.x, -(c2.y - c1.y));
-    //m_rendererDispatcher->addTranslation(translation);
+-(void) transformOneTouch:(const IVDA::Vec2f&)touchPos
+{
+    IVDA::Vec2f translation(touchPos.x - m_touchPos1.x, -(touchPos.y - m_touchPos1.y));
+    m_sceneController.lock()->addTranslation(translation);
+    m_touchPos1 = touchPos;
+}
+
+- (void) transformTwoTouch:(const IVDA::Vec2f&)touchPos1 andWith:(const IVDA::Vec2f&)touchPos2
+{
+    IVDA::Vec2f d1(m_touchPos1.x - m_touchPos2.x, m_touchPos1.y - m_touchPos2.y);
+    IVDA::Vec2f d2(touchPos1.x - touchPos2.x, touchPos1.y - touchPos2.y);
+    float l1 = d1.length();
+    float l2 = d2.length();
+    m_sceneController.lock()->addZoom(l2-l1);
+    
+    float angle = 0;
+    if (l1 > 0 && l2 > 0) {
+        d1 /= l1;
+        d2 /= l2;
+        angle = atan2(d1.y,d1.x) - atan2(d2.y,d2.x);
+    }
+    m_sceneController.lock()->addRotation(angle);
 }
 
 @end

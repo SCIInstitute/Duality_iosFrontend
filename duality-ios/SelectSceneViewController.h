@@ -4,17 +4,18 @@
 
 #import <UIKit/UIKit.h>
 
-#include "duality/SceneMetadata.h"
+#include "duality/SceneLoader.h"
 
 #include <vector>
 
 @interface SelectSceneViewController : UITableViewController
 {
+    SceneLoader* m_loader;
     std::vector<SceneMetadata> m_metadata;
     NSString* m_selectedScene;
 }
 
--(void) setMetadata:(std::vector<SceneMetadata>)metadata;
+-(id) initWithSceneLoader:(SceneLoader*)loader;
 
 @end
 

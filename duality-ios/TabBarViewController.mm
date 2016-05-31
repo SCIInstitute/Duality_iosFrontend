@@ -14,17 +14,23 @@
 {
     self = [super init];
     
-    m_render3DViewController = [[Render3DViewController alloc] init];
-    m_render2DViewController = [[Render2DViewController alloc] init];
-    m_selectSceneViewController = [[SelectSceneViewController alloc] init];
+    [self reinitSceneLoader:nil];
+    
+    EAGLContext* context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+    if (!context) {
+        NSLog(@"Failed to create OpenGLES context");
+    }
+    
+    m_render3DViewController = [[Render3DViewController alloc] initWithSceneLoader:m_sceneLoader.get()];
+    m_render3DViewController.context = context;
+    m_render2DViewController = [[Render2DViewController alloc] initWithSceneLoader:m_sceneLoader.get()];
+    m_render2DViewController.context = context;
+    m_selectSceneViewController = [[SelectSceneViewController alloc] initWithSceneLoader:m_sceneLoader.get()];
     m_settingsViewController = [[SettingsViewController alloc] init];
 
     [self createNavigationControllers];
-    [self reinitSceneLoader:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reinitSceneLoader:) name:@"ServerAddressChanged" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectNewScene:) name:@"SelectedSceneChanged" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDatasets:) name:@"DatasetChanged" object:nil];
     
     return self;
 }
@@ -41,15 +47,15 @@
 
     navController = [self createNavigationController:m_render2DViewController withTitle:@"2D View"];
     navController.navigationBar.hidden = YES;
-    navController.tabBarItem.tag = 0;
+    navController.tabBarItem.tag = 1;
     [viewControllersArray addObject:navController];
     
     navController = [self createNavigationController:m_selectSceneViewController withTitle:@"Select Scene"];
-    navController.tabBarItem.tag = 1;
+    navController.tabBarItem.tag = 2;
     [viewControllersArray addObject:navController];
 
     navController = [self createNavigationController:m_settingsViewController withTitle:@"Settings"];
-    navController.tabBarItem.tag = 2;
+    navController.tabBarItem.tag = 3;
     [viewControllersArray addObject:navController];
     
     self.viewControllers = viewControllersArray;
@@ -63,22 +69,6 @@
     return navController;
 }
 
--(void) selectNewScene:(NSNotification*)notification
-{
-    try {
-        NSString* name = notification.userInfo[@"name"];
-        if (m_sceneLoader->loadScene(std::string([name UTF8String]))) {
-            Scene* scene = m_sceneLoader->activeScene();
-            scene->updateDatasets();
-            [m_render3DViewController setScene:m_sceneLoader->activeScene()];
-            [m_render2DViewController setScene:m_sceneLoader->activeScene()];
-        }
-    }
-    catch (const std::exception& err) {
-        [self showAlertWithTitle:@"Error" andMessage:[NSString stringWithUTF8String:err.what()]];
-    }
-}
-
 -(void) reinitSceneLoader:(NSNotification*)notification
 {
     try {
@@ -90,40 +80,6 @@
         [m_render2DViewController reset];
     }
     catch (const std::exception& err) {
-        [self showAlertWithTitle:@"Error" andMessage:[NSString stringWithUTF8String:err.what()]];
-    }
-}
-
--(void) updateDatasets:(NSNotification*)notification
-{
-    try {
-        Scene* scene = m_sceneLoader->activeScene();
-        NSDictionary* changeData = notification.userInfo;
-        std::string objectName([(NSString*)changeData[@"objectName"] UTF8String]);
-        std::string variableName([(NSString*)changeData[@"variableName"] UTF8String]);
-        id value = changeData[@"value"];
-        if ([value isKindOfClass:[NSNumber class]]) {
-            scene->setVariable(objectName, variableName, [(NSNumber*)value floatValue]);
-        } else if ([value isKindOfClass:[NSString class]]) {
-            scene->setVariable(objectName, variableName, std::string([(NSString*)value UTF8String]));
-        }
-        scene->updateDatasets();
-    }
-    catch (const std::exception& err) {
-        [self showAlertWithTitle:@"Error" andMessage:[NSString stringWithUTF8String:err.what()]];
-    }
-}
-
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
-{
-    try {
-        // "Select Scene" tab was selected
-        if ([item tag] == 1) {
-            [m_selectSceneViewController setMetadata:m_sceneLoader->listMetadata()];
-        }
-    }
-    catch (const std::exception& err) {
-        [m_selectSceneViewController setMetadata:std::vector<SceneMetadata>()];
         [self showAlertWithTitle:@"Error" andMessage:[NSString stringWithUTF8String:err.what()]];
     }
 }

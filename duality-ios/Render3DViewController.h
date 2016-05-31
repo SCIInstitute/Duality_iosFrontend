@@ -5,26 +5,24 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
+#include "duality/SceneLoader.h"
+#include "src/IVDA/ArcBall.h"
 #include "IVDA/Vectors.h"
-#include "IVDA/ArcBall.h"
 
 #include <memory>
-
-class Scene;
-class RenderDispatcher3D;
 
 @interface Render3DViewController : GLKViewController
 {
 @protected
-    Scene* m_scene;
-    std::unique_ptr<RenderDispatcher3D> m_rendererDispatcher;
+    SceneLoader* m_loader;
+    std::weak_ptr<SceneController3D> m_sceneController;
     IVDA::Vec2f m_touchPos1;
     IVDA::Vec2f m_touchPos2;
     IVDA::ArcBall m_arcBall;
     UIStackView* m_dynamicUI;
 }
 
--(void) setScene:(Scene*)scene;
+-(id) initWithSceneLoader:(SceneLoader*)loader;
 -(void) reset;
 
 @property (nonatomic, retain) EAGLContext *context;

@@ -35,6 +35,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     m_selectedScene = [NSString stringWithUTF8String:m_metadata[indexPath.row].name().c_str()];
+    if (m_selectedScene) {
+        m_loader->loadScene(std::string([m_selectedScene UTF8String]));
+    }
 }
 
 - (void)viewDidLoad
@@ -45,20 +48,15 @@
 
 -(void) viewWillAppear:(BOOL)animated
 {
+    m_metadata = m_loader->listMetadata();
     [self.tableView reloadData];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+-(id) initWithSceneLoader:(SceneLoader*)loader
 {
-    if (m_selectedScene) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SelectedSceneChanged" object:self userInfo:@{@"name":m_selectedScene}];
-    }
-    [super viewWillDisappear:animated];
-}
-
--(void) setMetadata:(std::vector<SceneMetadata>)metadata
-{
-    m_metadata = std::move(metadata);
+    self = [super init];
+    m_loader = loader;
+    return self;
 }
 
 - (void)didReceiveMemoryWarning {

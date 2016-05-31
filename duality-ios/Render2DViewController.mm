@@ -7,38 +7,19 @@
 #import "Render2DViewController.h"
 #import "DynamicUIBuilder.h"
 
-#include "IVDA/iOS.h"
-#include "IVDA/GLInclude.h"
-#include "duality/RenderDispatcher2D.h"
-#include "duality/BoundingBox.h"
+#include "src/IVDA/iOS.h"
+#include "src/IVDA/GLInclude.h"
 #include "duality/ScreenInfo.h"
-#include "duality/Scene.h"
 
 @implementation Render2DViewController
 
 @synthesize context = _context;
 
--(void) setScene:(Scene*)scene
+-(id) initWithSceneLoader:(SceneLoader*)loader
 {
-    m_scene = scene;
-    auto variableMap = m_scene->variableMap();
-    if (!variableMap.empty()) {
-        if (m_dynamicUI) {
-            [m_dynamicUI removeFromSuperview];
-        }
-        m_dynamicUI = buildStackViewFromVariableMap(variableMap);
-        m_dynamicUI.translatesAutoresizingMaskIntoConstraints = false;
-        [self.view addSubview:m_dynamicUI];
-        [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
-        [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
-    }
-    ScreenInfo screenInfo = [self screenInfo];
-    
-    BoundingBoxCalculator bbCalc;
-    m_scene->dispatch(bbCalc);
-    m_rendererDispatcher = std::make_unique<RenderDispatcher2D>(screenInfo, bbCalc.boundingBox());
-    m_sliceSelector.minimumValue = bbCalc.boundingBox().min[2]; // FIXME
-    m_sliceSelector.maximumValue = bbCalc.boundingBox().max[2]; // FIXME
+    self = [super init];
+    m_loader = loader;
+    return self;
 }
 
 - (ScreenInfo)screenInfo
@@ -58,11 +39,6 @@
 
 - (void)initGL
 {
-    self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-    if (!self.context) {
-        NSLog(@"Failed to create OpenGLES context");
-    }
-    
     [EAGLContext setCurrentContext:self.context];
     
     GLKView *view = (GLKView *)self.view;
@@ -94,30 +70,57 @@
     [self.view addSubview:m_sliceSelector];
 }
 
-- (void)viewWillLayoutSubviews
+-(void) viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    if (m_loader->isSceneLoaded()) {
+        if (m_sceneController.expired()) {
+            m_sceneController = m_loader->sceneController2D();
+        }
+        m_sceneController.lock()->updateScreenInfo([self screenInfo]);
+        auto variableMap = m_sceneController.lock()->variableInfoMap();
+        if (!variableMap.empty()) {
+            if (m_dynamicUI) {
+                [m_dynamicUI removeFromSuperview];
+            }
+            m_dynamicUI = buildStackViewFromVariableMap(variableMap,
+                [=](std::string objectName, std::string variableName, float value) {
+                    m_sceneController.lock()->setVariable(objectName, variableName, value);
+                },
+                [=](std::string objectName, std::string variableName, std::string value) {
+                    m_sceneController.lock()->setVariable(objectName, variableName, value);
+                });
+            m_dynamicUI.translatesAutoresizingMaskIntoConstraints = false;
+            [self.view addSubview:m_dynamicUI];
+            [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
+            [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
+        }
+        //m_sliceSelector.minimumValue = bbCalc.boundingBox().min[2]; // FIXME
+        //m_sliceSelector.maximumValue = bbCalc.boundingBox().max[2]; // FIXME
+    }
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
     m_arcBall.SetWindowSize(uint32_t(self.view.bounds.size.width), uint32_t(self.view.bounds.size.height));
-    [super viewWillLayoutSubviews];
 }
 
 -(void) reset
 {
-    m_scene = nullptr;
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
 -(void) setSlice
 {
-    m_rendererDispatcher->setSlice(m_sliceSelector.value);
+    //std::shared_ptr<SceneController2D>(m_sceneController)->setSlice(m_sliceSelector.value); FIXME
 }
 
 // Drawing
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    if (m_scene) {
-        m_rendererDispatcher->startDraw();
-        m_scene->dispatch(*m_rendererDispatcher);
-        m_rendererDispatcher->finishDraw();
+    if (!m_sceneController.expired()) {
+        m_sceneController.lock()->render();
     }
     [view bindDrawable];
 }
@@ -126,7 +129,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
-    if (m_scene == nullptr) {
+    if (m_sceneController.expired()) {
         return;
     }
     
@@ -149,7 +152,7 @@
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesMoved:touches withEvent:event];
-    if (m_scene == nullptr) {
+    if (m_sceneController.expired()) {
         return;
     }
     

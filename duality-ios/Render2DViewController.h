@@ -5,8 +5,9 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
+#include "duality/SceneLoader.h"
+#include "src/IVDA/ArcBall.h"
 #include "IVDA/Vectors.h"
-#include "IVDA/ArcBall.h"
 
 #include <memory>
 
@@ -16,8 +17,8 @@ class RenderDispatcher2D;
 @interface Render2DViewController : GLKViewController
 {
 @protected
-    Scene* m_scene;
-    std::unique_ptr<RenderDispatcher2D> m_rendererDispatcher;
+    SceneLoader* m_loader;
+    std::weak_ptr<SceneController2D> m_sceneController;
     IVDA::Vec2f m_touchPos1;
     IVDA::Vec2f m_touchPos2;
     IVDA::ArcBall m_arcBall;
@@ -25,7 +26,7 @@ class RenderDispatcher2D;
     UISlider* m_sliceSelector;
 }
 
--(void) setScene:(Scene*)scene;
+-(id) initWithSceneLoader:(SceneLoader*)loader;
 -(void) reset;
 
 @property (nonatomic, retain) EAGLContext *context;

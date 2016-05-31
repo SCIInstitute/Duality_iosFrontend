@@ -7,35 +7,19 @@
 #import "Render3DViewController.h"
 #import "DynamicUIBuilder.h"
 
-#include "IVDA/iOS.h"
-#include "IVDA/GLInclude.h"
-#include "duality/BoundingBox.h"
-#include "duality/RenderDispatcher3D.h"
 #include "duality/ScreenInfo.h"
-#include "duality/Scene.h"
+#include "src/IVDA/GLInclude.h" // FIXME: move file
+#include "src/IVDA/iOS.h" // FIXME: move file
 
 @implementation Render3DViewController
 
 @synthesize context = _context;
 
--(void) setScene:(Scene*)scene
+-(id) initWithSceneLoader:(SceneLoader*)loader
 {
-    m_scene = scene;
-    auto variableMap = m_scene->variableMap();
-    if (!variableMap.empty()) {
-        if (m_dynamicUI) {
-            [m_dynamicUI removeFromSuperview];
-        }
-        m_dynamicUI = buildStackViewFromVariableMap(variableMap);
-        m_dynamicUI.translatesAutoresizingMaskIntoConstraints = false;
-        [self.view addSubview:m_dynamicUI];
-        [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
-        [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
-    }
-    ScreenInfo screenInfo = [self screenInfo];
-    BoundingBoxCalculator bbCalc;
-    m_scene->dispatch(bbCalc);
-    m_rendererDispatcher = std::make_unique<RenderDispatcher3D>(screenInfo, bbCalc.boundingBox());
+    self = [super init];
+    m_loader = loader;
+    return self;
 }
 
 - (ScreenInfo)screenInfo
@@ -55,11 +39,6 @@
 
 - (void)initGL
 {
-    self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-    if (!self.context) {
-        NSLog(@"Failed to create OpenGLES context");
-    }
-
     [EAGLContext setCurrentContext:self.context];
     
     GLKView *view = (GLKView *)self.view;
@@ -77,25 +56,49 @@
     [self initGL];
 }
 
-- (void)viewWillLayoutSubviews
+-(void) viewWillAppear:(BOOL)animated
 {
-    [super viewWillLayoutSubviews];
+    [super viewWillAppear:animated];
+    if (m_loader->isSceneLoaded()) {
+        if (m_sceneController.expired()) {
+            m_sceneController = m_loader->sceneController3D();
+        }
+        m_sceneController.lock()->updateScreenInfo([self screenInfo]);
+        auto variableMap = m_sceneController.lock()->variableInfoMap();
+        if (!variableMap.empty()) {
+            if (m_dynamicUI) {
+                [m_dynamicUI removeFromSuperview];
+            }
+            m_dynamicUI = buildStackViewFromVariableMap(variableMap,
+                [=](std::string objectName, std::string variableName, float value) {
+                    m_sceneController.lock()->setVariable(objectName, variableName, value);
+                },
+                [=](std::string objectName, std::string variableName, std::string value) {
+                    m_sceneController.lock()->setVariable(objectName, variableName, value);
+                });            m_dynamicUI.translatesAutoresizingMaskIntoConstraints = false;
+            [self.view addSubview:m_dynamicUI];
+            [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
+            [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
+        }
+    }
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
     m_arcBall.SetWindowSize(uint32_t(self.view.bounds.size.width), uint32_t(self.view.bounds.size.height));
 }
 
 -(void) reset
 {
-    m_scene = nullptr;
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
 // Drawing
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    if (m_scene) {
-        m_rendererDispatcher->startDraw();
-        m_scene->dispatch(*m_rendererDispatcher);
-        m_rendererDispatcher->finishDraw();
+    if (!m_sceneController.expired()) {
+        m_sceneController.lock()->render();
     }
     [view bindDrawable];
 }
@@ -104,7 +107,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
-    if (m_scene == nullptr) {
+    if (m_sceneController.expired()) {
         return;
     }
     
@@ -127,7 +130,7 @@
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesMoved:touches withEvent:event];
-    if (m_scene == nullptr) {
+    if (m_sceneController.expired()) {
         return;
     }
     
@@ -145,7 +148,7 @@
     if (numTouches == 1) {
         CGPoint touchPoint = [[touches anyObject] locationInView:self.view];
         IVDA::Mat4f rotation = m_arcBall.Drag(IVDA::Vec2ui(touchPoint.x, touchPoint.y)).ComputeRotation();
-        m_rendererDispatcher->addRotation(rotation);
+        m_sceneController.lock()->addRotation(rotation);
         m_arcBall.Click(IVDA::Vec2ui(touchPoint.x, touchPoint.y));
     }
     else if (numTouches == 2) {
@@ -169,7 +172,7 @@
     IVDA::Vec2f c1((m_touchPos1.x + m_touchPos2.x) / 2, (m_touchPos1.y + m_touchPos2.y) / 2);
     IVDA::Vec2f c2((touchPos1.x + touchPos2.x) / 2, (touchPos1.y + touchPos2.y) / 2);
     IVDA::Vec2f translation(c2.x - c1.x, -(c2.y - c1.y));
-    m_rendererDispatcher->addTranslation(translation);
+    m_sceneController.lock()->addTranslation(translation);
 }
 
 @end

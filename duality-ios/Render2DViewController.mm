@@ -63,14 +63,24 @@
     m_sliceSelector.transform = trans;
     m_sliceSelector.frame = CGRectMake(self.view.frame.size.width - 60, 50, 50, self.view.frame.size.height - 100);
     
+    m_sliceLabel = [[UITextView alloc] init];
+    [m_sliceLabel setFont:[UIFont boldSystemFontOfSize:12]];
+    [m_sliceLabel setEditable:NO];
+    [m_sliceLabel setTextColor:[UIColor whiteColor]];
+    [m_sliceLabel setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.8]];
+    [m_sliceLabel setTextAlignment:NSTextAlignmentCenter];
+    [m_sliceLabel setUserInteractionEnabled:NO];
+    m_sliceLabel.frame = CGRectMake(self.view.frame.size.width - 180, 174, 120, 40);
+    
     m_toggleAxisButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [m_toggleAxisButton addTarget:self action:@selector(toggleAxis) forControlEvents:UIControlEventTouchDown];
     [m_toggleAxisButton setTitleColor:m_toggleAxisButton.tintColor forState:UIControlStateNormal];
     [m_toggleAxisButton setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.8]];
-    [m_toggleAxisButton.titleLabel setFont:[UIFont boldSystemFontOfSize:11]];
+    [m_toggleAxisButton.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
     m_toggleAxisButton.frame = CGRectMake(self.view.frame.size.width - 180, 50, 120, 40);
     
     [self.view addSubview:m_sliceSelector];
+    [self.view addSubview:m_sliceLabel];
     [self.view addSubview:m_toggleAxisButton];
 }
 
@@ -102,6 +112,8 @@
         auto minMaxForAxis = m_sceneController.lock()->minMaxForCurrentAxis();
         m_sliceSelector.minimumValue = minMaxForAxis.first;
         m_sliceSelector.maximumValue = minMaxForAxis.second;
+        m_sliceSelector.value = m_sceneController.lock()->slice();
+        m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
         
         NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController.lock()->labelForCurrentAxis().c_str()];
         [m_toggleAxisButton setTitle:axisLabel forState:UIControlStateNormal];
@@ -122,14 +134,29 @@
 -(void) setSlice
 {
     std::shared_ptr<SceneController2D>(m_sceneController)->setSlice(m_sliceSelector.value);
+    m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
 }
 
 -(void) toggleAxis
 {
     std::shared_ptr<SceneController2D>(m_sceneController)->toggleAxis();
-    auto minMaxForAxis = m_sceneController.lock()->minMaxForCurrentAxis();
+
+    // set slice to value that corresponds to the current slider position
+    const float oldMin = m_sliceSelector.minimumValue;
+    const float oldMax = m_sliceSelector.maximumValue;
+    const float oldDistance = oldMax - oldMin;
+    const float oldRelValue = m_sliceSelector.value - oldMin;
+    const float epsilon = 0.000001f;
+    const auto minMaxForAxis = m_sceneController.lock()->minMaxForCurrentAxis();
+    const float newDistance = minMaxForAxis.second - minMaxForAxis.first;
+    if (std::abs(oldDistance) > epsilon && std::abs(newDistance) > epsilon) {
+        const float amount = oldRelValue / oldDistance;
+        m_sliceSelector.value = (amount * newDistance) + minMaxForAxis.first;
+        m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
+    }
     m_sliceSelector.minimumValue = minMaxForAxis.first;
     m_sliceSelector.maximumValue = minMaxForAxis.second;
+
     NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController.lock()->labelForCurrentAxis().c_str()];
     [m_toggleAxisButton setTitle:axisLabel forState:UIControlStateNormal];
 }

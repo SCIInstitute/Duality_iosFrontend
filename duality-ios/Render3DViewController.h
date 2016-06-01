@@ -16,6 +16,7 @@
 @protected
     SceneLoader* m_loader;
     std::weak_ptr<SceneController3D> m_sceneController;
+    NSUInteger m_numFingersDown;
     IVDA::Vec2f m_touchPos1;
     IVDA::Vec2f m_touchPos2;
     IVDA::ArcBall m_arcBall;

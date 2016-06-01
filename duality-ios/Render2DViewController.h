@@ -19,6 +19,7 @@ class RenderDispatcher2D;
 @protected
     SceneLoader* m_loader;
     std::weak_ptr<SceneController2D> m_sceneController;
+    NSUInteger m_numFingersDown;
     IVDA::Vec2f m_touchPos1;
     IVDA::Vec2f m_touchPos2;
     UIStackView* m_dynamicUI;

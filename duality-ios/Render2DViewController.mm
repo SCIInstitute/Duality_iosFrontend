@@ -11,6 +11,8 @@
 #include "src/IVDA/GLInclude.h"
 #include "duality/ScreenInfo.h"
 
+#include "mocca/log/LogManager.h"
+
 @implementation Render2DViewController
 
 @synthesize context = _context;
@@ -82,6 +84,8 @@
     [self.view addSubview:m_sliceSelector];
     [self.view addSubview:m_sliceLabel];
     [self.view addSubview:m_toggleAxisButton];
+    
+    m_numFingersDown = 0;
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -173,6 +177,10 @@
     }
     
     NSUInteger numTouches = [[event allTouches] count];
+    if (m_numFingersDown > numTouches) {
+        // this prevents the scene from "jumping" when a two-finger action was performed and one finger is lifted
+        return;
+    }
     if (numTouches == 1) {
         CGPoint touchPoint = [[touches anyObject] locationInView:self.view];
         m_touchPos1 = IVDA::Vec2f(touchPoint.x/self.view.frame.size.width,
@@ -200,6 +208,10 @@
     CGPoint pos = [touch locationInView:self.view];
     CGPoint prev = [touch previousLocationInView:self.view];
     NSUInteger numTouches = [[event allTouches] count];
+    if (m_numFingersDown > numTouches) {
+        // this prevents the scene from "jumping" when a two-finger action was performed and one finger is lifted
+        return;
+    }
     
     if (pos.x == prev.x && pos.y == prev.y && numTouches == 1) {
         return;
@@ -231,6 +243,12 @@
         m_touchPos1 = touchPos1;
         m_touchPos2 = touchPos2;
     }
+}
+
+-(void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
+    m_numFingersDown = [[event allTouches] count];
 }
 
 -(void) transformOneTouch:(const IVDA::Vec2f&)touchPos

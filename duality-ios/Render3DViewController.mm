@@ -112,6 +112,11 @@
     }
     
     NSUInteger numTouches = [[event allTouches] count];
+    if (m_numFingersDown > numTouches) {
+        // this prevents the scene from "jumping" when a two-finger action was performed and one finger is lifted
+        return;
+    }
+    
     if (numTouches == 1) {
         CGPoint touchPoint = [[touches anyObject] locationInView:self.view];
         m_arcBall.Click(IVDA::Vec2ui(touchPoint.x, touchPoint.y));
@@ -138,7 +143,11 @@
     CGPoint pos = [touch locationInView:self.view];
     CGPoint prev = [touch previousLocationInView:self.view];
     NSUInteger numTouches = [[event allTouches] count];
-    
+    if (m_numFingersDown > numTouches) {
+        // this prevents the scene from "jumping" when a two-finger action was performed and one finger is lifted
+        return;
+    }
+
     if (pos.x == prev.x && pos.y == prev.y && numTouches == 1) {
         return;
     }
@@ -166,6 +175,12 @@
         m_touchPos1 = touchPos1;
         m_touchPos2 = touchPos2;
     }
+}
+
+-(void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
+    m_numFingersDown = [[event allTouches] count];
 }
 
 - (void) transformTwoTouch:(const IVDA::Vec2f&)touchPos1 andWith:(const IVDA::Vec2f&)touchPos2 {

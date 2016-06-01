@@ -3,6 +3,7 @@
 //
 
 #import "SelectSceneViewController.h"
+#import "AlertView.h"
 
 @implementation SelectSceneViewController
 
@@ -36,7 +37,12 @@
 {
     m_selectedScene = [NSString stringWithUTF8String:m_metadata[indexPath.row].name().c_str()];
     if (m_selectedScene) {
-        m_loader->loadScene(std::string([m_selectedScene UTF8String]));
+        try {
+            m_loader->loadScene(std::string([m_selectedScene UTF8String]));
+        }
+        catch(const std::exception& err) {
+            showErrorAlertView(self, err);
+        }
     }
 }
 
@@ -48,7 +54,12 @@
 
 -(void) viewWillAppear:(BOOL)animated
 {
-    m_metadata = m_loader->listMetadata();
+    try {
+        m_metadata = m_loader->listMetadata();
+    }
+    catch(const std::exception& err) {
+        showErrorAlertView(self, err);
+    }
     [self.tableView reloadData];
 }
 

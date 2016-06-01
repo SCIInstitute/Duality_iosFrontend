@@ -6,12 +6,11 @@
 
 #import "Render2DViewController.h"
 #import "DynamicUIBuilder.h"
+#import "AlertView.h"
 
 #include "src/IVDA/iOS.h"
 #include "src/IVDA/GLInclude.h"
 #include "duality/ScreenInfo.h"
-
-#include "mocca/log/LogManager.h"
 
 @implementation Render2DViewController
 
@@ -91,36 +90,41 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (m_loader->isSceneLoaded()) {
-        if (m_sceneController.expired()) {
-            m_sceneController = m_loader->sceneController2D();
-        }
-        m_sceneController.lock()->updateScreenInfo([self screenInfo]);
-        auto variableMap = m_sceneController.lock()->variableInfoMap();
-        if (!variableMap.empty()) {
-            if (m_dynamicUI) {
-                [m_dynamicUI removeFromSuperview];
+    try {
+        if (m_loader->isSceneLoaded()) {
+            if (m_sceneController.expired()) {
+                m_sceneController = m_loader->sceneController2D();
             }
-            m_dynamicUI = buildStackViewFromVariableMap(variableMap,
-                [=](std::string objectName, std::string variableName, float value) {
-                    m_sceneController.lock()->setVariable(objectName, variableName, value);
-                },
-                [=](std::string objectName, std::string variableName, std::string value) {
-                    m_sceneController.lock()->setVariable(objectName, variableName, value);
-                });
-            m_dynamicUI.translatesAutoresizingMaskIntoConstraints = false;
-            [self.view addSubview:m_dynamicUI];
-            [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
-            [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
+            m_sceneController.lock()->updateScreenInfo([self screenInfo]);
+            auto variableMap = m_sceneController.lock()->variableInfoMap();
+            if (!variableMap.empty()) {
+                if (m_dynamicUI) {
+                    [m_dynamicUI removeFromSuperview];
+                }
+                m_dynamicUI = buildStackViewFromVariableMap(variableMap,
+                    [=](std::string objectName, std::string variableName, float value) {
+                        m_sceneController.lock()->setVariable(objectName, variableName, value);
+                    },
+                    [=](std::string objectName, std::string variableName, std::string value) {
+                        m_sceneController.lock()->setVariable(objectName, variableName, value);
+                    });
+                m_dynamicUI.translatesAutoresizingMaskIntoConstraints = false;
+                [self.view addSubview:m_dynamicUI];
+                [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
+                [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
+            }
+            auto minMaxForAxis = m_sceneController.lock()->minMaxForCurrentAxis();
+            m_sliceSelector.minimumValue = minMaxForAxis.first;
+            m_sliceSelector.maximumValue = minMaxForAxis.second;
+            m_sliceSelector.value = m_sceneController.lock()->slice();
+            m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
+            
+            NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController.lock()->labelForCurrentAxis().c_str()];
+            [m_toggleAxisButton setTitle:axisLabel forState:UIControlStateNormal];
         }
-        auto minMaxForAxis = m_sceneController.lock()->minMaxForCurrentAxis();
-        m_sliceSelector.minimumValue = minMaxForAxis.first;
-        m_sliceSelector.maximumValue = minMaxForAxis.second;
-        m_sliceSelector.value = m_sceneController.lock()->slice();
-        m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
-        
-        NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController.lock()->labelForCurrentAxis().c_str()];
-        [m_toggleAxisButton setTitle:axisLabel forState:UIControlStateNormal];
+    }
+    catch(const std::exception& err) {
+        showErrorAlertView(self, err);
     }
 }
 

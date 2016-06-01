@@ -6,6 +6,7 @@
 
 #import "Render3DViewController.h"
 #import "DynamicUIBuilder.h"
+#import "AlertView.h"
 
 #include "duality/ScreenInfo.h"
 #include "src/IVDA/GLInclude.h" // FIXME: move file
@@ -59,27 +60,32 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (m_loader->isSceneLoaded()) {
-        if (m_sceneController.expired()) {
-            m_sceneController = m_loader->sceneController3D();
-        }
-        m_sceneController.lock()->updateScreenInfo([self screenInfo]);
-        auto variableMap = m_sceneController.lock()->variableInfoMap();
-        if (!variableMap.empty()) {
-            if (m_dynamicUI) {
-                [m_dynamicUI removeFromSuperview];
+    try {
+        if (m_loader->isSceneLoaded()) {
+            if (m_sceneController.expired()) {
+                m_sceneController = m_loader->sceneController3D();
             }
-            m_dynamicUI = buildStackViewFromVariableMap(variableMap,
-                [=](std::string objectName, std::string variableName, float value) {
-                    m_sceneController.lock()->setVariable(objectName, variableName, value);
-                },
-                [=](std::string objectName, std::string variableName, std::string value) {
-                    m_sceneController.lock()->setVariable(objectName, variableName, value);
-                });            m_dynamicUI.translatesAutoresizingMaskIntoConstraints = false;
-            [self.view addSubview:m_dynamicUI];
-            [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
-            [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
+            m_sceneController.lock()->updateScreenInfo([self screenInfo]);
+            auto variableMap = m_sceneController.lock()->variableInfoMap();
+            if (!variableMap.empty()) {
+                if (m_dynamicUI) {
+                    [m_dynamicUI removeFromSuperview];
+                }
+                m_dynamicUI = buildStackViewFromVariableMap(variableMap,
+                    [=](std::string objectName, std::string variableName, float value) {
+                        m_sceneController.lock()->setVariable(objectName, variableName, value);
+                    },
+                    [=](std::string objectName, std::string variableName, std::string value) {
+                        m_sceneController.lock()->setVariable(objectName, variableName, value);
+                    });            m_dynamicUI.translatesAutoresizingMaskIntoConstraints = false;
+                [self.view addSubview:m_dynamicUI];
+                [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
+                [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
+            }
         }
+    }
+    catch(const std::exception& err) {
+        showErrorAlertView(self, err);
     }
 }
 

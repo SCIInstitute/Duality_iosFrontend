@@ -5,6 +5,7 @@
 #import <Foundation/Foundation.h>
 
 #import "TabBarViewController.h"
+#import "AlertView.h"
 
 #include "duality/SceneLoader.h"
 
@@ -75,26 +76,17 @@
         std::string serverIP = [[[NSUserDefaults standardUserDefaults] stringForKey:@"ServerIP"] UTF8String];
         uint16_t serverPort = [[NSUserDefaults standardUserDefaults] integerForKey:@"ServerPort"];
         mocca::net::Endpoint endpoint("tcp.prefixed", serverIP, std::to_string(serverPort));
-        m_sceneLoader = std::make_unique<SceneLoader>(endpoint);
+        if (m_sceneLoader == nullptr) {
+            m_sceneLoader = std::make_unique<SceneLoader>(endpoint);
+        } else {
+            m_sceneLoader->updateEndpoint(endpoint);
+        }
         [m_render3DViewController reset];
         [m_render2DViewController reset];
     }
     catch (const std::exception& err) {
-        [self showAlertWithTitle:@"Error" andMessage:[NSString stringWithUTF8String:err.what()]];
+        showErrorAlertView(self, err);
     }
-}
-
--(void) showAlertWithTitle:(NSString*)title andMessage:(NSString*)message
-{
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:title
-                                                            message:message
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction * action) {}];
-    
-    [alert addAction:defaultAction];
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

@@ -5,7 +5,6 @@
 #import <Foundation/Foundation.h>
 
 #import "TabBarViewController.h"
-#import "AlertView.h"
 
 #include "duality/SceneLoader.h"
 
@@ -32,6 +31,7 @@
     [self createNavigationControllers];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reinitSceneLoader:) name:@"ServerAddressChanged" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showErrorAlert:) name:@"ErrorOccured" object:nil];
     
     return self;
 }
@@ -85,8 +85,22 @@
         [m_render2DViewController reset];
     }
     catch (const std::exception& err) {
-        showErrorAlertView(self, err);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
     }
+}
+
+-(void) showErrorAlert:(NSNotification*)notification
+{
+    NSString* errorText = notification.userInfo[@"Error"];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                            message:errorText
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

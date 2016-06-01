@@ -34,7 +34,12 @@
 -(void)stepToValue:(FloatStepper *)stepper
 {
     m_label.text = [NSString stringWithFormat:@"%.02f", stepper.value];
-    m_callback(m_objectName, m_info.name, self.value);
+    try {
+        m_callback(m_objectName, m_info.name, self.value);
+    }
+    catch(const std::exception& err) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
+    }
 }
 
 @end
@@ -68,7 +73,12 @@
 {
     std::string value = m_info.values[(int)stepper.value];
     m_label.text = [NSString stringWithUTF8String:value.c_str()];
-    m_callback(m_objectName, m_info.name, value);
+    try {
+        m_callback(m_objectName, m_info.name, value);
+    }
+    catch(const std::exception& err) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
+    }
 }
 
 @end

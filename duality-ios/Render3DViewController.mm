@@ -6,7 +6,6 @@
 
 #import "Render3DViewController.h"
 #import "DynamicUIBuilder.h"
-#import "AlertView.h"
 
 #include "duality/ScreenInfo.h"
 #include "src/IVDA/GLInclude.h" // FIXME: move file
@@ -85,7 +84,7 @@
         }
     }
     catch(const std::exception& err) {
-        showErrorAlertView(self, err);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
     }
 }
 

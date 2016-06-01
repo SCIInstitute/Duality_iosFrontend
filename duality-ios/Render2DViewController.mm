@@ -6,7 +6,6 @@
 
 #import "Render2DViewController.h"
 #import "DynamicUIBuilder.h"
-#import "AlertView.h"
 
 #include "src/IVDA/iOS.h"
 #include "src/IVDA/GLInclude.h"
@@ -124,7 +123,7 @@
         }
     }
     catch(const std::exception& err) {
-        showErrorAlertView(self, err);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
     }
 }
 

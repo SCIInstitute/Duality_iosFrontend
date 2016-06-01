@@ -3,7 +3,6 @@
 //
 
 #import "SelectSceneViewController.h"
-#import "AlertView.h"
 
 @implementation SelectSceneViewController
 
@@ -41,7 +40,7 @@
             m_loader->loadScene(std::string([m_selectedScene UTF8String]));
         }
         catch(const std::exception& err) {
-            showErrorAlertView(self, err);
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
         }
     }
 }
@@ -58,7 +57,7 @@
         m_metadata = m_loader->listMetadata();
     }
     catch(const std::exception& err) {
-        showErrorAlertView(self, err);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
     }
     [self.tableView reloadData];
 }

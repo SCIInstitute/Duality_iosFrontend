@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8E2AFA561CDAC18400AC6CEC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2AFA551CDAC18400AC6CEC /* Foundation.framework */; };
 		8E2AFA581CDAC18C00AC6CEC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2AFA571CDAC18C00AC6CEC /* UIKit.framework */; };
-		8E57615C1CFF529F00BA0D46 /* AlertView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8E57615B1CFF529F00BA0D46 /* AlertView.mm */; };
 		8E96F8771CF763FD003511F6 /* Render2DViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8E96F8761CF763FD003511F6 /* Render2DViewController.mm */; };
 		8EC1922F1CE12FB6003EBC45 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC1922E1CE12FB6003EBC45 /* GLKit.framework */; };
 		8EC42E261CFDE68F00E931F0 /* AbstractIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EC42DD21CFDE68F00E931F0 /* AbstractIO.cpp */; };
@@ -154,8 +153,6 @@
 		8E2AF9CE1CDA762900AC6CEC /* Duality-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Duality-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2AFA551CDAC18400AC6CEC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8E2AFA571CDAC18C00AC6CEC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		8E57615B1CFF529F00BA0D46 /* AlertView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AlertView.mm; path = "duality-ios/AlertView.mm"; sourceTree = "<group>"; };
-		8E57615D1CFF52BD00BA0D46 /* AlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AlertView.h; path = "duality-ios/AlertView.h"; sourceTree = "<group>"; };
 		8E96F8751CF763E6003511F6 /* Render2DViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Render2DViewController.h; path = "duality-ios/Render2DViewController.h"; sourceTree = "<group>"; };
 		8E96F8761CF763FD003511F6 /* Render2DViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Render2DViewController.mm; path = "duality-ios/Render2DViewController.mm"; sourceTree = "<group>"; };
 		8EACEFB61CFF3AAC00988851 /* View.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
@@ -665,8 +662,6 @@
 		8EE8920F1CF6480900740718 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				8E57615D1CFF52BD00BA0D46 /* AlertView.h */,
-				8E57615B1CFF529F00BA0D46 /* AlertView.mm */,
 				8EE892101CF6481900740718 /* AppDelegate.h */,
 				8EE892111CF6481900740718 /* AppDelegate.mm */,
 				8EE892121CF6481900740718 /* DynamicUIBuilder.h */,
@@ -1241,7 +1236,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EE8957F1CF6483B00740718 /* TCPConnectionFactory.cpp in Sources */,
-				8E57615C1CFF529F00BA0D46 /* AlertView.mm in Sources */,
 				8EC42E2F1CFDE68F00E931F0 /* GeometryRenderer3D.cpp in Sources */,
 				8EE8957C1CF6483B00740718 /* Sockets.cpp in Sources */,
 				8EE895601CF6483B00740718 /* Log.cpp in Sources */,

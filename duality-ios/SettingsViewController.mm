@@ -78,7 +78,7 @@ typedef void(^CallbackBlock)(void);
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -106,11 +106,25 @@ typedef void(^CallbackBlock)(void);
                             andKey:@"ServerPort" andText:@"Server Port" andBlock:block]];
             break;
         }
+        case 2:
+        {
+            cell.textLabel.text = @"Anatomical Terms";
+            UISwitch* sw = [[UISwitch alloc] init];
+            [sw addTarget:self action:@selector(anatomicalTermsChanged:) forControlEvents:UIControlEventValueChanged];
+            cell.accessoryView = sw;
+        }
         default:
             break;
     }
     
     return cell;
+}
+
+-(void) anatomicalTermsChanged:(id)sender
+{
+    UISwitch* sw = (UISwitch*)sender;
+    bool anatomicalTerms = [sw isOn];
+    [[NSUserDefaults standardUserDefaults] setBool:anatomicalTerms forKey:@"AnatomicalTerms"];
 }
 
 - (void)viewDidLoad {

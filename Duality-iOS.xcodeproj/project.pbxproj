@@ -1424,12 +1424,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = "duality-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_BUNDLE_IDENTIFIER = sci.utah.edu.duality;
 				PRODUCT_NAME = "Duality-iOS";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$SRCROOT/duality-client/duality-client/include $SRCROOT/duality-client/mocca/mocca/include $SRCROOT/duality-client/mocca/ext/jsoncpp/include $SRCROOT/duality-client/mocca/ext/AES/include $SRCROOT/duality-client/mocca/ext/sha1/include $SRCROOT/duality-client/mocca/ext/base64/include $SRCROOT/duality-client/duality-client";
 			};
 			name = Debug;
@@ -1438,12 +1441,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = "duality-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_BUNDLE_IDENTIFIER = sci.utah.edu.duality;
 				PRODUCT_NAME = "Duality-iOS";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$SRCROOT/duality-client/duality-client/include $SRCROOT/duality-client/mocca/mocca/include $SRCROOT/duality-client/mocca/ext/jsoncpp/include $SRCROOT/duality-client/mocca/ext/AES/include $SRCROOT/duality-client/mocca/ext/sha1/include $SRCROOT/duality-client/mocca/ext/base64/include $SRCROOT/duality-client/duality-client";
 			};
 			name = Release;

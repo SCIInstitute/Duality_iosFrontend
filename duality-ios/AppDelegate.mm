@@ -15,6 +15,7 @@
     NSDictionary* appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
                                  @"127.0.0.1", @"ServerIP",
                                  @"10123", @"ServerPort",
+                                 false, @"AnatomicalTerms",
                                  nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
     

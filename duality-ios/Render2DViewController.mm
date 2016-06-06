@@ -118,7 +118,8 @@
             m_sliceSelector.value = m_sceneController.lock()->slice();
             m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
             
-            NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController.lock()->labelForCurrentAxis().c_str()];
+            SceneController2D::AxisLabelMode mode = [[NSUserDefaults standardUserDefaults] boolForKey:@"AnatomicalTerms"] ? SceneController2D::AxisLabelMode::Anatomical : SceneController2D::AxisLabelMode::Mathematical;
+            NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController.lock()->labelForCurrentAxis(mode).c_str()];
             [m_toggleAxisButton setTitle:axisLabel forState:UIControlStateNormal];
         }
     }
@@ -158,7 +159,8 @@
     m_sliceSelector.minimumValue = minMaxForAxis.first;
     m_sliceSelector.maximumValue = minMaxForAxis.second;
 
-    NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController.lock()->labelForCurrentAxis().c_str()];
+    SceneController2D::AxisLabelMode mode = [[NSUserDefaults standardUserDefaults] boolForKey:@"AnatomicalTerms"] ? SceneController2D::AxisLabelMode::Anatomical : SceneController2D::AxisLabelMode::Mathematical;
+    NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController.lock()->labelForCurrentAxis(mode).c_str()];
     [m_toggleAxisButton setTitle:axisLabel forState:UIControlStateNormal];
 }
 

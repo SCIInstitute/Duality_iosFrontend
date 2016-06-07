@@ -59,6 +59,7 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self reset];
     try {
         if (m_loader->isSceneLoaded()) {
             if (m_sceneController.expired()) {
@@ -67,9 +68,6 @@
             m_sceneController.lock()->updateScreenInfo([self screenInfo]);
             auto variableMap = m_sceneController.lock()->variableInfoMap();
             if (!variableMap.empty()) {
-                if (m_dynamicUI) {
-                    [m_dynamicUI removeFromSuperview];
-                }
                 m_dynamicUI = buildStackViewFromVariableMap(variableMap,
                     [=](std::string objectName, std::string variableName, float value) {
                         m_sceneController.lock()->setVariable(objectName, variableName, value);
@@ -96,6 +94,9 @@
 
 -(void) reset
 {
+    if (m_dynamicUI) {
+        [m_dynamicUI removeFromSuperview];
+    }
     glClear(GL_COLOR_BUFFER_BIT);
 }
 

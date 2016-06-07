@@ -89,6 +89,7 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self reset];
     try {
         if (m_loader->isSceneLoaded()) {
             if (m_sceneController.expired()) {
@@ -97,9 +98,6 @@
             m_sceneController.lock()->updateScreenInfo([self screenInfo]);
             auto variableMap = m_sceneController.lock()->variableInfoMap();
             if (!variableMap.empty()) {
-                if (m_dynamicUI) {
-                    [m_dynamicUI removeFromSuperview];
-                }
                 m_dynamicUI = buildStackViewFromVariableMap(variableMap,
                     [=](std::string objectName, std::string variableName, float value) {
                         m_sceneController.lock()->setVariable(objectName, variableName, value);
@@ -121,6 +119,11 @@
             SceneController2D::AxisLabelMode mode = [[NSUserDefaults standardUserDefaults] boolForKey:@"AnatomicalTerms"] ? SceneController2D::AxisLabelMode::Anatomical : SceneController2D::AxisLabelMode::Mathematical;
             NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController.lock()->labelForCurrentAxis(mode).c_str()];
             [m_toggleAxisButton setTitle:axisLabel forState:UIControlStateNormal];
+            
+            // unhide widgets after everything else has been setup successfully
+            [m_sliceSelector setHidden:false];
+            [m_sliceLabel setHidden:false];
+            [m_toggleAxisButton setHidden:false];
         }
     }
     catch(const std::exception& err) {
@@ -130,6 +133,14 @@
 
 -(void) reset
 {
+    [m_sliceSelector setHidden:true];
+    [m_sliceLabel setHidden:true];
+    [m_toggleAxisButton setHidden:true];
+
+    if (m_dynamicUI) {
+        [m_dynamicUI removeFromSuperview];
+    }
+    
     glClear(GL_COLOR_BUFFER_BIT);
 }
 

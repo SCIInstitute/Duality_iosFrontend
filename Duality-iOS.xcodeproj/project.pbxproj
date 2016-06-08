@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		637A2C651D08752B00B4EE84 /* I3M.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 637A2C611D08752B00B4EE84 /* I3M.cpp */; };
+		637A2C661D08752B00B4EE84 /* VolumeDataset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 637A2C631D08752B00B4EE84 /* VolumeDataset.cpp */; };
 		8E2AFA561CDAC18400AC6CEC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2AFA551CDAC18400AC6CEC /* Foundation.framework */; };
 		8E2AFA581CDAC18C00AC6CEC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2AFA571CDAC18C00AC6CEC /* UIKit.framework */; };
 		8E96F8771CF763FD003511F6 /* Render2DViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8E96F8761CF763FD003511F6 /* Render2DViewController.mm */; };
@@ -150,6 +152,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		637A2C611D08752B00B4EE84 /* I3M.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = I3M.cpp; sourceTree = "<group>"; };
+		637A2C621D08752B00B4EE84 /* I3M.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = I3M.h; sourceTree = "<group>"; };
+		637A2C631D08752B00B4EE84 /* VolumeDataset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VolumeDataset.cpp; sourceTree = "<group>"; };
+		637A2C641D08752B00B4EE84 /* VolumeDataset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeDataset.h; sourceTree = "<group>"; };
 		8E2AF9CE1CDA762900AC6CEC /* Duality-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Duality-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2AFA551CDAC18400AC6CEC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8E2AFA571CDAC18C00AC6CEC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -542,8 +548,12 @@
 				8EC42DDE1CFDE68F00E931F0 /* DownloadProvider.h */,
 				8EC42DDF1CFDE68F00E931F0 /* G3D.cpp */,
 				8EC42DE01CFDE68F00E931F0 /* G3D.h */,
+				637A2C611D08752B00B4EE84 /* I3M.cpp */,
+				637A2C621D08752B00B4EE84 /* I3M.h */,
 				8EC42DE11CFDE68F00E931F0 /* GeometryDataset.cpp */,
 				8EC42DE21CFDE68F00E931F0 /* GeometryDataset.h */,
+				637A2C631D08752B00B4EE84 /* VolumeDataset.cpp */,
+				637A2C641D08752B00B4EE84 /* VolumeDataset.h */,
 				8EC42DE31CFDE68F00E931F0 /* GeometryRenderer2D.cpp */,
 				8EC42DE41CFDE68F00E931F0 /* GeometryRenderer2D.h */,
 				8EC42DE51CFDE68F00E931F0 /* GeometryRenderer3D.cpp */,
@@ -1262,11 +1272,13 @@
 				8EE895731CF6483B00740718 /* JsonKeys.cpp in Sources */,
 				8EC42E3D1CFDE68F00E931F0 /* SceneController3DImpl.cpp in Sources */,
 				8EE8955D1CF6483B00740718 /* CallbackLog.cpp in Sources */,
+				637A2C651D08752B00B4EE84 /* I3M.cpp in Sources */,
 				8EC42E461CFDE68F00E931F0 /* GLFrameBufferObject.cpp in Sources */,
 				8EE895611CF6483B00740718 /* LogManager.cpp in Sources */,
 				8EE8956E1CF6483B00740718 /* LoopbackConnectionAcceptor.cpp in Sources */,
 				8EE895711CF6483B00740718 /* Message.cpp in Sources */,
 				8EC42E2B1CFDE68F00E931F0 /* DownloadProvider.cpp in Sources */,
+				637A2C661D08752B00B4EE84 /* VolumeDataset.cpp in Sources */,
 				8EE895761CF6483B00740718 /* RpcClient.cpp in Sources */,
 				8EE895771CF6483B00740718 /* ValueType.cpp in Sources */,
 				8EC42E2D1CFDE68F00E931F0 /* GeometryDataset.cpp in Sources */,

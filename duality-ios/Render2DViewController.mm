@@ -166,6 +166,7 @@
         const float amount = oldRelValue / oldDistance;
         m_sliceSelector.value = (amount * newDistance) + minMaxForAxis.first;
         m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
+        std::shared_ptr<SceneController2D>(m_sceneController)->setSlice(m_sliceSelector.value);
     }
     m_sliceSelector.minimumValue = minMaxForAxis.first;
     m_sliceSelector.maximumValue = minMaxForAxis.second;

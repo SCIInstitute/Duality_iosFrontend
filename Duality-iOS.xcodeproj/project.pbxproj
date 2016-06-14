@@ -13,6 +13,8 @@
 		6342A0431D0988E500D46147 /* VolumeRenderer3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6342A0411D0988E500D46147 /* VolumeRenderer3D.cpp */; };
 		637A2C651D08752B00B4EE84 /* I3M.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 637A2C611D08752B00B4EE84 /* I3M.cpp */; };
 		637A2C661D08752B00B4EE84 /* VolumeDataset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 637A2C631D08752B00B4EE84 /* VolumeDataset.cpp */; };
+		63C9EF8A1D1037B000F6393D /* GeometryNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63C9EF861D1037B000F6393D /* GeometryNode.cpp */; };
+		63C9EF8B1D1037B000F6393D /* VolumeNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63C9EF881D1037B000F6393D /* VolumeNode.cpp */; };
 		8E2AFA561CDAC18400AC6CEC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2AFA551CDAC18400AC6CEC /* Foundation.framework */; };
 		8E2AFA581CDAC18C00AC6CEC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2AFA571CDAC18C00AC6CEC /* UIKit.framework */; };
 		8E96F8771CF763FD003511F6 /* Render2DViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8E96F8761CF763FD003511F6 /* Render2DViewController.mm */; };
@@ -168,6 +170,10 @@
 		637A2C621D08752B00B4EE84 /* I3M.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = I3M.h; sourceTree = "<group>"; };
 		637A2C631D08752B00B4EE84 /* VolumeDataset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VolumeDataset.cpp; sourceTree = "<group>"; };
 		637A2C641D08752B00B4EE84 /* VolumeDataset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeDataset.h; sourceTree = "<group>"; };
+		63C9EF861D1037B000F6393D /* GeometryNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryNode.cpp; sourceTree = "<group>"; };
+		63C9EF871D1037B000F6393D /* GeometryNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryNode.h; sourceTree = "<group>"; };
+		63C9EF881D1037B000F6393D /* VolumeNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VolumeNode.cpp; sourceTree = "<group>"; };
+		63C9EF891D1037B000F6393D /* VolumeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeNode.h; sourceTree = "<group>"; };
 		8E2AF9CE1CDA762900AC6CEC /* Duality-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Duality-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2AFA551CDAC18400AC6CEC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8E2AFA571CDAC18C00AC6CEC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -606,6 +612,10 @@
 				8EC42E021CFDE68F00E931F0 /* SceneMetadata.cpp */,
 				8EC42E031CFDE68F00E931F0 /* SceneNode.cpp */,
 				8EC42E041CFDE68F00E931F0 /* SceneNode.h */,
+				63C9EF861D1037B000F6393D /* GeometryNode.cpp */,
+				63C9EF871D1037B000F6393D /* GeometryNode.h */,
+				63C9EF881D1037B000F6393D /* VolumeNode.cpp */,
+				63C9EF891D1037B000F6393D /* VolumeNode.h */,
 				8EC42E051CFDE68F00E931F0 /* SceneParser.cpp */,
 				8EC42E061CFDE68F00E931F0 /* SceneParser.h */,
 				8EACEFB61CFF3AAC00988851 /* View.h */,
@@ -1332,6 +1342,7 @@
 				8EC42E381CFDE68F00E931F0 /* RenderParameters3D.cpp in Sources */,
 				8EC42E411CFDE68F00E931F0 /* SceneParser.cpp in Sources */,
 				8EC42E3B1CFDE68F00E931F0 /* SceneController2DImpl.cpp in Sources */,
+				63C9EF8A1D1037B000F6393D /* GeometryNode.cpp in Sources */,
 				8EE8957E1CF6483B00740718 /* TCPConnectionAcceptor.cpp in Sources */,
 				8EC42E4B1CFDE68F00E931F0 /* MultiplexOut.cpp in Sources */,
 				8EE895701CF6483B00740718 /* LoopbackConnectionSpawner.cpp in Sources */,
@@ -1367,6 +1378,7 @@
 				8EC42E261CFDE68F00E931F0 /* AbstractIO.cpp in Sources */,
 				8EE8956C1CF6483B00740718 /* FramingConnectionFactory.cpp in Sources */,
 				8EC42E3A1CFDE68F00E931F0 /* SceneController2D.cpp in Sources */,
+				63C9EF8B1D1037B000F6393D /* VolumeNode.cpp in Sources */,
 				8EE895561CF6483B00740718 /* CommandLineParser.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

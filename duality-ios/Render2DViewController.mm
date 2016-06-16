@@ -83,6 +83,9 @@
     [self.view addSubview:m_sliceLabel];
     [self.view addSubview:m_toggleAxisButton];
     
+    // when the application resumes from background, we need to force a redraw, even though no rendering parameters changed
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redrawGL) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
     m_numFingersDown = 0;
 }
 
@@ -142,6 +145,13 @@
     }
     
     glClear(GL_COLOR_BUFFER_BIT);
+}
+
+-(void) redrawGL
+{
+    if (!m_sceneController.expired()) {
+        m_sceneController.lock()->setRedrawRequired();
+    }
 }
 
 -(void) setSlice

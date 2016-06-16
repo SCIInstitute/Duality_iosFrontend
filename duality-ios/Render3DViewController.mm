@@ -54,6 +54,9 @@
 {
     [super viewDidLoad];
     [self initGL];
+    
+    // when the application resumes from background, we need to force a redraw, even though no rendering parameters changed
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redrawGL) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -98,6 +101,13 @@
         [m_dynamicUI removeFromSuperview];
     }
     glClear(GL_COLOR_BUFFER_BIT);
+}
+
+-(void) redrawGL
+{
+    if (!m_sceneController.expired()) {
+        m_sceneController.lock()->setRedrawRequired();
+    }
 }
 
 // Drawing

@@ -99,7 +99,7 @@
                 m_sceneController = m_loader->sceneController2D();
             }
             m_sceneController.lock()->updateScreenInfo([self screenInfo]);
-            auto variableMap = m_sceneController.lock()->variableInfoMap();
+            auto variableMap = m_sceneController.lock()->variableMap();
             if (!variableMap.empty()) {
                 m_dynamicUI = buildStackViewFromVariableMap(variableMap,
                     [=](std::string objectName, std::string variableName, float value) {

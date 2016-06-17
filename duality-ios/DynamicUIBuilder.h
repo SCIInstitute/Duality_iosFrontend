@@ -4,8 +4,8 @@
 
 #import <UIKit/UIKit.h>
 
-#include "duality/VariableInfo.h"
+#include "duality/InputVariable.h"
 
 #include <functional>
 
-UIStackView* buildStackViewFromVariableMap(const VariableInfoMap& infoMap, std::function<void(std::string, std::string, float)> floatCallback, std::function<void(std::string, std::string, std::string)> enumCallback);
+UIStackView* buildStackViewFromVariableMap(const VariableMap& variables, std::function<void(std::string, std::string, float)> floatCallback, std::function<void(std::string, std::string, std::string)> enumCallback);

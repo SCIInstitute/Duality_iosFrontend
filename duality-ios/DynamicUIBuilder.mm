@@ -112,9 +112,7 @@ UIStackView* buildFloatVariableStackView(const std::string& objectName, const Fl
     stepper.stepValue = info.stepSize;
     stepper.value = info.defaultValue;
     [stackView addArrangedSubview:stepper];
-
     [valueLabel.rightAnchor constraintEqualToAnchor:stepper.leftAnchor constant:-20].active = true;
-    
     return stackView;
 }
 
@@ -175,6 +173,7 @@ UIStackView* buildObjectStackView(const std::string& name, const VariableInfos& 
             UIStackView* variableStackView = buildFloatVariableStackView(name, *floatIt, floatCallback);
             variableStackView.translatesAutoresizingMaskIntoConstraints = false;
             [stackView addArrangedSubview:variableStackView];
+            [variableStackView.rightAnchor constraintEqualToAnchor:stackView.rightAnchor].active = true;
         } else {
             auto enumIt = std::find_if(begin(infos.enumInfos), end(infos.enumInfos),
                                    [i](const EnumVariableInfo& info) { return info.index == i; });
@@ -182,6 +181,7 @@ UIStackView* buildObjectStackView(const std::string& name, const VariableInfos& 
             UIStackView* variableStackView = buildEnumVariableStackView(name, *enumIt, enumCallback);
             variableStackView.translatesAutoresizingMaskIntoConstraints = false;
             [stackView addArrangedSubview:variableStackView];
+            [variableStackView.rightAnchor constraintEqualToAnchor:stackView.rightAnchor].active = true;
         }
     }
     return stackView;

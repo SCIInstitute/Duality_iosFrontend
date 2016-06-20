@@ -77,7 +77,9 @@
         uint16_t serverPort = [[NSUserDefaults standardUserDefaults] integerForKey:@"ServerPort"];
         mocca::net::Endpoint endpoint("tcp.prefixed", serverIP, std::to_string(serverPort));
         if (m_sceneLoader == nullptr) {
-            m_sceneLoader = std::make_unique<SceneLoader>(endpoint);
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            mocca::fs::Path documentsDirectory([[paths objectAtIndex:0]UTF8String]);
+            m_sceneLoader = std::make_unique<SceneLoader>(endpoint, documentsDirectory + "scenecache");
         } else {
             m_sceneLoader->updateEndpoint(endpoint);
         }

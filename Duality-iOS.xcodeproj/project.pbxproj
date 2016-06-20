@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		630BB4CD1D181C45004EC28E /* DataCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 630BB4CB1D181C45004EC28E /* DataCache.cpp */; };
 		6329F64B1D0D8EE500CAD1F8 /* VolumeRenderer2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6329F6491D0D8EE500CAD1F8 /* VolumeRenderer2D.cpp */; };
 		6342A03D1D097E0600D46147 /* TransferFunction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6342A03B1D097E0600D46147 /* TransferFunction.cpp */; };
 		6342A0401D097F8E00D46147 /* GLTexture2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6342A03E1D097F8E00D46147 /* GLTexture2D.cpp */; };
@@ -157,6 +158,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		630BB4CB1D181C45004EC28E /* DataCache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataCache.cpp; sourceTree = "<group>"; };
+		630BB4CC1D181C45004EC28E /* DataCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCache.h; sourceTree = "<group>"; };
 		6329F6491D0D8EE500CAD1F8 /* VolumeRenderer2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VolumeRenderer2D.cpp; sourceTree = "<group>"; };
 		6329F64A1D0D8EE500CAD1F8 /* VolumeRenderer2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeRenderer2D.h; sourceTree = "<group>"; };
 		633D48B41D11615200215A26 /* NodeDispatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeDispatcher.h; sourceTree = "<group>"; };
@@ -556,6 +559,8 @@
 				8EC42DD71CFDE68F00E931F0 /* Communication.h */,
 				8EC42DD81CFDE68F00E931F0 /* CoordinateSystem.cpp */,
 				8EC42DD91CFDE68F00E931F0 /* DataProvider.h */,
+				630BB4CB1D181C45004EC28E /* DataCache.cpp */,
+				630BB4CC1D181C45004EC28E /* DataCache.h */,
 				8EC42DDA1CFDE68F00E931F0 /* Dataset.cpp */,
 				8EC42DDB1CFDE68F00E931F0 /* Dataset.h */,
 				8EC42DDD1CFDE68F00E931F0 /* DownloadProvider.cpp */,
@@ -1346,6 +1351,7 @@
 				8EC42E371CFDE68F00E931F0 /* RenderParameters2D.cpp in Sources */,
 				6329F64B1D0D8EE500CAD1F8 /* VolumeRenderer2D.cpp in Sources */,
 				8EC42E481CFDE68F00E931F0 /* GLShader.cpp in Sources */,
+				630BB4CD1D181C45004EC28E /* DataCache.cpp in Sources */,
 				8EC42E271CFDE68F00E931F0 /* BoundingBox.cpp in Sources */,
 				8EE895721CF6483B00740718 /* Dispatcher.cpp in Sources */,
 				8EC42E4D1CFDE68F00E931F0 /* Threads.cpp in Sources */,

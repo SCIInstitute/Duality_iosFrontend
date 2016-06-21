@@ -4,6 +4,8 @@
 
 #import "SettingsViewController.h"
 
+#include "src/duality/DataCache.h"
+
 typedef void(^CallbackBlock)(void);
 
 @interface TextSettingCell : NSObject
@@ -78,7 +80,7 @@ typedef void(^CallbackBlock)(void);
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -112,6 +114,17 @@ typedef void(^CallbackBlock)(void);
             UISwitch* sw = [[UISwitch alloc] init];
             [sw addTarget:self action:@selector(anatomicalTermsChanged:) forControlEvents:UIControlEventValueChanged];
             cell.accessoryView = sw;
+            break;
+        }
+        case 3:
+        {
+            cell.textLabel.text = @"Clear Scene Cache";
+            UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            [button setTitle:@"Clear Scene Cache" forState:UIControlStateNormal];
+            [button sizeToFit];
+            [button addTarget:self action:@selector(clearCache:) forControlEvents:UIControlEventTouchUpInside];
+            cell.accessoryView = button;
+            break;
         }
         default:
             break;
@@ -125,6 +138,11 @@ typedef void(^CallbackBlock)(void);
     UISwitch* sw = (UISwitch*)sender;
     bool anatomicalTerms = [sw isOn];
     [[NSUserDefaults standardUserDefaults] setBool:anatomicalTerms forKey:@"AnatomicalTerms"];
+}
+
+-(void) clearCache:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ClearDataCache" object:self];
 }
 
 - (void)viewDidLoad {

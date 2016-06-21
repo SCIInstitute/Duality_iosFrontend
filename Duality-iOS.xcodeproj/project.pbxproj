@@ -14,6 +14,16 @@
 		6342A0431D0988E500D46147 /* VolumeRenderer3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6342A0411D0988E500D46147 /* VolumeRenderer3D.cpp */; };
 		637A2C651D08752B00B4EE84 /* I3M.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 637A2C611D08752B00B4EE84 /* I3M.cpp */; };
 		637A2C661D08752B00B4EE84 /* VolumeDataset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 637A2C631D08752B00B4EE84 /* VolumeDataset.cpp */; };
+		63C71E031D19BABA00E17EEE /* Compression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63C71E021D19BAB900E17EEE /* Compression.cpp */; };
+		63C71E181D19BD1200E17EEE /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 63C71E071D19BD1200E17EEE /* CMakeLists.txt */; };
+		63C71E191D19BD1200E17EEE /* NEWS in Resources */ = {isa = PBXBuildFile; fileRef = 63C71E0B1D19BD1200E17EEE /* NEWS */; };
+		63C71E1A1D19BD1200E17EEE /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 63C71E0C1D19BD1200E17EEE /* README.md */; };
+		63C71E1B1D19BD1200E17EEE /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 63C71E0E1D19BD1200E17EEE /* LICENSE */; };
+		63C71E1C1D19BD1200E17EEE /* lz4.c in Sources */ = {isa = PBXBuildFile; fileRef = 63C71E0F1D19BD1200E17EEE /* lz4.c */; };
+		63C71E1D1D19BD1200E17EEE /* lz4frame.c in Sources */ = {isa = PBXBuildFile; fileRef = 63C71E101D19BD1200E17EEE /* lz4frame.c */; };
+		63C71E1E1D19BD1200E17EEE /* lz4hc.c in Sources */ = {isa = PBXBuildFile; fileRef = 63C71E131D19BD1200E17EEE /* lz4hc.c */; };
+		63C71E1F1D19BD1200E17EEE /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 63C71E151D19BD1200E17EEE /* README.md */; };
+		63C71E201D19BD1200E17EEE /* xxhash.c in Sources */ = {isa = PBXBuildFile; fileRef = 63C71E161D19BD1200E17EEE /* xxhash.c */; };
 		63C9EF8A1D1037B000F6393D /* GeometryNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63C9EF861D1037B000F6393D /* GeometryNode.cpp */; };
 		63C9EF8B1D1037B000F6393D /* VolumeNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63C9EF881D1037B000F6393D /* VolumeNode.cpp */; };
 		8E2AFA561CDAC18400AC6CEC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2AFA551CDAC18400AC6CEC /* Foundation.framework */; };
@@ -174,6 +184,22 @@
 		637A2C621D08752B00B4EE84 /* I3M.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = I3M.h; sourceTree = "<group>"; };
 		637A2C631D08752B00B4EE84 /* VolumeDataset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VolumeDataset.cpp; sourceTree = "<group>"; };
 		637A2C641D08752B00B4EE84 /* VolumeDataset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeDataset.h; sourceTree = "<group>"; };
+		63C71E011D19BAA800E17EEE /* Compression.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Compression.h; sourceTree = "<group>"; };
+		63C71E021D19BAB900E17EEE /* Compression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Compression.cpp; sourceTree = "<group>"; };
+		63C71E071D19BD1200E17EEE /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		63C71E0A1D19BD1200E17EEE /* lz4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lz4.h; sourceTree = "<group>"; };
+		63C71E0B1D19BD1200E17EEE /* NEWS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
+		63C71E0C1D19BD1200E17EEE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		63C71E0E1D19BD1200E17EEE /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		63C71E0F1D19BD1200E17EEE /* lz4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lz4.c; sourceTree = "<group>"; };
+		63C71E101D19BD1200E17EEE /* lz4frame.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lz4frame.c; sourceTree = "<group>"; };
+		63C71E111D19BD1200E17EEE /* lz4frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lz4frame.h; sourceTree = "<group>"; };
+		63C71E121D19BD1200E17EEE /* lz4frame_static.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lz4frame_static.h; sourceTree = "<group>"; };
+		63C71E131D19BD1200E17EEE /* lz4hc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lz4hc.c; sourceTree = "<group>"; };
+		63C71E141D19BD1200E17EEE /* lz4hc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lz4hc.h; sourceTree = "<group>"; };
+		63C71E151D19BD1200E17EEE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		63C71E161D19BD1200E17EEE /* xxhash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = xxhash.c; sourceTree = "<group>"; };
+		63C71E171D19BD1200E17EEE /* xxhash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xxhash.h; sourceTree = "<group>"; };
 		63C9EF861D1037B000F6393D /* GeometryNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryNode.cpp; sourceTree = "<group>"; };
 		63C9EF871D1037B000F6393D /* GeometryNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryNode.h; sourceTree = "<group>"; };
 		63C9EF881D1037B000F6393D /* VolumeNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VolumeNode.cpp; sourceTree = "<group>"; };
@@ -463,6 +489,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63C71E061D19BD1200E17EEE /* lz4 */ = {
+			isa = PBXGroup;
+			children = (
+				63C71E071D19BD1200E17EEE /* CMakeLists.txt */,
+				63C71E081D19BD1200E17EEE /* include */,
+				63C71E0B1D19BD1200E17EEE /* NEWS */,
+				63C71E0C1D19BD1200E17EEE /* README.md */,
+				63C71E0D1D19BD1200E17EEE /* src */,
+			);
+			path = lz4;
+			sourceTree = "<group>";
+		};
+		63C71E081D19BD1200E17EEE /* include */ = {
+			isa = PBXGroup;
+			children = (
+				63C71E091D19BD1200E17EEE /* lz4 */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		63C71E091D19BD1200E17EEE /* lz4 */ = {
+			isa = PBXGroup;
+			children = (
+				63C71E0A1D19BD1200E17EEE /* lz4.h */,
+			);
+			path = lz4;
+			sourceTree = "<group>";
+		};
+		63C71E0D1D19BD1200E17EEE /* src */ = {
+			isa = PBXGroup;
+			children = (
+				63C71E0E1D19BD1200E17EEE /* LICENSE */,
+				63C71E0F1D19BD1200E17EEE /* lz4.c */,
+				63C71E101D19BD1200E17EEE /* lz4frame.c */,
+				63C71E111D19BD1200E17EEE /* lz4frame.h */,
+				63C71E121D19BD1200E17EEE /* lz4frame_static.h */,
+				63C71E131D19BD1200E17EEE /* lz4hc.c */,
+				63C71E141D19BD1200E17EEE /* lz4hc.h */,
+				63C71E151D19BD1200E17EEE /* README.md */,
+				63C71E161D19BD1200E17EEE /* xxhash.c */,
+				63C71E171D19BD1200E17EEE /* xxhash.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		8E2AF9C51CDA762900AC6CEC = {
 			isa = PBXGroup;
 			children = (
@@ -724,6 +795,7 @@
 		8EE892261CF6483A00740718 /* ext */ = {
 			isa = PBXGroup;
 			children = (
+				63C71E061D19BD1200E17EEE /* lz4 */,
 				8EE892271CF6483A00740718 /* AES */,
 				8EE8922E1CF6483A00740718 /* base64 */,
 				8EE893A81CF6483B00740718 /* jsoncpp */,
@@ -905,6 +977,7 @@
 		8EE893BC1CF6483B00740718 /* base */ = {
 			isa = PBXGroup;
 			children = (
+				63C71E011D19BAA800E17EEE /* Compression.h */,
 				8EE893BD1CF6483B00740718 /* BidirectionalMap.h */,
 				8EE893BE1CF6483B00740718 /* CommandLineParser.h */,
 				8EE893BF1CF6483B00740718 /* ContainerTools.h */,
@@ -1050,6 +1123,7 @@
 		8EE894081CF6483B00740718 /* base */ = {
 			isa = PBXGroup;
 			children = (
+				63C71E021D19BAB900E17EEE /* Compression.cpp */,
 				8EE894091CF6483B00740718 /* CommandLineParser.cpp */,
 				8EE8940A1CF6483B00740718 /* Encryption.cpp */,
 				8EE8940B1CF6483B00740718 /* StringTools.cpp */,
@@ -1236,6 +1310,7 @@
 				8EE8920C1CF647F600740718 /* vol_nl_2.fsh in Resources */,
 				8EE891F31CF647F600740718 /* bb.vsh in Resources */,
 				8EE891F61CF647F600740718 /* geo_pn.fsh in Resources */,
+				63C71E191D19BD1200E17EEE /* NEWS in Resources */,
 				8EE891F91CF647F600740718 /* geo_pna.vsh in Resources */,
 				8EE8920A1CF647F600740718 /* vol_lti_2.fsh in Resources */,
 				8EE892021CF647F600740718 /* quad.fsh in Resources */,
@@ -1256,6 +1331,7 @@
 				8EE895551CF6483B00740718 /* LogManager.inl in Resources */,
 				8EE891F51CF647F600740718 /* geo_pc.vsh in Resources */,
 				8EE8920D1CF647F600740718 /* vol_nlti.fsh in Resources */,
+				63C71E1B1D19BD1200E17EEE /* LICENSE in Resources */,
 				8EE8920B1CF647F600740718 /* vol_nl.fsh in Resources */,
 				8EE891FA1CF647F600740718 /* geo_pnc.fsh in Resources */,
 				8EE892081CF647F600740718 /* vol_l_2.fsh in Resources */,
@@ -1265,6 +1341,7 @@
 				8EE891FE1CF647F600740718 /* geo_pnta.fsh in Resources */,
 				8EE891F71CF647F600740718 /* geo_pn.vsh in Resources */,
 				8EE892051CF647F600740718 /* sliceQuad.vsh in Resources */,
+				63C71E181D19BD1200E17EEE /* CMakeLists.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1275,6 +1352,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63C71E031D19BABA00E17EEE /* Compression.cpp in Sources */,
 				8EE8957F1CF6483B00740718 /* TCPConnectionFactory.cpp in Sources */,
 				8EC42E2F1CFDE68F00E931F0 /* GeometryRenderer3D.cpp in Sources */,
 				8EE8957C1CF6483B00740718 /* Sockets.cpp in Sources */,
@@ -1294,9 +1372,12 @@
 				8EC42E2A1CFDE68F00E931F0 /* Dataset.cpp in Sources */,
 				8EC42E2C1CFDE68F00E931F0 /* G3D.cpp in Sources */,
 				8EE892251CF6481900740718 /* TabBarViewController.mm in Sources */,
+				63C71E1A1D19BD1200E17EEE /* README.md in Sources */,
 				8EC42E4A1CFDE68F00E931F0 /* Macros.cpp in Sources */,
 				8EE8957B1CF6483B00740718 /* QueueConnectionSpawner.cpp in Sources */,
+				63C71E1E1D19BD1200E17EEE /* lz4hc.c in Sources */,
 				8EE8921E1CF6481900740718 /* AppDelegate.mm in Sources */,
+				63C71E1C1D19BD1200E17EEE /* lz4.c in Sources */,
 				8EC42E321CFDE68F00E931F0 /* MVP2D.cpp in Sources */,
 				8EE895641CF6483B00740718 /* ConnectionAggregator.cpp in Sources */,
 				8EE895731CF6483B00740718 /* JsonKeys.cpp in Sources */,
@@ -1337,6 +1418,7 @@
 				8EE895691CF6483B00740718 /* WebSocketProtocol.cpp in Sources */,
 				8EC42E491CFDE68F00E931F0 /* iOS.mm in Sources */,
 				8EC42E281CFDE68F00E931F0 /* Communication.cpp in Sources */,
+				63C71E1F1D19BD1200E17EEE /* README.md in Sources */,
 				8EE895811CF6483B00740718 /* NetworkTesting.cpp in Sources */,
 				8EC42E381CFDE68F00E931F0 /* RenderParameters3D.cpp in Sources */,
 				8EC42E411CFDE68F00E931F0 /* SceneParser.cpp in Sources */,
@@ -1360,6 +1442,7 @@
 				8EC42E3E1CFDE68F00E931F0 /* SceneLoader.cpp in Sources */,
 				8EE8956D1CF6483B00740718 /* LoopbackConnection.cpp in Sources */,
 				8EE892241CF6481900740718 /* SettingsViewController.mm in Sources */,
+				63C71E1D1D19BD1200E17EEE /* lz4frame.c in Sources */,
 				8EE8955A1CF6483B00740718 /* File.cpp in Sources */,
 				8EC42E301CFDE68F00E931F0 /* GeometryUtil.cpp in Sources */,
 				8EE895581CF6483B00740718 /* StringTools.cpp in Sources */,
@@ -1378,6 +1461,7 @@
 				8EC42E261CFDE68F00E931F0 /* AbstractIO.cpp in Sources */,
 				8EE8956C1CF6483B00740718 /* FramingConnectionFactory.cpp in Sources */,
 				8EC42E3A1CFDE68F00E931F0 /* SceneController2D.cpp in Sources */,
+				63C71E201D19BD1200E17EEE /* xxhash.c in Sources */,
 				63C9EF8B1D1037B000F6393D /* VolumeNode.cpp in Sources */,
 				8EE895561CF6483B00740718 /* CommandLineParser.cpp in Sources */,
 			);
@@ -1481,7 +1565,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = sci.utah.edu.duality;
 				PRODUCT_NAME = "Duality-iOS";
 				PROVISIONING_PROFILE = "";
-				USER_HEADER_SEARCH_PATHS = "$SRCROOT/duality-client/duality-client/include $SRCROOT/duality-client/mocca/mocca/include $SRCROOT/duality-client/mocca/ext/jsoncpp/include $SRCROOT/duality-client/mocca/ext/AES/include $SRCROOT/duality-client/mocca/ext/sha1/include $SRCROOT/duality-client/mocca/ext/base64/include $SRCROOT/duality-client/duality-client";
+				USER_HEADER_SEARCH_PATHS = "$SRCROOT/duality-client/duality-client/include $SRCROOT/duality-client/mocca/mocca/include $SRCROOT/duality-client/mocca/ext/jsoncpp/include $SRCROOT/duality-client/mocca/ext/AES/include $SRCROOT/duality-client/mocca/ext/sha1/include $SRCROOT/duality-client/mocca/ext/base64/include $SRCROOT/duality-client/mocca/ext/lz4/include $SRCROOT/duality-client/duality-client";
 			};
 			name = Debug;
 		};
@@ -1498,7 +1582,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = sci.utah.edu.duality;
 				PRODUCT_NAME = "Duality-iOS";
 				PROVISIONING_PROFILE = "";
-				USER_HEADER_SEARCH_PATHS = "$SRCROOT/duality-client/duality-client/include $SRCROOT/duality-client/mocca/mocca/include $SRCROOT/duality-client/mocca/ext/jsoncpp/include $SRCROOT/duality-client/mocca/ext/AES/include $SRCROOT/duality-client/mocca/ext/sha1/include $SRCROOT/duality-client/mocca/ext/base64/include $SRCROOT/duality-client/duality-client";
+				USER_HEADER_SEARCH_PATHS = "$SRCROOT/duality-client/duality-client/include $SRCROOT/duality-client/mocca/mocca/include $SRCROOT/duality-client/mocca/ext/jsoncpp/include $SRCROOT/duality-client/mocca/ext/AES/include $SRCROOT/duality-client/mocca/ext/sha1/include $SRCROOT/duality-client/mocca/ext/base64/include $SRCROOT/duality-client/mocca/ext/lz4/include $SRCROOT/duality-client/duality-client";
 			};
 			name = Release;
 		};

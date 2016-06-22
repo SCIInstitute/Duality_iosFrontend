@@ -95,7 +95,11 @@ UIStackView* buildFloatVariableStackView(const std::string& nodeName, const Floa
     stackView.spacing = 10;
     
     UILabel* nameLabel = [[UILabel alloc] init];
-    nameLabel.text = [NSString stringWithUTF8String:var.name.c_str()];
+    if (!var.label.isNull()) {
+        nameLabel.text = [NSString stringWithUTF8String:var.label.get().c_str()];
+    } else {
+        nameLabel.text = [NSString stringWithUTF8String:var.name.c_str()];
+    }
     nameLabel.textColor = [UIColor whiteColor];
     nameLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
     [stackView addArrangedSubview:nameLabel];
@@ -127,7 +131,11 @@ UIStackView* buildEnumVariableStackView(const std::string& nodeName, const EnumV
     stackView.spacing = 10;
     
     UILabel* nameLabel = [[UILabel alloc] init];
-    nameLabel.text = [NSString stringWithUTF8String:var.name.c_str()];
+    if (!var.label.isNull()) {
+        nameLabel.text = [NSString stringWithUTF8String:var.label.get().c_str()];
+    } else {
+        nameLabel.text = [NSString stringWithUTF8String:var.name.c_str()];
+    }
     nameLabel.textColor = [UIColor whiteColor];
     nameLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
     [stackView addArrangedSubview:nameLabel];

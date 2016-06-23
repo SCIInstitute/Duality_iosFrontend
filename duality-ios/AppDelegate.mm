@@ -16,6 +16,7 @@
                                  @"127.0.0.1", @"ServerIP",
                                  @"10123", @"ServerPort",
                                  false, @"AnatomicalTerms",
+                                 true, @"CachingEnabled",
                                  nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
     

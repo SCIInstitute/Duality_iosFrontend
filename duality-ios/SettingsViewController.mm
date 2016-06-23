@@ -80,7 +80,7 @@ typedef void(^CallbackBlock)(void);
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -112,11 +112,22 @@ typedef void(^CallbackBlock)(void);
         {
             cell.textLabel.text = @"Anatomical Terms";
             UISwitch* sw = [[UISwitch alloc] init];
+            bool tmp = [[NSUserDefaults standardUserDefaults] boolForKey:@"AnatomicalTerms"];
+            [sw setOn:tmp];
             [sw addTarget:self action:@selector(anatomicalTermsChanged:) forControlEvents:UIControlEventValueChanged];
             cell.accessoryView = sw;
             break;
         }
         case 3:
+        {
+            cell.textLabel.text = @"Caching Enabled";
+            UISwitch* sw = [[UISwitch alloc] init];
+            [sw setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"CachingEnabled"]];
+            [sw addTarget:self action:@selector(cachingEnabledChanged:) forControlEvents:UIControlEventValueChanged];
+            cell.accessoryView = sw;
+            break;
+        }
+        case 4:
         {
             cell.textLabel.text = @"Clear Scene Cache";
             UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -138,6 +149,14 @@ typedef void(^CallbackBlock)(void);
     UISwitch* sw = (UISwitch*)sender;
     bool anatomicalTerms = [sw isOn];
     [[NSUserDefaults standardUserDefaults] setBool:anatomicalTerms forKey:@"AnatomicalTerms"];
+}
+
+-(void) cachingEnabledChanged:(id)sender
+{
+    UISwitch* sw = (UISwitch*)sender;
+    bool cachingEnabled = [sw isOn];
+    [[NSUserDefaults standardUserDefaults] setBool:cachingEnabled forKey:@"CachingEnabled"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CachingEnabledChanged" object:self];
 }
 
 -(void) clearCache:(id)sender

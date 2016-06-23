@@ -33,6 +33,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reinitSceneLoader:) name:@"ServerAddressChanged" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showErrorAlert:) name:@"ErrorOccured" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearDataCache:) name:@"ClearDataCache" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cachingEnabledChanged:) name:@"CachingEnabledChanged" object:nil];
     
     return self;
 }
@@ -109,6 +110,11 @@
 -(void) clearDataCache:(NSNotification*)notification
 {
     m_sceneLoader->clearCache();
+}
+
+-(void) cachingEnabledChanged:(NSNotification*)notification
+{
+    m_sceneLoader->setCachingEnabled([[NSUserDefaults standardUserDefaults] boolForKey:@"CachingEnabled"]);
 }
 
 @end

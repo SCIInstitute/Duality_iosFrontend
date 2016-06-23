@@ -162,11 +162,18 @@ typedef void(^CallbackBlock)(void);
 -(void) clearCache:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ClearDataCache" object:self];
+    [(UIButton*)sender setEnabled:false];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Settings";
+}
+
+-(void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

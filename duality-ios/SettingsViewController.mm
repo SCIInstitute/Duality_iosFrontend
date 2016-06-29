@@ -91,6 +91,21 @@ typedef void(^CallbackBlock)(void);
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    else
+    {
+        for (UIView* v in cell.contentView.subviews)
+        {
+            [v removeFromSuperview];
+        }
+        cell.textLabel.text = nil;
+        cell.textLabel.enabled = true;
+        cell.userInteractionEnabled = true;
+        cell.detailTextLabel.text = nil;
+        cell.imageView.image = nil;
+        cell.accessoryView = nil;
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
     
     switch (indexPath.row)
     {

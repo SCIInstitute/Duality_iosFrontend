@@ -76,7 +76,9 @@
 - (BOOL)tabBarController:(UITabBarController*)tabBarController shouldSelectViewController:(UIViewController*)viewController
 {
     if (((UINavigationController*)viewController).tabBarItem.tag == 4) {
-        m_webViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:@"http://www.google.de"]];
+        std::string url = m_sceneLoader->currentMetadata().url();
+        NSURL* nsurl = [NSURL URLWithString:[NSString stringWithUTF8String:url.data()]];
+        m_webViewController = [[SFSafariViewController alloc] initWithURL:nsurl];
         [self presentViewController:m_webViewController animated:true completion:nil];
         return NO;
     }

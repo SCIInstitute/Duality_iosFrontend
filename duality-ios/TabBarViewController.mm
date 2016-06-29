@@ -27,13 +27,17 @@
     m_render2DViewController.context = context;
     m_selectSceneViewController = [[SelectSceneViewController alloc] initWithSceneLoader:m_sceneLoader.get()];
     m_settingsViewController = [[SettingsViewController alloc] init];
-
+    m_webViewController = [SFSafariViewController alloc];
+    
     [self createNavigationControllers];
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadScene:) name:@"SceneSelected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reinitSceneLoader:) name:@"ServerAddressChanged" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showErrorAlert:) name:@"ErrorOccured" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearDataCache:) name:@"ClearDataCache" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cachingEnabledChanged:) name:@"CachingEnabledChanged" object:nil];
+    
+    self.delegate = self;
     
     return self;
 }
@@ -61,7 +65,23 @@
     navController.tabBarItem.tag = 3;
     [viewControllersArray addObject:navController];
     
+    navController = [self createNavigationController:m_webViewController withTitle:@"WebView"];
+    navController.tabBarItem.tag = 4;
+    navController.tabBarItem.enabled = false;
+    [viewControllersArray addObject:navController];
+    
     self.viewControllers = viewControllersArray;
+}
+
+- (BOOL)tabBarController:(UITabBarController*)tabBarController shouldSelectViewController:(UIViewController*)viewController
+{
+    if (((UINavigationController*)viewController).tabBarItem.tag == 4) {
+        m_webViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:@"http://www.google.de"]];
+        [self presentViewController:m_webViewController animated:true completion:nil];
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (UINavigationController*) createNavigationController:(UIViewController*)viewController withTitle:(NSString*)title
@@ -70,6 +90,26 @@
     UITabBarItem* tabBarItem  = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(title, @"Title of the tab") image:[UIImage imageNamed:@"data.png"] tag:0];
     navController.tabBarItem = tabBarItem;
     return navController;
+}
+
+-(void) loadScene:(NSNotification*)notification
+{
+    try {
+        NSString* scene = notification.userInfo[@"Name"];
+        m_sceneLoader->loadScene([scene UTF8String]);
+        std::string url = m_sceneLoader->currentMetadata().url();
+        UINavigationController* nc = (UINavigationController*)[self.viewControllers objectAtIndex:4];
+        if (!url.empty()) {
+            NSURL* nsurl = [NSURL URLWithString:[NSString stringWithUTF8String:url.data()]];
+            m_webViewController = [[SFSafariViewController alloc] initWithURL:nsurl];
+            nc.tabBarItem.enabled = true;
+        } else {
+            nc.tabBarItem.enabled = false;
+        }
+    }
+    catch (const std::exception& err) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
+    }
 }
 
 -(void) reinitSceneLoader:(NSNotification*)notification

@@ -36,12 +36,7 @@
 {
     m_selectedScene = [NSString stringWithUTF8String:m_metadata[indexPath.row].name().c_str()];
     if (m_selectedScene) {
-        try {
-            m_loader->loadScene(std::string([m_selectedScene UTF8String]));
-        }
-        catch(const std::exception& err) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
-        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SceneSelected" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:m_selectedScene, @"Name", nil]];
     }
 }
 
@@ -53,6 +48,7 @@
 
 -(void) viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     try {
         m_metadata = m_loader->listMetadata();
     }

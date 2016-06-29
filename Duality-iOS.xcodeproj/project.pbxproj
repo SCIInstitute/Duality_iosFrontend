@@ -12,6 +12,7 @@
 		6342A03D1D097E0600D46147 /* TransferFunction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6342A03B1D097E0600D46147 /* TransferFunction.cpp */; };
 		6342A0401D097F8E00D46147 /* GLTexture2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6342A03E1D097F8E00D46147 /* GLTexture2D.cpp */; };
 		6342A0431D0988E500D46147 /* VolumeRenderer3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6342A0411D0988E500D46147 /* VolumeRenderer3D.cpp */; };
+		634EC1431D23E982003929A7 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634EC1421D23E982003929A7 /* SafariServices.framework */; };
 		637A2C651D08752B00B4EE84 /* I3M.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 637A2C611D08752B00B4EE84 /* I3M.cpp */; };
 		637A2C661D08752B00B4EE84 /* VolumeDataset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 637A2C631D08752B00B4EE84 /* VolumeDataset.cpp */; };
 		63C71E031D19BABA00E17EEE /* Compression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63C71E021D19BAB900E17EEE /* Compression.cpp */; };
@@ -180,6 +181,7 @@
 		6342A03F1D097F8E00D46147 /* GLTexture2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLTexture2D.h; sourceTree = "<group>"; };
 		6342A0411D0988E500D46147 /* VolumeRenderer3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VolumeRenderer3D.cpp; sourceTree = "<group>"; };
 		6342A0421D0988E500D46147 /* VolumeRenderer3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeRenderer3D.h; sourceTree = "<group>"; };
+		634EC1421D23E982003929A7 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		637A2C611D08752B00B4EE84 /* I3M.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = I3M.cpp; sourceTree = "<group>"; };
 		637A2C621D08752B00B4EE84 /* I3M.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = I3M.h; sourceTree = "<group>"; };
 		637A2C631D08752B00B4EE84 /* VolumeDataset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VolumeDataset.cpp; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				634EC1431D23E982003929A7 /* SafariServices.framework in Frameworks */,
 				8EEA652E1CF8AA3700B6465A /* CoreGraphics.framework in Frameworks */,
 				8EC5A3961CE143650042E2C8 /* OpenGLES.framework in Frameworks */,
 				8EC1922F1CE12FB6003EBC45 /* GLKit.framework in Frameworks */,
@@ -558,6 +561,7 @@
 		8E6DCECF1CDBBA320091D5AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				634EC1421D23E982003929A7 /* SafariServices.framework */,
 				8EEA652D1CF8AA3700B6465A /* CoreGraphics.framework */,
 				8EC5A3951CE143650042E2C8 /* OpenGLES.framework */,
 				8EC1922E1CE12FB6003EBC45 /* GLKit.framework */,

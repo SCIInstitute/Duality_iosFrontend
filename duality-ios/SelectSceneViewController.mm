@@ -56,6 +56,17 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
     }
     [self.tableView reloadData];
+    if (m_loader->isSceneLoaded()) {
+        std::string selectedScene = m_loader->currentMetadata().name();
+        auto it = std::find_if(begin(m_metadata), end(m_metadata), [&](const SceneMetadata& m) {
+            return m.name() == selectedScene;
+        });
+        if (it != end(m_metadata)) {
+            auto pos = std::distance(begin(m_metadata), it);
+            NSIndexPath* indexPath = [NSIndexPath indexPathForRow:pos inSection:0];
+            [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        }
+    }
 }
 
 -(id) initWithSceneLoader:(SceneLoader*)loader

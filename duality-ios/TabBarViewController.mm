@@ -76,7 +76,7 @@
 - (BOOL)tabBarController:(UITabBarController*)tabBarController shouldSelectViewController:(UIViewController*)viewController
 {
     if (((UINavigationController*)viewController).tabBarItem.tag == 4) {
-        std::string url = m_sceneLoader->currentMetadata().url();
+        std::string url = m_sceneLoader->webViewURL();
         NSURL* nsurl = [NSURL URLWithString:[NSString stringWithUTF8String:url.data()]];
         m_webViewController = [[SFSafariViewController alloc] initWithURL:nsurl];
         [self presentViewController:m_webViewController animated:true completion:nil];
@@ -99,7 +99,7 @@
     try {
         NSString* scene = notification.userInfo[@"Name"];
         m_sceneLoader->loadScene([scene UTF8String]);
-        std::string url = m_sceneLoader->currentMetadata().url();
+        std::string url = m_sceneLoader->webViewURL();
         UINavigationController* nc = (UINavigationController*)[self.viewControllers objectAtIndex:4];
         if (!url.empty()) {
             NSURL* nsurl = [NSURL URLWithString:[NSString stringWithUTF8String:url.data()]];

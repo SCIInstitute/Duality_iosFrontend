@@ -57,7 +57,7 @@
     }
     [self.tableView reloadData];
     if (m_loader->isSceneLoaded()) {
-        std::string selectedScene = m_loader->currentMetadata().name();
+        std::string selectedScene = m_loader->metadata().name();
         auto it = std::find_if(begin(m_metadata), end(m_metadata), [&](const SceneMetadata& m) {
             return m.name() == selectedScene;
         });

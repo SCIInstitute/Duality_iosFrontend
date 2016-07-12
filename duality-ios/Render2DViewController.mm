@@ -6,6 +6,7 @@
 
 #import "Render2DViewController.h"
 #import "DynamicUIBuilder.h"
+#import "SettingsObject.h"
 
 #include "src/IVDA/iOS.h"
 #include "src/IVDA/GLInclude.h"
@@ -119,7 +120,9 @@
             m_sliceSelector.value = m_sceneController.lock()->slice();
             m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
             
-            SceneController2D::AxisLabelMode mode = [[NSUserDefaults standardUserDefaults] boolForKey:@"AnatomicalTerms"] ? SceneController2D::AxisLabelMode::Anatomical : SceneController2D::AxisLabelMode::Mathematical;
+            SceneController2D::AxisLabelMode mode = m_loader->settings()->anatomicalTerms()
+                ? SceneController2D::AxisLabelMode::Anatomical
+                : SceneController2D::AxisLabelMode::Mathematical;
             NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController.lock()->labelForCurrentAxis(mode).c_str()];
             [m_toggleAxisButton setTitle:axisLabel forState:UIControlStateNormal];
             

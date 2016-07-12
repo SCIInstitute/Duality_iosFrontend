@@ -15,6 +15,7 @@
 		634EC1431D23E982003929A7 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634EC1421D23E982003929A7 /* SafariServices.framework */; };
 		637A2C651D08752B00B4EE84 /* I3M.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 637A2C611D08752B00B4EE84 /* I3M.cpp */; };
 		637A2C661D08752B00B4EE84 /* VolumeDataset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 637A2C631D08752B00B4EE84 /* VolumeDataset.cpp */; };
+		63A007CA1D2D5F360010B22D /* InterleavingRenderer3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63A007C81D2D5F360010B22D /* InterleavingRenderer3D.cpp */; };
 		63C71E031D19BABA00E17EEE /* Compression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63C71E021D19BAB900E17EEE /* Compression.cpp */; };
 		63C71E181D19BD1200E17EEE /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 63C71E071D19BD1200E17EEE /* CMakeLists.txt */; };
 		63C71E191D19BD1200E17EEE /* NEWS in Resources */ = {isa = PBXBuildFile; fileRef = 63C71E0B1D19BD1200E17EEE /* NEWS */; };
@@ -27,12 +28,12 @@
 		63C71E201D19BD1200E17EEE /* xxhash.c in Sources */ = {isa = PBXBuildFile; fileRef = 63C71E161D19BD1200E17EEE /* xxhash.c */; };
 		63C9EF8A1D1037B000F6393D /* GeometryNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63C9EF861D1037B000F6393D /* GeometryNode.cpp */; };
 		63C9EF8B1D1037B000F6393D /* VolumeNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63C9EF881D1037B000F6393D /* VolumeNode.cpp */; };
+		63FCC3191D3417AB000A8D3B /* SettingsObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 63FCC3181D3417AB000A8D3B /* SettingsObject.mm */; };
 		8E2AFA561CDAC18400AC6CEC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2AFA551CDAC18400AC6CEC /* Foundation.framework */; };
 		8E2AFA581CDAC18C00AC6CEC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2AFA571CDAC18C00AC6CEC /* UIKit.framework */; };
 		8E96F8771CF763FD003511F6 /* Render2DViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8E96F8761CF763FD003511F6 /* Render2DViewController.mm */; };
 		8EC1922F1CE12FB6003EBC45 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC1922E1CE12FB6003EBC45 /* GLKit.framework */; };
 		8EC42E261CFDE68F00E931F0 /* AbstractIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EC42DD21CFDE68F00E931F0 /* AbstractIO.cpp */; };
-		8EC42E271CFDE68F00E931F0 /* BoundingBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EC42DD41CFDE68F00E931F0 /* BoundingBox.cpp */; };
 		8EC42E281CFDE68F00E931F0 /* Communication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EC42DD61CFDE68F00E931F0 /* Communication.cpp */; };
 		8EC42E291CFDE68F00E931F0 /* CoordinateSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EC42DD81CFDE68F00E931F0 /* CoordinateSystem.cpp */; };
 		8EC42E2A1CFDE68F00E931F0 /* Dataset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EC42DDA1CFDE68F00E931F0 /* Dataset.cpp */; };
@@ -173,7 +174,6 @@
 		630BB4CC1D181C45004EC28E /* DataCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCache.h; sourceTree = "<group>"; };
 		6329F6491D0D8EE500CAD1F8 /* VolumeRenderer2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VolumeRenderer2D.cpp; sourceTree = "<group>"; };
 		6329F64A1D0D8EE500CAD1F8 /* VolumeRenderer2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeRenderer2D.h; sourceTree = "<group>"; };
-		633D48B41D11615200215A26 /* NodeDispatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeDispatcher.h; sourceTree = "<group>"; };
 		633DC1481D14B24400E02C3B /* InputVariable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputVariable.h; sourceTree = "<group>"; };
 		6342A03B1D097E0600D46147 /* TransferFunction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransferFunction.cpp; sourceTree = "<group>"; };
 		6342A03C1D097E0600D46147 /* TransferFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferFunction.h; sourceTree = "<group>"; };
@@ -186,6 +186,9 @@
 		637A2C621D08752B00B4EE84 /* I3M.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = I3M.h; sourceTree = "<group>"; };
 		637A2C631D08752B00B4EE84 /* VolumeDataset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VolumeDataset.cpp; sourceTree = "<group>"; };
 		637A2C641D08752B00B4EE84 /* VolumeDataset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeDataset.h; sourceTree = "<group>"; };
+		63A007C71D2D5E2F0010B22D /* RenderableConcept.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderableConcept.h; sourceTree = "<group>"; };
+		63A007C81D2D5F360010B22D /* InterleavingRenderer3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterleavingRenderer3D.cpp; sourceTree = "<group>"; };
+		63A007C91D2D5F360010B22D /* InterleavingRenderer3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterleavingRenderer3D.h; sourceTree = "<group>"; };
 		63C71E011D19BAA800E17EEE /* Compression.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Compression.h; sourceTree = "<group>"; };
 		63C71E021D19BAB900E17EEE /* Compression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Compression.cpp; sourceTree = "<group>"; };
 		63C71E071D19BD1200E17EEE /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
@@ -206,6 +209,9 @@
 		63C9EF871D1037B000F6393D /* GeometryNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryNode.h; sourceTree = "<group>"; };
 		63C9EF881D1037B000F6393D /* VolumeNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VolumeNode.cpp; sourceTree = "<group>"; };
 		63C9EF891D1037B000F6393D /* VolumeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeNode.h; sourceTree = "<group>"; };
+		63FCC3181D3417AB000A8D3B /* SettingsObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SettingsObject.mm; path = "duality-ios/SettingsObject.mm"; sourceTree = "<group>"; };
+		63FCC31A1D3417E9000A8D3B /* SettingsObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsObject.h; sourceTree = "<group>"; };
+		63FCC31D1D342B3E000A8D3B /* Settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		8E2AF9CE1CDA762900AC6CEC /* Duality-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Duality-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2AFA551CDAC18400AC6CEC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8E2AFA571CDAC18C00AC6CEC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -225,7 +231,6 @@
 		8EC42DCF1CFDE68F00E931F0 /* Vectors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vectors.h; sourceTree = "<group>"; };
 		8EC42DD21CFDE68F00E931F0 /* AbstractIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AbstractIO.cpp; sourceTree = "<group>"; };
 		8EC42DD31CFDE68F00E931F0 /* AbstractIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractIO.h; sourceTree = "<group>"; };
-		8EC42DD41CFDE68F00E931F0 /* BoundingBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoundingBox.cpp; sourceTree = "<group>"; };
 		8EC42DD51CFDE68F00E931F0 /* BoundingBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoundingBox.h; sourceTree = "<group>"; };
 		8EC42DD61CFDE68F00E931F0 /* Communication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Communication.cpp; sourceTree = "<group>"; };
 		8EC42DD71CFDE68F00E931F0 /* Communication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Communication.h; sourceTree = "<group>"; };
@@ -600,6 +605,7 @@
 				8EC42DC91CFDE68F00E931F0 /* SceneMetadata.h */,
 				8EC42DCA1CFDE68F00E931F0 /* ScreenInfo.h */,
 				633DC1481D14B24400E02C3B /* InputVariable.h */,
+				63FCC31D1D342B3E000A8D3B /* Settings.h */,
 			);
 			path = duality;
 			sourceTree = "<group>";
@@ -628,7 +634,6 @@
 			children = (
 				8EC42DD21CFDE68F00E931F0 /* AbstractIO.cpp */,
 				8EC42DD31CFDE68F00E931F0 /* AbstractIO.h */,
-				8EC42DD41CFDE68F00E931F0 /* BoundingBox.cpp */,
 				8EC42DD51CFDE68F00E931F0 /* BoundingBox.h */,
 				8EC42DD61CFDE68F00E931F0 /* Communication.cpp */,
 				8EC42DD71CFDE68F00E931F0 /* Communication.h */,
@@ -658,6 +663,8 @@
 				6329F64A1D0D8EE500CAD1F8 /* VolumeRenderer2D.h */,
 				6342A0411D0988E500D46147 /* VolumeRenderer3D.cpp */,
 				6342A0421D0988E500D46147 /* VolumeRenderer3D.h */,
+				63A007C81D2D5F360010B22D /* InterleavingRenderer3D.cpp */,
+				63A007C91D2D5F360010B22D /* InterleavingRenderer3D.h */,
 				8EC42DE71CFDE68F00E931F0 /* GeometryUtil.cpp */,
 				8EC42DE81CFDE68F00E931F0 /* GeometryUtil.h */,
 				8EC42DEB1CFDE68F00E931F0 /* MVP2D.cpp */,
@@ -666,7 +673,6 @@
 				8EC42DEE1CFDE68F00E931F0 /* MVP3D.h */,
 				8EC42DEF1CFDE68F00E931F0 /* PythonProvider.cpp */,
 				8EC42DF01CFDE68F00E931F0 /* PythonProvider.h */,
-				633D48B41D11615200215A26 /* NodeDispatcher.h */,
 				8EC42DF11CFDE68F00E931F0 /* RenderDispatcher2D.cpp */,
 				8EC42DF21CFDE68F00E931F0 /* RenderDispatcher2D.h */,
 				8EC42DF31CFDE68F00E931F0 /* RenderDispatcher3D.cpp */,
@@ -696,6 +702,7 @@
 				8EACEFB61CFF3AAC00988851 /* View.h */,
 				6342A03B1D097E0600D46147 /* TransferFunction.cpp */,
 				6342A03C1D097E0600D46147 /* TransferFunction.h */,
+				63A007C71D2D5E2F0010B22D /* RenderableConcept.h */,
 			);
 			path = duality;
 			sourceTree = "<group>";
@@ -792,6 +799,8 @@
 				8EE8921B1CF6481900740718 /* SettingsViewController.mm */,
 				8EE8921C1CF6481900740718 /* TabBarViewController.h */,
 				8EE8921D1CF6481900740718 /* TabBarViewController.mm */,
+				63FCC31A1D3417E9000A8D3B /* SettingsObject.h */,
+				63FCC3181D3417AB000A8D3B /* SettingsObject.mm */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -1438,7 +1447,6 @@
 				6329F64B1D0D8EE500CAD1F8 /* VolumeRenderer2D.cpp in Sources */,
 				8EC42E481CFDE68F00E931F0 /* GLShader.cpp in Sources */,
 				630BB4CD1D181C45004EC28E /* DataCache.cpp in Sources */,
-				8EC42E271CFDE68F00E931F0 /* BoundingBox.cpp in Sources */,
 				8EE895721CF6483B00740718 /* Dispatcher.cpp in Sources */,
 				8EC42E4D1CFDE68F00E931F0 /* Threads.cpp in Sources */,
 				8EE895671CF6483B00740718 /* FramingUtils.cpp in Sources */,
@@ -1455,6 +1463,7 @@
 				8EE895521CF6483B00740718 /* sha1.cpp in Sources */,
 				8EE895741CF6483B00740718 /* Method.cpp in Sources */,
 				8EE895751CF6483B00740718 /* MethodDescription.cpp in Sources */,
+				63A007CA1D2D5F360010B22D /* InterleavingRenderer3D.cpp in Sources */,
 				8EE8955C1CF6483B00740718 /* Path.cpp in Sources */,
 				8EE895571CF6483B00740718 /* Encryption.cpp in Sources */,
 				8EE895781CF6483B00740718 /* QueueConnection.cpp in Sources */,
@@ -1462,6 +1471,7 @@
 				8EC42E451CFDE68F00E931F0 /* DebugOutHandler.cpp in Sources */,
 				8EE8955F1CF6483B00740718 /* HTMLLog.cpp in Sources */,
 				8EE895621CF6483B00740718 /* StreamLog.cpp in Sources */,
+				63FCC3191D3417AB000A8D3B /* SettingsObject.mm in Sources */,
 				8EC42E261CFDE68F00E931F0 /* AbstractIO.cpp in Sources */,
 				8EE8956C1CF6483B00740718 /* FramingConnectionFactory.cpp in Sources */,
 				8EC42E3A1CFDE68F00E931F0 /* SceneController2D.cpp in Sources */,
@@ -1564,9 +1574,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = "duality-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lz";
-				PRODUCT_BUNDLE_IDENTIFIER = sci.utah.edu.duality;
+				PRODUCT_BUNDLE_IDENTIFIER = sci.utah.edu.duality17;
 				PRODUCT_NAME = "Duality-iOS";
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$SRCROOT/duality-client/duality-client/include $SRCROOT/duality-client/mocca/mocca/include $SRCROOT/duality-client/mocca/ext/jsoncpp/include $SRCROOT/duality-client/mocca/ext/AES/include $SRCROOT/duality-client/mocca/ext/sha1/include $SRCROOT/duality-client/mocca/ext/base64/include $SRCROOT/duality-client/mocca/ext/lz4/include $SRCROOT/duality-client/duality-client";
@@ -1581,9 +1592,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = "duality-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lz";
-				PRODUCT_BUNDLE_IDENTIFIER = sci.utah.edu.duality;
+				PRODUCT_BUNDLE_IDENTIFIER = sci.utah.edu.duality17;
 				PRODUCT_NAME = "Duality-iOS";
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$SRCROOT/duality-client/duality-client/include $SRCROOT/duality-client/mocca/mocca/include $SRCROOT/duality-client/mocca/ext/jsoncpp/include $SRCROOT/duality-client/mocca/ext/AES/include $SRCROOT/duality-client/mocca/ext/sha1/include $SRCROOT/duality-client/mocca/ext/base64/include $SRCROOT/duality-client/mocca/ext/lz4/include $SRCROOT/duality-client/duality-client";

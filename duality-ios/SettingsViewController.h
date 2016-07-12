@@ -4,6 +4,10 @@
 
 #import <UIKit/UIKit.h>
 
+#include "duality/Settings.h"
+
+#include <memory>
+
 @class TextSettingCell;
 
 class SceneLoader;
@@ -11,8 +15,9 @@ class SceneLoader;
 @interface SettingsViewController : UITableViewController
 {
     NSMutableArray<TextSettingCell*>* m_textSettingCells;
+    std::shared_ptr<Settings> m_settings;
 }
 
-- (id) init;
+- (id) initWithSettings:(std::shared_ptr<Settings>)settings;
 
 @end

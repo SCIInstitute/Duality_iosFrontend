@@ -5,6 +5,7 @@
 #import <Foundation/Foundation.h>
 
 #import "TabBarViewController.h"
+#import "SettingsObject.h"
 
 #include "duality/SceneLoader.h"
 
@@ -26,7 +27,7 @@
     m_render2DViewController = [[Render2DViewController alloc] initWithSceneLoader:m_sceneLoader.get()];
     m_render2DViewController.context = context;
     m_selectSceneViewController = [[SelectSceneViewController alloc] initWithSceneLoader:m_sceneLoader.get()];
-    m_settingsViewController = [[SettingsViewController alloc] init];
+    m_settingsViewController = [[SettingsViewController alloc] initWithSettings:m_sceneLoader->settings()];
     m_webViewController = [SFSafariViewController alloc];
     
     [self createNavigationControllers];
@@ -35,7 +36,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reinitSceneLoader:) name:@"ServerAddressChanged" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showErrorAlert:) name:@"ErrorOccured" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearDataCache:) name:@"ClearDataCache" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cachingEnabledChanged:) name:@"CachingEnabledChanged" object:nil];
     
     self.delegate = self;
     
@@ -117,15 +117,12 @@
 -(void) reinitSceneLoader:(NSNotification*)notification
 {
     try {
-        std::string serverIP = [[[NSUserDefaults standardUserDefaults] stringForKey:@"ServerIP"] UTF8String];
-        uint16_t serverPort = [[NSUserDefaults standardUserDefaults] integerForKey:@"ServerPort"];
-        mocca::net::Endpoint endpoint("tcp.prefixed", serverIP, std::to_string(serverPort));
         if (m_sceneLoader == nullptr) {
             NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
             mocca::fs::Path documentsDirectory([[paths objectAtIndex:0]UTF8String]);
-            m_sceneLoader = std::make_unique<SceneLoader>(endpoint, documentsDirectory + "scenecache");
+            m_sceneLoader = std::make_unique<SceneLoader>(documentsDirectory + "scenecache", std::make_shared<SettingsObject>());
         } else {
-            m_sceneLoader->updateEndpoint(endpoint);
+            m_sceneLoader->updateEndpoint();
         }
         [m_render3DViewController reset];
         [m_render2DViewController reset];
@@ -152,11 +149,6 @@
 -(void) clearDataCache:(NSNotification*)notification
 {
     m_sceneLoader->clearCache();
-}
-
--(void) cachingEnabledChanged:(NSNotification*)notification
-{
-    m_sceneLoader->setCachingEnabled([[NSUserDefaults standardUserDefaults] boolForKey:@"CachingEnabled"]);
 }
 
 @end

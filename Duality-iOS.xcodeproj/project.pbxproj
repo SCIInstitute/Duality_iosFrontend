@@ -172,6 +172,7 @@
 /* Begin PBXFileReference section */
 		630BB4CB1D181C45004EC28E /* DataCache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataCache.cpp; sourceTree = "<group>"; };
 		630BB4CC1D181C45004EC28E /* DataCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCache.h; sourceTree = "<group>"; };
+		631A73E41D3789FF00C47EBB /* Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		6329F6491D0D8EE500CAD1F8 /* VolumeRenderer2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VolumeRenderer2D.cpp; sourceTree = "<group>"; };
 		6329F64A1D0D8EE500CAD1F8 /* VolumeRenderer2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeRenderer2D.h; sourceTree = "<group>"; };
 		633DC1481D14B24400E02C3B /* InputVariable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputVariable.h; sourceTree = "<group>"; };
@@ -635,6 +636,7 @@
 				8EC42DD21CFDE68F00E931F0 /* AbstractIO.cpp */,
 				8EC42DD31CFDE68F00E931F0 /* AbstractIO.h */,
 				8EC42DD51CFDE68F00E931F0 /* BoundingBox.h */,
+				631A73E41D3789FF00C47EBB /* Color.h */,
 				8EC42DD61CFDE68F00E931F0 /* Communication.cpp */,
 				8EC42DD71CFDE68F00E931F0 /* Communication.h */,
 				8EC42DD81CFDE68F00E931F0 /* CoordinateSystem.cpp */,

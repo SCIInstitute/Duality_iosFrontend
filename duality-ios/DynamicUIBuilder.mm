@@ -101,14 +101,14 @@ UIStackView* buildFloatVariableStackView(const std::string& nodeName, const Floa
         nameLabel.text = [NSString stringWithUTF8String:var.name.c_str()];
     }
     nameLabel.textColor = [UIColor whiteColor];
-    nameLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+    nameLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8];
     [stackView addArrangedSubview:nameLabel];
     
     UILabel* valueLabel = [[UILabel alloc] init];
     valueLabel.text = [NSString stringWithFormat:@"%.02f", var.value];
     valueLabel.textAlignment = NSTextAlignment::NSTextAlignmentRight;
     valueLabel.textColor = [UIColor whiteColor];
-    valueLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+    valueLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8];
     [valueLabel.widthAnchor constraintEqualToConstant:80.0].active = true;
     [stackView addArrangedSubview:valueLabel];
     

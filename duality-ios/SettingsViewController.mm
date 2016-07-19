@@ -67,7 +67,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView
   numberOfRowsInSection:(NSInteger)section {
-  return 6;
+  return 7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -119,6 +119,14 @@
       break;
   }
   case 4: {
+      cell.textLabel.text = @"Use Slice Indices";
+      UISwitch *sw = [[UISwitch alloc] init];
+      [sw setOn:m_settings->useSliceIndices()];
+      [sw addTarget:self action:@selector(useSliceIndicesChanged:) forControlEvents:UIControlEventValueChanged];
+      cell.accessoryView = sw;
+      break;
+  }
+  case 5: {
     cell.textLabel.text = @"Caching Enabled";
     UISwitch *sw = [[UISwitch alloc] init];
       bool o = m_settings->cachingEnabled();
@@ -127,7 +135,7 @@
     cell.accessoryView = sw;
     break;
   }
-  case 5: {
+  case 6: {
     cell.textLabel.text = @"Clear Scene Cache";
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [button setTitle:@"Clear Scene Cache" forState:UIControlStateNormal];
@@ -160,6 +168,11 @@
 - (void)anatomicalTermsChanged:(id)sender {
   UISwitch* sw = (UISwitch *)sender;
   m_settings->setAnatomicalTerms([sw isOn]);
+}
+
+- (void)useSliceIndicesChanged:(id)sender {
+    UISwitch* sw = (UISwitch *)sender;
+    m_settings->setUseSliceIndices([sw isOn]);
 }
 
 - (void)backgroundColorChanged:(id)sender {

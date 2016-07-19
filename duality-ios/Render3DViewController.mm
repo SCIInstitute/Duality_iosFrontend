@@ -82,6 +82,7 @@
                 [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
                 [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
             }
+            m_sceneController.lock()->setRedrawRequired();
         }
     }
     catch(const std::exception& err) {

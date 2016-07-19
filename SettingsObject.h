@@ -16,4 +16,7 @@ public:
     
     std::array<float, 3> backgroundColor() const override;
     void setBackgroundColor(const std::array<float, 3>& color) override;
+    
+    bool useSliceIndices() const override;
+    void setUseSliceIndices(bool use) override;
 };

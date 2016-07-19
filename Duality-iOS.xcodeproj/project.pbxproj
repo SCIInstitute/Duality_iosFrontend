@@ -16,6 +16,9 @@
 		637A2C651D08752B00B4EE84 /* I3M.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 637A2C611D08752B00B4EE84 /* I3M.cpp */; };
 		637A2C661D08752B00B4EE84 /* VolumeDataset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 637A2C631D08752B00B4EE84 /* VolumeDataset.cpp */; };
 		63A007CA1D2D5F360010B22D /* InterleavingRenderer3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63A007C81D2D5F360010B22D /* InterleavingRenderer3D.cpp */; };
+		63B0E9081D3E4FC500A79EAC /* SliderParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63B0E9071D3E4FC500A79EAC /* SliderParameter.cpp */; };
+		63B0E90A1D3E564C00A79EAC /* BoundingBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63B0E9091D3E564C00A79EAC /* BoundingBox.cpp */; };
+		63B0E90D1D3E603800A79EAC /* SliderParameterCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63B0E90C1D3E603800A79EAC /* SliderParameterCalculator.cpp */; };
 		63C71E031D19BABA00E17EEE /* Compression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63C71E021D19BAB900E17EEE /* Compression.cpp */; };
 		63C71E181D19BD1200E17EEE /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 63C71E071D19BD1200E17EEE /* CMakeLists.txt */; };
 		63C71E191D19BD1200E17EEE /* NEWS in Resources */ = {isa = PBXBuildFile; fileRef = 63C71E0B1D19BD1200E17EEE /* NEWS */; };
@@ -190,6 +193,11 @@
 		63A007C71D2D5E2F0010B22D /* RenderableConcept.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderableConcept.h; sourceTree = "<group>"; };
 		63A007C81D2D5F360010B22D /* InterleavingRenderer3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InterleavingRenderer3D.cpp; sourceTree = "<group>"; };
 		63A007C91D2D5F360010B22D /* InterleavingRenderer3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterleavingRenderer3D.h; sourceTree = "<group>"; };
+		63B0E9071D3E4FC500A79EAC /* SliderParameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SliderParameter.cpp; sourceTree = "<group>"; };
+		63B0E9091D3E564C00A79EAC /* BoundingBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoundingBox.cpp; sourceTree = "<group>"; };
+		63B0E90B1D3E602700A79EAC /* SliderParameterCalculator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SliderParameterCalculator.h; sourceTree = "<group>"; };
+		63B0E90C1D3E603800A79EAC /* SliderParameterCalculator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SliderParameterCalculator.cpp; sourceTree = "<group>"; };
+		63B0E90E1D3E857F00A79EAC /* SliderParameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SliderParameter.h; sourceTree = "<group>"; };
 		63C71E011D19BAA800E17EEE /* Compression.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Compression.h; sourceTree = "<group>"; };
 		63C71E021D19BAB900E17EEE /* Compression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Compression.cpp; sourceTree = "<group>"; };
 		63C71E071D19BD1200E17EEE /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
@@ -606,6 +614,7 @@
 				8EC42DC91CFDE68F00E931F0 /* SceneMetadata.h */,
 				8EC42DCA1CFDE68F00E931F0 /* ScreenInfo.h */,
 				633DC1481D14B24400E02C3B /* InputVariable.h */,
+				63B0E90E1D3E857F00A79EAC /* SliderParameter.h */,
 				63FCC31D1D342B3E000A8D3B /* Settings.h */,
 			);
 			path = duality;
@@ -636,6 +645,7 @@
 				8EC42DD21CFDE68F00E931F0 /* AbstractIO.cpp */,
 				8EC42DD31CFDE68F00E931F0 /* AbstractIO.h */,
 				8EC42DD51CFDE68F00E931F0 /* BoundingBox.h */,
+				63B0E9091D3E564C00A79EAC /* BoundingBox.cpp */,
 				631A73E41D3789FF00C47EBB /* Color.h */,
 				8EC42DD61CFDE68F00E931F0 /* Communication.cpp */,
 				8EC42DD71CFDE68F00E931F0 /* Communication.h */,
@@ -681,6 +691,9 @@
 				8EC42DF41CFDE68F00E931F0 /* RenderDispatcher3D.h */,
 				8EC42DF51CFDE68F00E931F0 /* RenderParameters2D.cpp */,
 				8EC42DF61CFDE68F00E931F0 /* RenderParameters2D.h */,
+				63B0E9071D3E4FC500A79EAC /* SliderParameter.cpp */,
+				63B0E90B1D3E602700A79EAC /* SliderParameterCalculator.h */,
+				63B0E90C1D3E603800A79EAC /* SliderParameterCalculator.cpp */,
 				8EC42DF71CFDE68F00E931F0 /* RenderParameters3D.cpp */,
 				8EC42DF81CFDE68F00E931F0 /* RenderParameters3D.h */,
 				8EC42DF91CFDE68F00E931F0 /* Scene.cpp */,
@@ -1383,6 +1396,7 @@
 				8EC42E291CFDE68F00E931F0 /* CoordinateSystem.cpp in Sources */,
 				8EC42E2E1CFDE68F00E931F0 /* GeometryRenderer2D.cpp in Sources */,
 				8EE8956A1CF6483B00740718 /* FramingConnection.cpp in Sources */,
+				63B0E90D1D3E603800A79EAC /* SliderParameterCalculator.cpp in Sources */,
 				8EC42E391CFDE68F00E931F0 /* Scene.cpp in Sources */,
 				8EC42E2A1CFDE68F00E931F0 /* Dataset.cpp in Sources */,
 				8EC42E2C1CFDE68F00E931F0 /* G3D.cpp in Sources */,
@@ -1406,6 +1420,7 @@
 				8EC42E2B1CFDE68F00E931F0 /* DownloadProvider.cpp in Sources */,
 				637A2C661D08752B00B4EE84 /* VolumeDataset.cpp in Sources */,
 				8EE895761CF6483B00740718 /* RpcClient.cpp in Sources */,
+				63B0E90A1D3E564C00A79EAC /* BoundingBox.cpp in Sources */,
 				8EE895771CF6483B00740718 /* ValueType.cpp in Sources */,
 				8EC42E2D1CFDE68F00E931F0 /* GeometryDataset.cpp in Sources */,
 				8EE895791CF6483B00740718 /* QueueConnectionAcceptor.cpp in Sources */,
@@ -1441,6 +1456,7 @@
 				63C9EF8A1D1037B000F6393D /* GeometryNode.cpp in Sources */,
 				8EE8957E1CF6483B00740718 /* TCPConnectionAcceptor.cpp in Sources */,
 				8EC42E4B1CFDE68F00E931F0 /* MultiplexOut.cpp in Sources */,
+				63B0E9081D3E4FC500A79EAC /* SliderParameter.cpp in Sources */,
 				8EE895701CF6483B00740718 /* LoopbackConnectionSpawner.cpp in Sources */,
 				8EE8955E1CF6483B00740718 /* ConsoleLog.cpp in Sources */,
 				8EE895591CF6483B00740718 /* Thread.cpp in Sources */,

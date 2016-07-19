@@ -99,6 +99,7 @@
             if (m_sceneController.expired()) {
                 m_sceneController = m_loader->sceneController2D();
             }
+            
             m_sceneController.lock()->updateScreenInfo([self screenInfo]);
             auto variableMap = m_sceneController.lock()->variableMap();
             if (!variableMap.empty()) {
@@ -114,11 +115,20 @@
                 [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
                 [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
             }
-            auto minMaxForAxis = m_sceneController.lock()->minMaxForCurrentAxis();
-            m_sliceSelector.minimumValue = minMaxForAxis.first;
-            m_sliceSelector.maximumValue = minMaxForAxis.second;
-            m_sliceSelector.value = m_sceneController.lock()->slice();
-            m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
+            
+            if (m_sceneController.lock()->supportsSlices()) {
+                auto numSlices = m_sceneController.lock()->numSlicesForCurrentAxis();
+                m_sliceSelector.minimumValue = 0;
+                m_sliceSelector.maximumValue = numSlices;
+                m_sliceSelector.value = m_sceneController.lock()->sliderParameter().slice();
+                m_sliceLabel.text = [NSString stringWithFormat:@"%i", m_sceneController.lock()->sliderParameter().slice()];
+            } else {
+                auto minMaxForAxis = m_sceneController.lock()->boundsForCurrentAxis();
+                m_sliceSelector.minimumValue = minMaxForAxis.first;
+                m_sliceSelector.maximumValue = minMaxForAxis.second;
+                m_sliceSelector.value = m_sceneController.lock()->sliderParameter().depth();
+                m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
+            }
             
             SceneController2D::AxisLabelMode mode = m_loader->settings()->anatomicalTerms()
                 ? SceneController2D::AxisLabelMode::Anatomical
@@ -130,6 +140,8 @@
             [m_sliceSelector setHidden:false];
             [m_sliceLabel setHidden:false];
             [m_toggleAxisButton setHidden:false];
+            
+            m_sceneController.lock()->setRedrawRequired();
         }
     }
     catch(const std::exception& err) {
@@ -159,13 +171,19 @@
 
 -(void) setSlice
 {
-    std::shared_ptr<SceneController2D>(m_sceneController)->setSlice(m_sliceSelector.value);
-    m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
+    if (m_sceneController.lock()->supportsSlices()) {
+        int slice = std::min<int>(roundf(m_sliceSelector.value), m_sceneController.lock()->numSlicesForCurrentAxis() - 1);
+        m_sceneController.lock()->setSlice(slice);
+        m_sliceLabel.text = [NSString stringWithFormat:@"%i", slice];
+    }else {
+        m_sceneController.lock()->setDepth(m_sliceSelector.value);
+        m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
+    }
 }
 
 -(void) toggleAxis
 {
-    std::shared_ptr<SceneController2D>(m_sceneController)->toggleAxis();
+    m_sceneController.lock()->toggleAxis();
 
     // set slice to value that corresponds to the current slider position
     const float oldMin = m_sliceSelector.minimumValue;
@@ -173,16 +191,26 @@
     const float oldDistance = oldMax - oldMin;
     const float oldRelValue = m_sliceSelector.value - oldMin;
     const float epsilon = 0.000001f;
-    const auto minMaxForAxis = m_sceneController.lock()->minMaxForCurrentAxis();
-    const float newDistance = minMaxForAxis.second - minMaxForAxis.first;
-    if (std::abs(oldDistance) > epsilon && std::abs(newDistance) > epsilon) {
-        const float amount = oldRelValue / oldDistance;
-        m_sliceSelector.value = (amount * newDistance) + minMaxForAxis.first;
-        m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
-        std::shared_ptr<SceneController2D>(m_sceneController)->setSlice(m_sliceSelector.value);
+    const float amount = oldRelValue / oldDistance;
+    if (m_sceneController.lock()->supportsSlices()) {
+        auto numSlices = m_sceneController.lock()->numSlicesForCurrentAxis();
+        int slice = std::min<int>(roundf(amount * numSlices), numSlices - 1);
+        m_sliceSelector.minimumValue = 0;
+        m_sliceSelector.maximumValue = numSlices;
+        m_sliceSelector.value = slice;
+        m_sliceLabel.text = [NSString stringWithFormat:@"%i", slice];
+        m_sceneController.lock()->setSlice(slice);
+    } else {
+        const auto minMaxForAxis = m_sceneController.lock()->boundsForCurrentAxis();
+        m_sliceSelector.minimumValue = minMaxForAxis.first;
+        m_sliceSelector.maximumValue = minMaxForAxis.second;
+        const float newDistance = minMaxForAxis.second - minMaxForAxis.first;
+        if (std::abs(oldDistance) > epsilon && std::abs(newDistance) > epsilon) {
+            m_sliceSelector.value = (amount * newDistance) + minMaxForAxis.first;
+            m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
+            m_sceneController.lock()->setDepth(m_sliceSelector.value);
+        }
     }
-    m_sliceSelector.minimumValue = minMaxForAxis.first;
-    m_sliceSelector.maximumValue = minMaxForAxis.second;
 
     SceneController2D::AxisLabelMode mode = [[NSUserDefaults standardUserDefaults] boolForKey:@"AnatomicalTerms"] ? SceneController2D::AxisLabelMode::Anatomical : SceneController2D::AxisLabelMode::Mathematical;
     NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController.lock()->labelForCurrentAxis(mode).c_str()];

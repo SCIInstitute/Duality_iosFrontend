@@ -49,3 +49,11 @@ void SettingsObject::setBackgroundColor(const std::array<float, 3>& color) {
     NSArray<NSNumber*>* arr = [NSArray arrayWithObjects:r, g, b, nil];
     [[NSUserDefaults standardUserDefaults] setObject:arr forKey:@"BackgroundColor"];
 }
+
+bool SettingsObject::useSliceIndices() const {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"UseSliceIndices"];
+}
+
+void SettingsObject::setUseSliceIndices(bool use) {
+    [[NSUserDefaults standardUserDefaults] setBool:use forKey:@"UseSliceIndices"];
+}

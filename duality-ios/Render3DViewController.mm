@@ -68,7 +68,10 @@
             if (m_sceneController.expired()) {
                 m_sceneController = m_loader->sceneController3D();
             }
+            
             m_sceneController.lock()->updateScreenInfo([self screenInfo]);
+            m_sceneController.lock()->updateDatasets();
+            
             auto variableMap = m_sceneController.lock()->variableMap();
             if (!variableMap.empty()) {
                 m_dynamicUI = buildStackViewFromVariableMap(variableMap,

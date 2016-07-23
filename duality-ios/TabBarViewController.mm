@@ -22,7 +22,7 @@
         NSLog(@"Failed to create OpenGLES context");
     }
     
-    m_render3DViewController = [[Render3DViewController alloc] initWithSceneLoader:m_sceneLoader.get()];
+    m_render3DViewController = [[Render3DViewController alloc] init];
     m_render3DViewController.context = context;
     m_render2DViewController = [[Render2DViewController alloc] initWithSceneLoader:m_sceneLoader.get()];
     m_render2DViewController.context = context;
@@ -75,6 +75,42 @@
 
 - (BOOL)tabBarController:(UITabBarController*)tabBarController shouldSelectViewController:(UIViewController*)viewController
 {
+    if (((UINavigationController*)viewController).tabBarItem.tag == 0) {
+        if (m_sceneLoader->isSceneLoaded()) {
+            std::weak_ptr<SceneController3D> controller = m_sceneLoader->sceneController3D();
+            
+            [m_render3DViewController reset];
+            
+            UIProgressView* progress = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+            progress.frame = CGRectMake(100, 100, 200, 50);
+            UILabel* progressLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 170, 200, 50)];
+            progressLabel.textColor = [UIColor whiteColor];
+            [self.view addSubview:progress];
+            [self.view addSubview:progressLabel];
+            
+            controller.lock()->setUpdateDatasetCallback(
+                [=](int current, int total, const std::string& name) {
+                       dispatch_async(dispatch_get_main_queue(), ^{
+                           float prog = (static_cast<float>(current) / static_cast<float>(total));
+                           [progress setProgress:prog animated:true];
+                           [progressLabel setText:[NSString stringWithFormat:@"%s (%d / %d)", name.c_str(), current + 1, total]];
+                       });
+                   });
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                controller.lock()->updateDatasets();
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [progress removeFromSuperview];
+                    [progressLabel removeFromSuperview];
+                    controller.lock()->initializeDatasets();
+                    [m_render3DViewController setSceneController:controller];
+                    [m_render3DViewController setup];
+                });
+            });
+        }
+        return YES;
+    }
+    
     if (((UINavigationController*)viewController).tabBarItem.tag == 4) {
         std::string url = m_sceneLoader->webViewURL();
         NSURL* nsurl = [NSURL URLWithString:[NSString stringWithUTF8String:url.data()]];

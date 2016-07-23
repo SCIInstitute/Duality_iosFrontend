@@ -100,8 +100,8 @@
                 m_sceneController = m_loader->sceneController2D();
             }
             
-            m_sceneController.lock()->updateScreenInfo([self screenInfo]);
             m_sceneController.lock()->updateDatasets();
+            m_sceneController.lock()->updateScreenInfo([self screenInfo]);
             
             auto variableMap = m_sceneController.lock()->variableMap();
             if (!variableMap.empty()) {

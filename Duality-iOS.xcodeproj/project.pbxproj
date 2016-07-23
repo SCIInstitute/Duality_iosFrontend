@@ -39,7 +39,6 @@
 		8EC42E261CFDE68F00E931F0 /* AbstractIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EC42DD21CFDE68F00E931F0 /* AbstractIO.cpp */; };
 		8EC42E281CFDE68F00E931F0 /* Communication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EC42DD61CFDE68F00E931F0 /* Communication.cpp */; };
 		8EC42E291CFDE68F00E931F0 /* CoordinateSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EC42DD81CFDE68F00E931F0 /* CoordinateSystem.cpp */; };
-		8EC42E2A1CFDE68F00E931F0 /* Dataset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EC42DDA1CFDE68F00E931F0 /* Dataset.cpp */; };
 		8EC42E2B1CFDE68F00E931F0 /* DownloadProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EC42DDD1CFDE68F00E931F0 /* DownloadProvider.cpp */; };
 		8EC42E2C1CFDE68F00E931F0 /* G3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EC42DDF1CFDE68F00E931F0 /* G3D.cpp */; };
 		8EC42E2D1CFDE68F00E931F0 /* GeometryDataset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EC42DE11CFDE68F00E931F0 /* GeometryDataset.cpp */; };
@@ -245,8 +244,6 @@
 		8EC42DD71CFDE68F00E931F0 /* Communication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Communication.h; sourceTree = "<group>"; };
 		8EC42DD81CFDE68F00E931F0 /* CoordinateSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoordinateSystem.cpp; sourceTree = "<group>"; };
 		8EC42DD91CFDE68F00E931F0 /* DataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataProvider.h; sourceTree = "<group>"; };
-		8EC42DDA1CFDE68F00E931F0 /* Dataset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dataset.cpp; sourceTree = "<group>"; };
-		8EC42DDB1CFDE68F00E931F0 /* Dataset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dataset.h; sourceTree = "<group>"; };
 		8EC42DDD1CFDE68F00E931F0 /* DownloadProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DownloadProvider.cpp; sourceTree = "<group>"; };
 		8EC42DDE1CFDE68F00E931F0 /* DownloadProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadProvider.h; sourceTree = "<group>"; };
 		8EC42DDF1CFDE68F00E931F0 /* G3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = G3D.cpp; sourceTree = "<group>"; };
@@ -653,8 +650,6 @@
 				8EC42DD91CFDE68F00E931F0 /* DataProvider.h */,
 				630BB4CB1D181C45004EC28E /* DataCache.cpp */,
 				630BB4CC1D181C45004EC28E /* DataCache.h */,
-				8EC42DDA1CFDE68F00E931F0 /* Dataset.cpp */,
-				8EC42DDB1CFDE68F00E931F0 /* Dataset.h */,
 				8EC42DDD1CFDE68F00E931F0 /* DownloadProvider.cpp */,
 				8EC42DDE1CFDE68F00E931F0 /* DownloadProvider.h */,
 				8EC42DDF1CFDE68F00E931F0 /* G3D.cpp */,
@@ -1398,7 +1393,6 @@
 				8EE8956A1CF6483B00740718 /* FramingConnection.cpp in Sources */,
 				63B0E90D1D3E603800A79EAC /* SliderParameterCalculator.cpp in Sources */,
 				8EC42E391CFDE68F00E931F0 /* Scene.cpp in Sources */,
-				8EC42E2A1CFDE68F00E931F0 /* Dataset.cpp in Sources */,
 				8EC42E2C1CFDE68F00E931F0 /* G3D.cpp in Sources */,
 				8EE892251CF6481900740718 /* TabBarViewController.mm in Sources */,
 				63C71E1A1D19BD1200E17EEE /* README.md in Sources */,

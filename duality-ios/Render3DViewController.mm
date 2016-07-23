@@ -11,15 +11,15 @@
 #include "src/IVDA/GLInclude.h" // FIXME: move file
 #include "src/IVDA/iOS.h" // FIXME: move file
 
+#include <thread>
+
 @implementation Render3DViewController
 
 @synthesize context = _context;
 
--(id) initWithSceneLoader:(SceneLoader*)loader
+-(void) setSceneController:(std::weak_ptr<SceneController3D>)controller
 {
-    self = [super init];
-    m_loader = loader;
-    return self;
+    m_sceneController = controller;
 }
 
 - (ScreenInfo)screenInfo
@@ -59,41 +59,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redrawGL) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
--(void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self reset];
-    try {
-        if (m_loader->isSceneLoaded()) {
-            if (m_sceneController.expired()) {
-                m_sceneController = m_loader->sceneController3D();
-            }
-            
-            m_sceneController.lock()->updateScreenInfo([self screenInfo]);
-            m_sceneController.lock()->updateDatasets();
-            
-            auto variableMap = m_sceneController.lock()->variableMap();
-            if (!variableMap.empty()) {
-                m_dynamicUI = buildStackViewFromVariableMap(variableMap,
-                    [=](std::string objectName, std::string variableName, float value) {
-                        m_sceneController.lock()->setVariable(objectName, variableName, value);
-                    },
-                    [=](std::string objectName, std::string variableName, std::string value) {
-                        m_sceneController.lock()->setVariable(objectName, variableName, value);
-                    });            m_dynamicUI.translatesAutoresizingMaskIntoConstraints = false;
-                [self.view addSubview:m_dynamicUI];
-                [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
-                [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
-            }
-            m_sceneController.lock()->setRedrawRequired();
-        }
-    }
-    catch(const std::exception& err) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
-    }
-}
-
-- (void)viewDidLayoutSubviews
+- (void) viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     m_arcBall.SetWindowSize(uint32_t(self.view.bounds.size.width), uint32_t(self.view.bounds.size.height));
@@ -105,6 +71,33 @@
         [m_dynamicUI removeFromSuperview];
     }
     glClear(GL_COLOR_BUFFER_BIT);
+}
+
+-(void) setup
+{
+    
+    try {
+        if (!m_sceneController.expired()) {
+            m_sceneController.lock()->updateScreenInfo([self screenInfo]);
+            auto variableMap = m_sceneController.lock()->variableMap();
+            if (!variableMap.empty()) {
+                m_dynamicUI = buildStackViewFromVariableMap(variableMap,
+                                                            [=](std::string objectName, std::string variableName, float value) {
+                                                                m_sceneController.lock()->setVariable(objectName, variableName, value);
+                                                            },
+                                                            [=](std::string objectName, std::string variableName, std::string value) {
+                                                                m_sceneController.lock()->setVariable(objectName, variableName, value);
+                                                            });            m_dynamicUI.translatesAutoresizingMaskIntoConstraints = false;
+                [self.view addSubview:m_dynamicUI];
+                [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
+                [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
+            }
+            m_sceneController.lock()->setRedrawRequired();
+        }
+    }
+    catch(const std::exception& err) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
+    }
 }
 
 -(void) redrawGL

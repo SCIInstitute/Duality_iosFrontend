@@ -14,17 +14,19 @@
 @interface Render3DViewController : GLKViewController
 {
 @protected
-    SceneLoader* m_loader;
     std::weak_ptr<SceneController3D> m_sceneController;
     NSUInteger m_numFingersDown;
     IVDA::Vec2f m_touchPos1;
     IVDA::Vec2f m_touchPos2;
     IVDA::ArcBall m_arcBall;
     UIStackView* m_dynamicUI;
+    UIProgressView* m_updateProgress;
+    bool m_initialized;
 }
 
--(id) initWithSceneLoader:(SceneLoader*)loader;
+-(void) setSceneController:(std::weak_ptr<SceneController3D>)controller;
 -(void) reset;
+-(void) setup;
 
 @property (nonatomic, retain) EAGLContext *context;
 

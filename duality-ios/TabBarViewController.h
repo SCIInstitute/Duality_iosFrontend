@@ -20,6 +20,10 @@ class SceneLoader;
     SelectSceneViewController* m_selectSceneViewController;
     SettingsViewController* m_settingsViewController;
     SFSafariViewController* m_webViewController;
+    
+    UILabel* m_loadingLabel;
+    UILabel* m_progressLabel;
+    UIProgressView* m_progress;
 }
 
 - (id)init;

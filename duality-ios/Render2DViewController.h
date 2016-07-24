@@ -17,8 +17,7 @@ class RenderDispatcher2D;
 @interface Render2DViewController : GLKViewController
 {
 @protected
-    SceneLoader* m_loader;
-    std::weak_ptr<SceneController2D> m_sceneController;
+    std::shared_ptr<SceneController2D> m_sceneController;
     NSUInteger m_numFingersDown;
     IVDA::Vec2f m_touchPos1;
     IVDA::Vec2f m_touchPos2;
@@ -28,8 +27,9 @@ class RenderDispatcher2D;
     UIButton* m_toggleAxisButton;
 }
 
--(id) initWithSceneLoader:(SceneLoader*)loader;
+-(void) setSceneController:(std::shared_ptr<SceneController2D>)controller;
 -(void) reset;
+-(void) setup;
 
 @property (nonatomic, retain) EAGLContext *context;
 

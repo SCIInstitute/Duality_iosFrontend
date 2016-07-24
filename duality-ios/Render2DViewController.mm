@@ -16,11 +16,9 @@
 
 @synthesize context = _context;
 
--(id) initWithSceneLoader:(SceneLoader*)loader
+-(void) setSceneController:(std::shared_ptr<SceneController2D>)controller
 {
-    self = [super init];
-    m_loader = loader;
-    return self;
+    m_sceneController = controller;
 }
 
 - (ScreenInfo)screenInfo
@@ -90,52 +88,45 @@
     m_numFingersDown = 0;
 }
 
--(void) viewWillAppear:(BOOL)animated
+-(void) setup
 {
-    [super viewWillAppear:animated];
-    [self reset];
-    try {
-        if (m_loader->isSceneLoaded()) {
-            if (m_sceneController.expired()) {
-                m_sceneController = m_loader->sceneController2D();
-            }
+    if (m_sceneController != nullptr) {
+        try {
+            m_sceneController->updateScreenInfo([self screenInfo]);
             
-            m_sceneController.lock()->updateDatasets();
-            m_sceneController.lock()->updateScreenInfo([self screenInfo]);
-            
-            auto variableMap = m_sceneController.lock()->variableMap();
+            auto variableMap = m_sceneController->variableMap();
             if (!variableMap.empty()) {
                 m_dynamicUI = buildStackViewFromVariableMap(variableMap,
-                    [=](std::string objectName, std::string variableName, float value) {
-                        m_sceneController.lock()->setVariable(objectName, variableName, value);
-                    },
-                    [=](std::string objectName, std::string variableName, std::string value) {
-                        m_sceneController.lock()->setVariable(objectName, variableName, value);
-                    });
+                                                            [=](std::string objectName, std::string variableName, float value) {
+                                                                m_sceneController->setVariable(objectName, variableName, value);
+                                                            },
+                                                            [=](std::string objectName, std::string variableName, std::string value) {
+                                                                m_sceneController->setVariable(objectName, variableName, value);
+                                                            });
                 m_dynamicUI.translatesAutoresizingMaskIntoConstraints = false;
                 [self.view addSubview:m_dynamicUI];
                 [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
                 [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
             }
             
-            if (m_sceneController.lock()->supportsSlices()) {
-                auto numSlices = m_sceneController.lock()->numSlicesForCurrentAxis();
+            if (m_sceneController->supportsSlices()) {
+                auto numSlices = m_sceneController->numSlicesForCurrentAxis();
                 m_sliceSelector.minimumValue = 0;
                 m_sliceSelector.maximumValue = numSlices;
-                m_sliceSelector.value = m_sceneController.lock()->sliderParameter().slice();
-                m_sliceLabel.text = [NSString stringWithFormat:@"%i", m_sceneController.lock()->sliderParameter().slice()];
+                m_sliceSelector.value = m_sceneController->sliderParameter().slice();
+                m_sliceLabel.text = [NSString stringWithFormat:@"%i", m_sceneController->sliderParameter().slice()];
             } else {
-                auto minMaxForAxis = m_sceneController.lock()->boundsForCurrentAxis();
+                auto minMaxForAxis = m_sceneController->boundsForCurrentAxis();
                 m_sliceSelector.minimumValue = minMaxForAxis.first;
                 m_sliceSelector.maximumValue = minMaxForAxis.second;
-                m_sliceSelector.value = m_sceneController.lock()->sliderParameter().depth();
+                m_sliceSelector.value = m_sceneController->sliderParameter().depth();
                 m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
             }
             
-            SceneController2D::AxisLabelMode mode = m_loader->settings()->anatomicalTerms()
+            SceneController2D::AxisLabelMode mode = m_sceneController->settings()->anatomicalTerms()
                 ? SceneController2D::AxisLabelMode::Anatomical
                 : SceneController2D::AxisLabelMode::Mathematical;
-            NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController.lock()->labelForCurrentAxis(mode).c_str()];
+            NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController->labelForCurrentAxis(mode).c_str()];
             [m_toggleAxisButton setTitle:axisLabel forState:UIControlStateNormal];
             
             // unhide widgets after everything else has been setup successfully
@@ -143,16 +134,18 @@
             [m_sliceLabel setHidden:false];
             [m_toggleAxisButton setHidden:false];
             
-            m_sceneController.lock()->setRedrawRequired();
+            m_sceneController->setRedrawRequired();
+
         }
-    }
-    catch(const std::exception& err) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
+        catch(const std::exception& err) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
+        }
     }
 }
 
 -(void) reset
 {
+    m_sceneController = nullptr;
     [m_sliceSelector setHidden:true];
     [m_sliceLabel setHidden:true];
     [m_toggleAxisButton setHidden:true];
@@ -166,26 +159,26 @@
 
 -(void) redrawGL
 {
-    if (!m_sceneController.expired()) {
-        m_sceneController.lock()->setRedrawRequired();
+    if (m_sceneController != nullptr) {
+        m_sceneController->setRedrawRequired();
     }
 }
 
 -(void) setSlice
 {
-    if (m_sceneController.lock()->supportsSlices()) {
-        int slice = std::min<int>(roundf(m_sliceSelector.value), m_sceneController.lock()->numSlicesForCurrentAxis() - 1);
-        m_sceneController.lock()->setSlice(slice);
+    if (m_sceneController->supportsSlices()) {
+        int slice = std::min<int>(roundf(m_sliceSelector.value), m_sceneController->numSlicesForCurrentAxis() - 1);
+        m_sceneController->setSlice(slice);
         m_sliceLabel.text = [NSString stringWithFormat:@"%i", slice];
     }else {
-        m_sceneController.lock()->setDepth(m_sliceSelector.value);
+        m_sceneController->setDepth(m_sliceSelector.value);
         m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
     }
 }
 
 -(void) toggleAxis
 {
-    m_sceneController.lock()->toggleAxis();
+    m_sceneController->toggleAxis();
 
     // set slice to value that corresponds to the current slider position
     const float oldMin = m_sliceSelector.minimumValue;
@@ -194,36 +187,36 @@
     const float oldRelValue = m_sliceSelector.value - oldMin;
     const float epsilon = 0.000001f;
     const float amount = oldRelValue / oldDistance;
-    if (m_sceneController.lock()->supportsSlices()) {
-        auto numSlices = m_sceneController.lock()->numSlicesForCurrentAxis();
+    if (m_sceneController->supportsSlices()) {
+        auto numSlices = m_sceneController->numSlicesForCurrentAxis();
         int slice = std::min<int>(roundf(amount * numSlices), numSlices - 1);
         m_sliceSelector.minimumValue = 0;
         m_sliceSelector.maximumValue = numSlices;
         m_sliceSelector.value = slice;
         m_sliceLabel.text = [NSString stringWithFormat:@"%i", slice];
-        m_sceneController.lock()->setSlice(slice);
+        m_sceneController->setSlice(slice);
     } else {
-        const auto minMaxForAxis = m_sceneController.lock()->boundsForCurrentAxis();
+        const auto minMaxForAxis = m_sceneController->boundsForCurrentAxis();
         m_sliceSelector.minimumValue = minMaxForAxis.first;
         m_sliceSelector.maximumValue = minMaxForAxis.second;
         const float newDistance = minMaxForAxis.second - minMaxForAxis.first;
         if (std::abs(oldDistance) > epsilon && std::abs(newDistance) > epsilon) {
             m_sliceSelector.value = (amount * newDistance) + minMaxForAxis.first;
             m_sliceLabel.text = [NSString stringWithFormat:@"%.4f", m_sliceSelector.value];
-            m_sceneController.lock()->setDepth(m_sliceSelector.value);
+            m_sceneController->setDepth(m_sliceSelector.value);
         }
     }
 
     SceneController2D::AxisLabelMode mode = [[NSUserDefaults standardUserDefaults] boolForKey:@"AnatomicalTerms"] ? SceneController2D::AxisLabelMode::Anatomical : SceneController2D::AxisLabelMode::Mathematical;
-    NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController.lock()->labelForCurrentAxis(mode).c_str()];
+    NSString* axisLabel = [NSString stringWithUTF8String:m_sceneController->labelForCurrentAxis(mode).c_str()];
     [m_toggleAxisButton setTitle:axisLabel forState:UIControlStateNormal];
 }
 
 // Drawing
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    if (!m_sceneController.expired()) {
-        m_sceneController.lock()->render();
+    if (m_sceneController != nullptr) {
+        m_sceneController->render();
     }
     [view bindDrawable];
 }
@@ -232,7 +225,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
-    if (m_sceneController.expired()) {
+    if (m_sceneController == nullptr) {
         return;
     }
     
@@ -260,7 +253,7 @@
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesMoved:touches withEvent:event];
-    if (m_sceneController.expired()) {
+    if (m_sceneController == nullptr) {
         return;
     }
     
@@ -314,7 +307,7 @@
 -(void) transformOneTouch:(const IVDA::Vec2f&)touchPos
 {
     IVDA::Vec2f translation(touchPos.x - m_touchPos1.x, -(touchPos.y - m_touchPos1.y));
-    m_sceneController.lock()->addTranslation(translation);
+    m_sceneController->addTranslation(translation);
     m_touchPos1 = touchPos;
 }
 
@@ -324,7 +317,7 @@
     IVDA::Vec2f d2(touchPos1.x - touchPos2.x, touchPos1.y - touchPos2.y);
     float l1 = d1.length();
     float l2 = d2.length();
-    m_sceneController.lock()->addZoom(l2-l1);
+    m_sceneController->addZoom(l2-l1);
     
     float angle = 0;
     if (l1 > 0 && l2 > 0) {
@@ -332,7 +325,7 @@
         d2 /= l2;
         angle = atan2(d1.y,d1.x) - atan2(d2.y,d2.x);
     }
-    m_sceneController.lock()->addRotation(angle);
+    m_sceneController->addRotation(angle);
 }
 
 @end

@@ -17,7 +17,7 @@
 
 @synthesize context = _context;
 
--(void) setSceneController:(std::weak_ptr<SceneController3D>)controller
+-(void) setSceneController:(std::shared_ptr<SceneController3D>)controller
 {
     m_sceneController = controller;
 }
@@ -67,6 +67,7 @@
 
 -(void) reset
 {
+    m_sceneController = nullptr;
     if (m_dynamicUI) {
         [m_dynamicUI removeFromSuperview];
     }
@@ -75,43 +76,42 @@
 
 -(void) setup
 {
-    
-    try {
-        if (!m_sceneController.expired()) {
-            m_sceneController.lock()->updateScreenInfo([self screenInfo]);
-            auto variableMap = m_sceneController.lock()->variableMap();
+    if (m_sceneController != nullptr) {
+        try {
+            m_sceneController->updateScreenInfo([self screenInfo]);
+            auto variableMap = m_sceneController->variableMap();
             if (!variableMap.empty()) {
                 m_dynamicUI = buildStackViewFromVariableMap(variableMap,
-                                                            [=](std::string objectName, std::string variableName, float value) {
-                                                                m_sceneController.lock()->setVariable(objectName, variableName, value);
-                                                            },
-                                                            [=](std::string objectName, std::string variableName, std::string value) {
-                                                                m_sceneController.lock()->setVariable(objectName, variableName, value);
-                                                            });            m_dynamicUI.translatesAutoresizingMaskIntoConstraints = false;
+                    [=](std::string objectName, std::string variableName, float value) {
+                        m_sceneController->setVariable(objectName, variableName, value);
+                    },
+                    [=](std::string objectName, std::string variableName, std::string value) {
+                        m_sceneController->setVariable(objectName, variableName, value);
+                    });            m_dynamicUI.translatesAutoresizingMaskIntoConstraints = false;
                 [self.view addSubview:m_dynamicUI];
                 [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
                 [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;
             }
-            m_sceneController.lock()->setRedrawRequired();
+            m_sceneController->setRedrawRequired();
         }
-    }
-    catch(const std::exception& err) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
+        catch(const std::exception& err) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
+        }
     }
 }
 
 -(void) redrawGL
 {
-    if (!m_sceneController.expired()) {
-        m_sceneController.lock()->setRedrawRequired();
+    if (m_sceneController != nullptr) {
+        m_sceneController->setRedrawRequired();
     }
 }
 
 // Drawing
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    if (!m_sceneController.expired()) {
-        m_sceneController.lock()->render();
+    if (m_sceneController != nullptr) {
+        m_sceneController->render();
     }
     [view bindDrawable];
 }
@@ -120,7 +120,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
-    if (m_sceneController.expired()) {
+    if (m_sceneController == nullptr) {
         return;
     }
     
@@ -148,7 +148,7 @@
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesMoved:touches withEvent:event];
-    if (m_sceneController.expired()) {
+    if (m_sceneController == nullptr) {
         return;
     }
     
@@ -170,7 +170,7 @@
     if (numTouches == 1) {
         CGPoint touchPoint = [[touches anyObject] locationInView:self.view];
         IVDA::Mat4f rotation = m_arcBall.Drag(IVDA::Vec2ui(touchPoint.x, touchPoint.y)).ComputeRotation();
-        m_sceneController.lock()->addRotation(rotation);
+        m_sceneController->addRotation(rotation);
         m_arcBall.Click(IVDA::Vec2ui(touchPoint.x, touchPoint.y));
     }
     else if (numTouches == 2) {
@@ -200,13 +200,13 @@
     IVDA::Vec2f c1((m_touchPos1.x + m_touchPos2.x) / 2, (m_touchPos1.y + m_touchPos2.y) / 2);
     IVDA::Vec2f c2((touchPos1.x + touchPos2.x) / 2, (touchPos1.y + touchPos2.y) / 2);
     IVDA::Vec2f translation(c2.x - c1.x, -(c2.y - c1.y));
-    m_sceneController.lock()->addTranslation(translation);
+    m_sceneController->addTranslation(translation);
     
     IVDA::Vec2f d1(m_touchPos1.x - m_touchPos2.x, m_touchPos1.y - m_touchPos2.y);
     IVDA::Vec2f d2(touchPos1.x - touchPos2.x, touchPos1.y - touchPos2.y);
     float l1 = d1.length();
     float l2 = d2.length();
-    m_sceneController.lock()->addZoom(l2-l1);
+    m_sceneController->addZoom(l2-l1);
 }
 
 @end

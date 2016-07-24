@@ -14,7 +14,7 @@
 @interface Render3DViewController : GLKViewController
 {
 @protected
-    std::weak_ptr<SceneController3D> m_sceneController;
+    std::shared_ptr<SceneController3D> m_sceneController;
     NSUInteger m_numFingersDown;
     IVDA::Vec2f m_touchPos1;
     IVDA::Vec2f m_touchPos2;
@@ -24,7 +24,7 @@
     bool m_initialized;
 }
 
--(void) setSceneController:(std::weak_ptr<SceneController3D>)controller;
+-(void) setSceneController:(std::shared_ptr<SceneController3D>)controller;
 -(void) reset;
 -(void) setup;
 

@@ -24,7 +24,7 @@
     
     m_render3DViewController = [[Render3DViewController alloc] init];
     m_render3DViewController.context = context;
-    m_render2DViewController = [[Render2DViewController alloc] initWithSceneLoader:m_sceneLoader.get()];
+    m_render2DViewController = [[Render2DViewController alloc] init];
     m_render2DViewController.context = context;
     m_selectSceneViewController = [[SelectSceneViewController alloc] initWithSceneLoader:m_sceneLoader.get()];
     m_settingsViewController = [[SettingsViewController alloc] initWithSettings:m_sceneLoader->settings()];
@@ -73,38 +73,108 @@
     self.viewControllers = viewControllersArray;
 }
 
+-(void) viewDidLoad
+{
+    [super viewDidLoad];
+    m_loadingLabel = [[UILabel alloc] init];
+    m_loadingLabel.textColor = [UIColor whiteColor];
+    m_loadingLabel.text = @"Loading data sets ...";
+    m_loadingLabel.translatesAutoresizingMaskIntoConstraints = false;
+    [self.view addSubview:m_loadingLabel];
+    [m_loadingLabel.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20].active = true;
+    [m_loadingLabel.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:20].active = true;
+    [m_loadingLabel.widthAnchor constraintEqualToConstant:200.0].active = true;
+    
+    m_progress = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+    m_progress.translatesAutoresizingMaskIntoConstraints = false;
+    [self.view addSubview:m_progress];
+    [m_progress.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20].active = true;
+    [m_progress.topAnchor constraintEqualToAnchor:m_loadingLabel.bottomAnchor constant:20].active = true;
+    [m_progress.widthAnchor constraintEqualToConstant:200.0].active = true;
+    
+    m_progressLabel = [[UILabel alloc] init];
+    m_progressLabel.textColor = [UIColor whiteColor];
+    m_progressLabel.translatesAutoresizingMaskIntoConstraints = false;
+    [self.view addSubview:m_progressLabel];
+    [m_progressLabel.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20].active = true;
+    [m_progressLabel.topAnchor constraintEqualToAnchor:m_progress.bottomAnchor constant:20].active = true;
+    [m_progressLabel.widthAnchor constraintEqualToConstant:200.0].active = true;
+    
+    [self hideProgressWidgets];
+}
+
+-(void) showProgressWidgets
+{
+    m_loadingLabel.hidden = false;
+    m_progress.hidden = false;
+    [m_progress setProgress:0.0f animated:false];
+    m_progressLabel.hidden = false;
+    [m_progressLabel setText:@""];
+}
+
+-(void) hideProgressWidgets
+{
+    m_loadingLabel.hidden = true;
+    m_progress.hidden = true;
+    m_progressLabel.hidden = true;
+}
+
 - (BOOL)tabBarController:(UITabBarController*)tabBarController shouldSelectViewController:(UIViewController*)viewController
 {
     if (((UINavigationController*)viewController).tabBarItem.tag == 0) {
         if (m_sceneLoader->isSceneLoaded()) {
-            std::weak_ptr<SceneController3D> controller = m_sceneLoader->sceneController3D();
-            
             [m_render3DViewController reset];
+            self.tabBar.userInteractionEnabled = false;
+            [self showProgressWidgets];
             
-            UIProgressView* progress = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-            progress.frame = CGRectMake(100, 100, 200, 50);
-            UILabel* progressLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 170, 200, 50)];
-            progressLabel.textColor = [UIColor whiteColor];
-            [self.view addSubview:progress];
-            [self.view addSubview:progressLabel];
-            
-            controller.lock()->setUpdateDatasetCallback(
-                [=](int current, int total, const std::string& name) {
-                       dispatch_async(dispatch_get_main_queue(), ^{
-                           float prog = (static_cast<float>(current) / static_cast<float>(total));
-                           [progress setProgress:prog animated:true];
-                           [progressLabel setText:[NSString stringWithFormat:@"%s (%d / %d)", name.c_str(), current + 1, total]];
-                       });
+            auto controller = m_sceneLoader->sceneController3D(
+               [=](int current, int total, const std::string& name) {
+                   dispatch_async(dispatch_get_main_queue(), ^{
+                       float prog = (static_cast<float>(current) / static_cast<float>(total));
+                       [m_progress setProgress:prog animated:true];
+                       [m_progressLabel setText:[NSString stringWithFormat:@"%s (%d / %d)", name.c_str(), current + 1, total]];
                    });
+               });
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                controller->updateDatasets();
+            
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [m_render3DViewController setSceneController:controller];
+                    controller->initializeDatasets();
+                    [self hideProgressWidgets];
+                    self.tabBar.userInteractionEnabled = true;
+                    [m_render3DViewController setup];
+                });
+            });
+        }
+        return YES;
+    }
+    
+    if (((UINavigationController*)viewController).tabBarItem.tag == 1) {
+        if (m_sceneLoader->isSceneLoaded()) {
+            [m_render2DViewController reset];
+            self.tabBar.userInteractionEnabled = false;
+            [self showProgressWidgets];
+
+            auto controller = m_sceneLoader->sceneController2D(
+                 [=](int current, int total, const std::string& name) {
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         float prog = (static_cast<float>(current) / static_cast<float>(total));
+                         [m_progress setProgress:prog animated:true];
+                         [m_progressLabel setText:[NSString stringWithFormat:@"%s (%d / %d)", name.c_str(), current + 1, total]];
+                     });
+                 });
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                controller.lock()->updateDatasets();
+                controller->updateDatasets();
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [progress removeFromSuperview];
-                    [progressLabel removeFromSuperview];
-                    controller.lock()->initializeDatasets();
-                    [m_render3DViewController setSceneController:controller];
-                    [m_render3DViewController setup];
+                    [m_render2DViewController setSceneController:controller];
+                    controller->initializeDatasets();
+                    controller->initializeSliderCalculator();
+                    [self hideProgressWidgets];
+                    self.tabBar.userInteractionEnabled = true;
+                    [m_render2DViewController setup];
                 });
             });
         }

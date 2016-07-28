@@ -13,6 +13,7 @@
     SceneLoader* m_loader;
     std::vector<SceneMetadata> m_metadata;
     NSString* m_selectedScene;
+    NSTimer* m_timer;
 }
 
 -(id) initWithSceneLoader:(SceneLoader*)loader;

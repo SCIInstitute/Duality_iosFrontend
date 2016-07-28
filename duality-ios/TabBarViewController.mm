@@ -122,8 +122,8 @@
 - (BOOL)tabBarController:(UITabBarController*)tabBarController shouldSelectViewController:(UIViewController*)viewController
 {
     if (((UINavigationController*)viewController).tabBarItem.tag == 0) {
+        [m_render3DViewController reset];
         if (m_sceneLoader->isSceneLoaded()) {
-            [m_render3DViewController reset];
             self.tabBar.userInteractionEnabled = false;
             [self showProgressWidgets];
             
@@ -136,23 +136,32 @@
                    });
                });
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                controller->updateDatasets();
-            
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [m_render3DViewController setSceneController:controller];
-                    controller->initializeDatasets();
-                    [self hideProgressWidgets];
-                    self.tabBar.userInteractionEnabled = true;
-                    [m_render3DViewController setup];
-                });
+                try {
+                    controller->updateDatasets();
+
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [m_render3DViewController setSceneController:controller];
+                        controller->initializeDatasets();
+                        [self hideProgressWidgets];
+                        self.tabBar.userInteractionEnabled = true;
+                        [m_render3DViewController setup];
+                    });
+                }
+                catch(const std::exception& err) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self hideProgressWidgets];
+                        self.tabBar.userInteractionEnabled = true;
+                    });
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
+                }
             });
         }
         return YES;
     }
     
     if (((UINavigationController*)viewController).tabBarItem.tag == 1) {
+        [m_render2DViewController reset];
         if (m_sceneLoader->isSceneLoaded()) {
-            [m_render2DViewController reset];
             self.tabBar.userInteractionEnabled = false;
             [self showProgressWidgets];
 
@@ -166,16 +175,25 @@
                  });
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                controller->updateDatasets();
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [m_render2DViewController setSceneController:controller];
-                    controller->initializeDatasets();
-                    controller->initializeSliderCalculator();
-                    [self hideProgressWidgets];
-                    self.tabBar.userInteractionEnabled = true;
-                    [m_render2DViewController setup];
-                });
+                try {
+                    controller->updateDatasets();
+
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [m_render2DViewController setSceneController:controller];
+                        controller->initializeDatasets();
+                        controller->initializeSliderCalculator();
+                        [self hideProgressWidgets];
+                        self.tabBar.userInteractionEnabled = true;
+                        [m_render2DViewController setup];
+                    });
+                }
+                catch(const std::exception& err) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self hideProgressWidgets];
+                        self.tabBar.userInteractionEnabled = true;
+                    });
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"ErrorOccured" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithUTF8String:err.what()], @"Error", nil]];
+                }
             });
         }
         return YES;

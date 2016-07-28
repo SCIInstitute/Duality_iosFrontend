@@ -49,6 +49,12 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self updateSceneList];
+    m_timer = [NSTimer scheduledTimerWithTimeInterval: 10.0 target:self selector:@selector(updateSceneList) userInfo: nil repeats:YES];
+}
+
+-(void) updateSceneList
+{
     try {
         m_metadata = m_loader->listMetadata();
     }
@@ -65,6 +71,8 @@
             auto pos = std::distance(begin(m_metadata), it);
             NSIndexPath* indexPath = [NSIndexPath indexPathForRow:pos inSection:0];
             [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        } else {
+            m_loader->unloadScene();
         }
     }
 }

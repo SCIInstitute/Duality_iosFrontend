@@ -53,6 +53,13 @@
     m_timer = [NSTimer scheduledTimerWithTimeInterval: 10.0 target:self selector:@selector(updateSceneList) userInfo: nil repeats:YES];
 }
 
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [m_timer invalidate];
+    m_timer = nil;
+}
+
 -(void) updateSceneList
 {
     try {

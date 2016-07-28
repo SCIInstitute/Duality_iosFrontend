@@ -85,6 +85,40 @@
 
 @end
 
+@interface NodeButton : UIButton
+{
+@private
+    UIStackView* m_variableStackView;
+    bool m_expanded;
+}
+-(id) initWithStackView:(UIStackView*)stackView;
+-(void) toggle;
+@end
+
+@implementation NodeButton
+
+-(id) initWithStackView:(UIStackView *)stackView
+{
+    self = [super init];
+    self.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.3];
+    [self setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    m_variableStackView = stackView;
+    m_expanded = true;
+    [self addTarget:self action:@selector(toggle) forControlEvents:UIControlEventTouchDown];
+    return self;
+}
+
+-(void) toggle
+{
+    m_expanded = !m_expanded;
+    [UIView animateWithDuration:0.25 animations:^{
+        m_variableStackView.hidden = !m_expanded;
+    }];
+}
+
+@end
+
+
 
 UIStackView* buildFloatVariableStackView(const std::string& nodeName, const FloatVariable& var, std::function<void(std::string, std::string, float)> floatCallback)
 {
@@ -170,30 +204,43 @@ UIStackView* buildObjectStackView(const std::string& name, const Variables& vari
     stackView.axis = UILayoutConstraintAxisVertical;
     stackView.distribution = UIStackViewDistributionEqualSpacing;
     stackView.alignment = UIStackViewAlignmentLeading;
-    stackView.spacing = 5;
+    //stackView.spacing = 5;
     
-    UILabel* objectLabel = [[UILabel alloc] init];
+    /*UILabel* objectLabel = [[UILabel alloc] init];
     objectLabel.text = [NSString stringWithUTF8String:name.c_str()];
     objectLabel.textColor = [UIColor whiteColor];
     objectLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-    [stackView addArrangedSubview:objectLabel];
+    [stackView addArrangedSubview:objectLabel];*/
+    
+    UIStackView* variablesStackView = [[UIStackView alloc] init];
+    
+    NodeButton* nodeButton = [[NodeButton alloc] initWithStackView:variablesStackView];
+    [nodeButton setTitle:[NSString stringWithUTF8String:name.c_str()] forState:UIControlStateNormal];
+    [stackView addArrangedSubview:nodeButton];
+    
+    
+    variablesStackView.axis = UILayoutConstraintAxisVertical;
+    variablesStackView.distribution = UIStackViewDistributionEqualSpacing;
+    variablesStackView.alignment = UIStackViewAlignmentLeading;
+    variablesStackView.spacing = 5;
+    [stackView addArrangedSubview:variablesStackView];
     
     for (size_t i = 0; i < variables.floatVariables.size() + variables.enumVariables.size(); ++i) {
         auto floatIt = std::find_if(begin(variables.floatVariables), end(variables.floatVariables),
                                [i](const FloatVariable& var) { return i == var.info.index; });
         if (floatIt != end(variables.floatVariables)) {
-            UIStackView* variableStackView = buildFloatVariableStackView(name, *floatIt, floatCallback);
-            variableStackView.translatesAutoresizingMaskIntoConstraints = false;
-            [stackView addArrangedSubview:variableStackView];
-            [variableStackView.rightAnchor constraintEqualToAnchor:stackView.rightAnchor].active = true;
+            UIStackView* floatVarStackView = buildFloatVariableStackView(name, *floatIt, floatCallback);
+            floatVarStackView.translatesAutoresizingMaskIntoConstraints = false;
+            [variablesStackView addArrangedSubview:floatVarStackView];
+            [floatVarStackView.rightAnchor constraintEqualToAnchor:stackView.rightAnchor].active = true;
         } else {
             auto enumIt = std::find_if(begin(variables.enumVariables), end(variables.enumVariables),
                                        [i](const EnumVariable& var) { return i == var.info.index; });
             assert(enumIt != end(variables.enumVariables));
-            UIStackView* variableStackView = buildEnumVariableStackView(name, *enumIt, enumCallback);
-            variableStackView.translatesAutoresizingMaskIntoConstraints = false;
-            [stackView addArrangedSubview:variableStackView];
-            [variableStackView.rightAnchor constraintEqualToAnchor:stackView.rightAnchor].active = true;
+            UIStackView* enumVarStackView = buildEnumVariableStackView(name, *enumIt, enumCallback);
+            enumVarStackView.translatesAutoresizingMaskIntoConstraints = false;
+            [variablesStackView addArrangedSubview:enumVarStackView];
+            [enumVarStackView.rightAnchor constraintEqualToAnchor:stackView.rightAnchor].active = true;
         }
     }
     return stackView;
@@ -205,7 +252,7 @@ UIStackView* buildStackViewFromVariableMap(const VariableMap& variables, std::fu
     stackView.axis = UILayoutConstraintAxisVertical;
     stackView.distribution = UIStackViewDistributionEqualSpacing;
     stackView.alignment = UIStackViewAlignmentLeading;
-    stackView.spacing = 50;
+    stackView.spacing = 30;
     
     for (const auto& var : variables) {
         if (!var.second.floatVariables.empty() || !var.second.enumVariables.empty()) {

@@ -82,12 +82,16 @@
             auto variableMap = m_sceneController->variableMap();
             if (!variableMap.empty()) {
                 m_dynamicUI = buildStackViewFromVariableMap(variableMap,
-                    [=](std::string objectName, std::string variableName, float value) {
-                        m_sceneController->setVariable(objectName, variableName, value);
+                    [=](std::string nodeName, std::string variableName, float value) {
+                        m_sceneController->setVariable(nodeName, variableName, value);
                     },
-                    [=](std::string objectName, std::string variableName, std::string value) {
-                        m_sceneController->setVariable(objectName, variableName, value);
-                    });            m_dynamicUI.translatesAutoresizingMaskIntoConstraints = false;
+                    [=](std::string nodeName, std::string variableName, std::string value) {
+                        m_sceneController->setVariable(nodeName, variableName, value);
+                    },
+                    [=](std::string nodeName, bool enabled) {
+                        m_sceneController->setNodeUpdateEnabled(nodeName, enabled);
+                    });
+                m_dynamicUI.translatesAutoresizingMaskIntoConstraints = false;
                 [self.view addSubview:m_dynamicUI];
                 [m_dynamicUI.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:20.0].active = true;
                 [m_dynamicUI.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:20.0].active = true;

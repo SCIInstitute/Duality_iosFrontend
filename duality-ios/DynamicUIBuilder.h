@@ -8,4 +8,4 @@
 
 #include <functional>
 
-UIStackView* buildStackViewFromVariableMap(const VariableMap& variables, std::function<void(std::string, std::string, float)> floatCallback, std::function<void(std::string, std::string, std::string)> enumCallback);
+UIStackView* buildStackViewFromVariableMap(const VariableMap& variables, std::function<void(std::string, std::string, float)> floatCallback, std::function<void(std::string, std::string, std::string)> enumCallback, std::function<void(std::string, bool)> nodeEnabledCallback);

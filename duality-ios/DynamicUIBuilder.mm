@@ -89,6 +89,7 @@
 {
 @private
     UIStackView* m_variableStackView;
+    UISwitch* m_updateEnabledSwitch;
     bool m_expanded;
 }
 -(id) initWithStackView:(UIStackView*)stackView;
@@ -97,14 +98,16 @@
 
 @implementation NodeButton
 
--(id) initWithStackView:(UIStackView *)stackView
+-(id) initWithStackView:(UIStackView*)stackView
 {
     self = [super init];
-    self.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.3];
-    [self setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     m_variableStackView = stackView;
     m_expanded = true;
+    
+    self.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.3];
+    self.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
     [self addTarget:self action:@selector(toggle) forControlEvents:UIControlEventTouchDown];
+    
     return self;
 }
 
@@ -117,6 +120,38 @@
 }
 
 @end
+
+
+@interface NodeEnabledSwitch : UISwitch
+{
+@private
+    std::string m_nodeName;
+    std::function<void(std::string, bool)> m_callback;
+}
+-(id) initWithNodeName:(const std::string&)name andCallback:(std::function<void(std::string, bool)>)callback;
+-(void) setUpdateEnabled:(NodeEnabledSwitch*)sender;
+@end
+
+@implementation NodeEnabledSwitch
+
+-(id) initWithNodeName:(const std::string&)name andCallback:(std::function<void(std::string, bool)>)callback
+{
+    self = [super init];
+    m_nodeName = name;
+    m_callback = callback;
+    self.on = true;
+    [self addTarget:self action:@selector(setUpdateEnabled:) forControlEvents:UIControlEventValueChanged];
+    return self;
+}
+
+-(void) setUpdateEnabled:(NodeEnabledSwitch*)sender
+{
+    bool enabled = [sender isOn];
+    m_callback(m_nodeName, enabled);
+}
+
+@end
+
 
 
 
@@ -198,26 +233,35 @@ UIStackView* buildEnumVariableStackView(const std::string& nodeName, const EnumV
     return stackView;
 }
 
-UIStackView* buildObjectStackView(const std::string& name, const Variables& variables, std::function<void(std::string, std::string, float)> floatCallback, std::function<void(std::string, std::string, std::string)> enumCallback)
+UIStackView* buildObjectStackView(const std::string& name, const Variables& variables, std::function<void(std::string, std::string, float)> floatCallback, std::function<void(std::string, std::string, std::string)> enumCallback, std::function<void(std::string, bool)> nodeEnabledCallback)
 {
     UIStackView* stackView = [[UIStackView alloc] init];
     stackView.axis = UILayoutConstraintAxisVertical;
     stackView.distribution = UIStackViewDistributionEqualSpacing;
     stackView.alignment = UIStackViewAlignmentLeading;
-    //stackView.spacing = 5;
-    
-    /*UILabel* objectLabel = [[UILabel alloc] init];
-    objectLabel.text = [NSString stringWithUTF8String:name.c_str()];
-    objectLabel.textColor = [UIColor whiteColor];
-    objectLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-    [stackView addArrangedSubview:objectLabel];*/
-    
+    stackView.spacing = 10;
+
     UIStackView* variablesStackView = [[UIStackView alloc] init];
+
+    UIStackView* nodeStackView = [[UIStackView alloc] init];
+    nodeStackView.axis = UILayoutConstraintAxisHorizontal;
+    nodeStackView.distribution = UIStackViewDistributionEqualSpacing;
+    nodeStackView.alignment = UIStackViewAlignmentCenter;
+    nodeStackView.spacing = 30;
+    nodeStackView.translatesAutoresizingMaskIntoConstraints = false;
+    
+    [stackView addArrangedSubview:nodeStackView];
     
     NodeButton* nodeButton = [[NodeButton alloc] initWithStackView:variablesStackView];
     [nodeButton setTitle:[NSString stringWithUTF8String:name.c_str()] forState:UIControlStateNormal];
-    [stackView addArrangedSubview:nodeButton];
+    nodeButton.translatesAutoresizingMaskIntoConstraints = false;
     
+    NodeEnabledSwitch* nodeEnabledSwitch = [[NodeEnabledSwitch alloc] initWithNodeName:name andCallback:nodeEnabledCallback];
+    nodeEnabledSwitch.translatesAutoresizingMaskIntoConstraints = false;
+    [nodeStackView addArrangedSubview:nodeEnabledSwitch];
+
+    [nodeStackView addArrangedSubview:nodeButton];
+    [nodeStackView addArrangedSubview:nodeEnabledSwitch];
     
     variablesStackView.axis = UILayoutConstraintAxisVertical;
     variablesStackView.distribution = UIStackViewDistributionEqualSpacing;
@@ -246,7 +290,7 @@ UIStackView* buildObjectStackView(const std::string& name, const Variables& vari
     return stackView;
 }
 
-UIStackView* buildStackViewFromVariableMap(const VariableMap& variables, std::function<void(std::string, std::string, float)> floatCallback, std::function<void(std::string, std::string, std::string)> enumCallback)
+UIStackView* buildStackViewFromVariableMap(const VariableMap& variables, std::function<void(std::string, std::string, float)> floatCallback, std::function<void(std::string, std::string, std::string)> enumCallback, std::function<void(std::string, bool)> nodeEnabledCallback)
 {
     UIStackView* stackView = [[UIStackView alloc] init];
     stackView.axis = UILayoutConstraintAxisVertical;
@@ -256,7 +300,7 @@ UIStackView* buildStackViewFromVariableMap(const VariableMap& variables, std::fu
     
     for (const auto& var : variables) {
         if (!var.second.floatVariables.empty() || !var.second.enumVariables.empty()) {
-            UIStackView* objectStackView = buildObjectStackView(var.first, var.second, floatCallback, enumCallback);
+            UIStackView* objectStackView = buildObjectStackView(var.first, var.second, floatCallback, enumCallback, nodeEnabledCallback);
             objectStackView.translatesAutoresizingMaskIntoConstraints = false;
             [stackView addArrangedSubview:objectStackView];
             [objectStackView.rightAnchor constraintEqualToAnchor:stackView.rightAnchor].active = true;

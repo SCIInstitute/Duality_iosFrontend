@@ -8,14 +8,14 @@
 
 #include <memory>
 
-@class TextSettingCell;
-
 class SceneLoader;
 
 @interface SettingsViewController : UITableViewController
 {
-    NSMutableArray<TextSettingCell*>* m_textSettingCells;
     std::shared_ptr<Settings> m_settings;
+    UITextField* m_rField;
+    UITextField* m_gField;
+    UITextField* m_bField;
 }
 
 - (id) initWithSettings:(std::shared_ptr<Settings>)settings;
